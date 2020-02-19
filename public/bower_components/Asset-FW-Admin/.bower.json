@@ -1,0 +1,14 @@
+{
+  "name": "Asset-FW-Admin",
+  "homepage": "https://github.com/DinhDuyTu/Asset-FW-Admin",
+  "_release": "54331dcd35",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "54331dcd35f15ec2f4bcde1bef94c3a84a1952a0"
+  },
+  "_source": "https://github.com/DinhDuyTu/Asset-FW-Admin.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/DinhDuyTu/Asset-FW-Admin.git",
+  "_direct": true
+}
