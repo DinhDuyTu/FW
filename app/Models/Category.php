@@ -11,4 +11,14 @@ class Category extends Model
         'name',
         'content',
     ];
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
