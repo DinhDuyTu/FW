@@ -9,7 +9,7 @@ class Category extends Model
     protected $fillable = [
         'parent_id',
         'name',
-        'content',
+        'description',
     ];
 
     public function categories()
