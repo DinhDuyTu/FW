@@ -29,111 +29,42 @@
                     <table class="table table-striped table-hover table-bordered" id="editable-sample">
                         <thead>
                             <tr>
-                                <th>Username</th>
-                                <th>Full Name</th>
-                                <th>Points</th>
-                                <th>Notes</th>
+                                <th>STT</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Price Sale</th>
+                                <th>Quantity</th>
+                                <th>Highlight</th>
+                                <th>Detail</th>
+                                <th>Description</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="">
-                                <td>Jondi Rose</td>
-                                <td>Alfred Jondi Rose</td>
-                                <td>1234</td>
-                                <td class="center">super user</td>
-                                <td><a class="edit" href="javascript:;">Edit</a></td>
-                                <td><a class="delete" href="javascript:;">Delete</a></td>
-                            </tr>
-                            <tr class="">
-                                <td>Dulal</td>
-                                <td>Jonathan Smith</td>
-                                <td>434</td>
-                                <td class="center">new user</td>
-                                <td><a class="edit" href="javascript:;">Edit</a></td>
-                                <td><a class="delete" href="javascript:;">Delete</a></td>
-                            </tr>
-                            <tr class="">
-                                <td>Sumon</td>
-                                <td> Sumon Ahmed</td>
-                                <td>232</td>
-                                <td class="center">super user</td>
-                                <td><a class="edit" href="javascript:;">Edit</a></td>
-                                <td><a class="delete" href="javascript:;">Delete</a></td>
-                            </tr>
-                            <tr class="">
-                                <td>vectorlab</td>
-                                <td>dk mosa</td>
-                                <td>132</td>
-                                <td class="center">elite user</td>
-                                <td><a class="edit" href="javascript:;">Edit</a></td>
-                                <td><a class="delete" href="javascript:;">Delete</a></td>
-                            </tr>
-                            <tr class="">
-                                <td>Admin</td>
-                                <td> Flat Lab</td>
-                                <td>462</td>
-                                <td class="center">new user</td>
-                                <td><a class="edit" href="javascript:;">Edit</a></td>
-                                <td><a class="delete" href="javascript:;">Delete</a></td>
-                            </tr>
-                            <tr class="">
-                                <td>Rafiqul</td>
-                                <td>Rafiqul dulal</td>
-                                <td>62</td>
-                                <td class="center">new user</td>
-                                <td><a class="edit" href="javascript:;">Edit</a></td>
-                                <td><a class="delete" href="javascript:;">Delete</a></td>
-                            </tr>
-                            <tr class="">
-                                <td>Jhon Doe</td>
-                                <td>Jhon Doe </td>
-                                <td>1234</td>
-                                <td class="center">super user</td>
-                                <td><a class="edit" href="javascript:;">Edit</a></td>
-                                <td><a class="delete" href="javascript:;">Delete</a></td>
-                            </tr>
-                            <tr class="">
-                                <td>Dulal</td>
-                                <td>Jonathan Smith</td>
-                                <td>434</td>
-                                <td class="center">new user</td>
-                                <td><a class="edit" href="javascript:;">Edit</a></td>
-                                <td><a class="delete" href="javascript:;">Delete</a></td>
-                            </tr>
-                            <tr class="">
-                                <td>Sumon</td>
-                                <td> Sumon Ahmed</td>
-                                <td>232</td>
-                                <td class="center">super user</td>
-                                <td><a class="edit" href="javascript:;">Edit</a></td>
-                                <td><a class="delete" href="javascript:;">Delete</a></td>
-                            </tr>
-                            <tr class="">
-                                <td>vectorlab</td>
-                                <td>dk mosa</td>
-                                <td>132</td>
-                                <td class="center">elite user</td>
-                                <td><a class="edit" href="javascript:;">Edit</a></td>
-                                <td><a class="delete" href="javascript:;">Delete</a></td>
-                            </tr>
-                            <tr class="">
-                                <td>Admin</td>
-                                <td> Flat Lab</td>
-                                <td>462</td>
-                                <td class="center">new user</td>
-                                <td><a class="edit" href="javascript:;">Edit</a></td>
-                                <td><a class="delete" href="javascript:;">Delete</a></td>
-                            </tr>
-                            <tr class="">
-                                <td>Rafiqul</td>
-                                <td>Rafiqul dulal</td>
-                                <td>62</td>
-                                <td class="center">new user</td>
-                                <td><a class="edit" href="javascript:;">Edit</a></td>
-                                <td><a class="delete" href="javascript:;">Delete</a></td>
-                            </tr>
+                            @foreach ($products as $key => $product)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.products.edit', $product->id) }}"><img style="width: 100px" src="{{ $product->image }}" alt=""></a>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li><a href="{{ route('admin.products.edit', $product->id) }}"><b>Name:</b> {{ $product->name }}</a></li>
+                                            <li><a href="{{ route('admin.products.edit', $product->id) }}"><b>Product Code</b> {{ $product->product_code }}</a></li>
+                                        </ul>
+                                    </td>
+                                    <td class="center">{{ number_format($product->price) }} VND</td>
+                                    <td class="center">{{ number_format($product->price_sale) }} VND</td>
+                                    <td class="center">{{ $product->quantity }}</td>
+                                    <td class="center"><input type="checkbox" @if ($product->is_highlight == 1) checked @endif></td>
+                                    <td>{{ $product->detail }}</td>
+                                    <td>{{ $product->description }}</td>
+                                    <td><a class="edit" href="javascript:;">Edit</a></td>
+                                    <td><a class="delete" href="javascript:;">Delete</a></td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

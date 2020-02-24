@@ -8,7 +8,7 @@
                 Toastr
             </header>
             <div class="panel-body">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="{{ route('admin.products.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row toastr-row">
                         <div class="col-md-2"></div>
@@ -16,7 +16,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="title">Category</label>
                                 <select name="category_id" id="" class="form-control">
-                                    <option value=""></option>
+                                    @include('admin.partials.categories_options', ['level' => 0])
                                 </select>
                             </div>
                             <div class="form-group">
@@ -28,11 +28,14 @@
                                 <input id="title" type="text" name="product_code" class="form-control" placeholder="Enter a product code ... ">
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="message">Image</label>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <input onchange="changeImg(this)" style="display: none;" id="input_img" type="file" name="image" class="form-control">
-                                        <img style="width: 150px;" id="img" src="{{ asset('bower_components/Asset-FW-Admin/img/photos/add_photo.png') }}" alt="">
+                                <label class="control-label" for="message">
+                                    Image |
+                                    <button type="button" class="btn btn-sm addImage"><i class="fa fa-plus"></i></button>
+                                </label>
+                                <div class="row add_main">
+                                    <div class="col-md-3 image">
+                                        <input onchange="changeImg(this)" style="display: none;" id="input_img1" type="file" name="image" class="form-control">
+                                        <img style="width: 150px;" id="img1" src="{{ asset('bower_components/Asset-FW-Admin/img/photos/add_photo.png') }}" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -62,8 +65,8 @@
                             </div>
                             <div class="row float-right-button">
                                 <div class="col-md-12">
-                                    <button type="button" class="btn btn-success" id="showtoast">Show Toast</button>
-                                    <button type="button" class="btn btn-danger" id="cleartoasts">Clear Toasts</button>
+                                    <button type="submit" class="btn btn-success" id="showtoast">Create Product</button>
+                                    <button type="button" class="btn btn-danger" id="cleartoasts">Cancel</button>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +75,6 @@
                 </form>
             </div>
         </div>
-        <!-- page end-->
     </section>
 </section>
 @endsection

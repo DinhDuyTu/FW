@@ -75,20 +75,70 @@
           });
     </script>
     <script>
+        $(document).ready(function (){
+            $('#img1').click(function(){
+                $('#input_img1').click();
+            });
+        });
+
+        $(document).ready(function() {
+            var i = 1;
+            $('.addImage').click(function() {
+                if (++i <= 4) {
+                    $('.add_main').append('<div class="col-md-3 image"><input onchange="changeImg'+i+'(this)" style="display: none;" id="input_img'+i+'" type="file" name="prd_image[]" class="form-control input_image"><img style="width: 150px;" class="imageA" id="img'+i+'" src="{{ asset('bower_components/Asset-FW-Admin/img/photos/add_photo.png') }}" alt=""><button type="button" style="width: 100%" class="btn btn-danger btn_remove">Remove</button></div>');
+                    $(".imageA").click(function () {
+                        var id = this.id;
+                        id = '#input_' + id;
+                        $(id).click();
+                    });
+                } else {
+                    alert('Fail');
+                }
+            });
+            $(document).on('click','.btn_remove',function(){
+                $(this).parents('.image').remove();
+            });
+        });
+
         function changeImg(input){
             if(input.files && input.files[0]){
                 var reader = new FileReader();
                 reader.onload = function(e){
-                    $('#img').attr('src',e.target.result);
+                    $('#img1').attr('src',e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
         }
-        $(document).ready(function() {
-            $('#img').click(function(){
-                $('#input_img').click();
-            });
-        });
+
+        function changeImg2(input){
+            if(input.files && input.files[0]){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#img2').attr('src',e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function changeImg3(input){
+            if(input.files && input.files[0]){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#img3').attr('src',e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function changeImg4(input){
+            if(input.files && input.files[0]){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#img4').attr('src',e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 </body>
 

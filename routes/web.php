@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('admin.categories.create');
+    // return view('admin.categories.create');
 });
 
 Auth::routes();
