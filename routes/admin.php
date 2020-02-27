@@ -11,7 +11,7 @@
 |
 */
 
-// Route::group(['middleware' => ['checkAdminLogin','auth']], function () {
+Route::group(['middleware' => ['auth']], function () {
     Route::get('', [
         'as' => 'admin.dashboard.index',
         'uses' => 'DashboardController@index'
@@ -26,4 +26,9 @@
             'parameters' => ['products' => 'id']
         ]);
     });
-// });
+    Route::group(['as' => 'admin.'], function () {
+        Route::resource('users', 'UserController', [
+            'parameters' => ['users' => 'id']
+        ]);
+    });
+});

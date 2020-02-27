@@ -6,9 +6,28 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Image;
+use App\Repositories\Product\ProductRepositoryInterface;
+use App\Repositories\Category\CategoryRepositoryInterface;
+use App\Repositories\Image\ImageRepositoryInterface;
 
 class ProductController extends Controller
 {
+    private $productRepository;
+    private $categoryRepository;
+    private $imageRepository;
+
+    public function __construct (
+        ProductRepositoryInterface  $productRepository,
+        CategoryRepositoryInterface  $categoryRepository,
+        ImageRepositoryInterface  $imageRepository
+    )
+    {
+        $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->imageRepository = $imageRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +35,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('admin.products.index', compact('products'));
+        $products = $this->productRepository->getLatest()->get();
+        $images = $this->imageRepository->getAll()->where('image_default', '1');
+
+        return view('admin.products.index', compact('products', 'images'));
     }
 
     /**
@@ -27,23 +48,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = $this->getSubCategories(0);
+        $categories = $this->categoryRepository->getSubCategories(0);
 
         return view('admin.products.create', compact('categories'));
-    }
-
-    private function getSubCategories($parent_id, $ignore_id = null)
-    {
-        $categories = Category::where('parent_id', $parent_id)
-            ->where('id', '<>', $ignore_id)
-            ->get()
-            ->map(function($query) use($ignore_id){
-                $query->sub = $this->getSubCategories($query->id, $ignore_id);
-
-                return $query;
-            });
-
-        return $categories;
     }
 
     /**
@@ -54,11 +61,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile('image')) {
-            $image = $this->uploadImage($request);
-        } else {
-            $image = "/images/product/default.jpeg";
-        }
         $attr = [
             'category_id' => $request->get('category_id'),
             'name' => $request->get('name'),
@@ -75,17 +77,38 @@ class ProductController extends Controller
             $is_highlight = 0;
         }
         $attr['is_highlight'] = $is_highlight;
-        $attr['image'] = $image;
-        Product::create($attr);
+        $product = $this->productRepository->create($attr);
+
+        if ($request->hasFile('image')) {
+            foreach ($request->image as $key => $value) {
+                $image = $this->uploadImage($value);
+                $attr = [
+                    'product_id' => $product->id,
+                    'image' => $image,
+                ];
+                $this->imageRepository->create($attr);
+            }
+        } else {
+            $attr = [
+                'product_id' => $product->id,
+                'image' => "/images/product/default.jpeg",
+            ];
+            $this->imageRepository->create($attr);
+        }
+        $image_default = $this->imageRepository->getFirstImageByProduct($product->id);
+        $attr = [
+            'image_default' => '1',
+        ];
+        $image_default->update($attr);
         
         return redirect()->route('admin.products.index');
     }
 
-    private function uploadImage(Request $request)
+    private function uploadImage($value)
     {
         $destinationDir = public_path('images/product');
-        $fileName = uniqid('product') . '.' . $request->image->extension();
-        $request->image->move($destinationDir, $fileName);
+        $fileName = uniqid('product') . '.' . $value->extension();
+        $value->move($destinationDir, $fileName);
 
         return $image = "/images/product/" . $fileName;
     }
@@ -109,10 +132,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-        $categories = $this->getSubCategories(0, $id);
+        $product = $this->productRepository->find($id);
+        $categories = $this->categoryRepository->getSubCategories(0, $id);
+        $images = $this->imageRepository->getAll()->where('product_id', $id);
 
-        return view('admin.products.edit', compact('categories', 'product'));
+        return view('admin.products.edit', compact('categories', 'product', 'images'));
     }
 
     /**
@@ -124,12 +148,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::findOrFail($id);
-        if ($request->hasFile('image')) {
-            $image = $this->uploadImage($request);
-        } else {
-            $image = $product->image;
-        }
+        $product = $this->productRepository->find($id);
         $attr = [
             'category_id' => $request->get('category_id'),
             'name' => $request->get('name'),
@@ -146,8 +165,26 @@ class ProductController extends Controller
             $is_highlight = 0;
         }
         $attr['is_highlight'] = $is_highlight;
-        $attr['image'] = $image;
-        $product = $product->update($attr);
+        $product->update($attr);
+        if ($request->hasFile('image')) {
+            $image_delete = $this->imageRepository->getAll()->where('product_id', $id);
+            foreach ($image_delete as $img_del) {
+                $img_del->delete();
+            }
+            foreach ($request->image as $key => $value) {
+                $image = $this->uploadImage($value);
+                $attr = [
+                    'product_id' => $product->id,
+                    'image' => $image,
+                ];
+                $this->imageRepository->create($attr);
+            }
+        }
+        $image_default = $this->imageRepository->getFirstImageByProduct($id);
+        $attr = [
+            'image_default' => '1',
+        ];
+        $image_default->update($attr);
         
         return redirect()->route('admin.products.index');
     }

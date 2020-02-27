@@ -9,6 +9,7 @@
             </header>
             <div class="panel-body">
                 <form action="{{ route('admin.categories.update', $category->id) }}" method="post">
+                    @method('PUT')
                     @csrf
                     <div class="row toastr-row">
                         <div class="col-md-2"></div>

@@ -12,9 +12,7 @@
 */
 
 Route::get('/', function () {
-    // return view('admin.categories.create');
+    return view('client.index');
 });
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

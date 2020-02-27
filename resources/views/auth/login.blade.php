@@ -28,35 +28,29 @@
     <![endif]-->
 </head>
 
-  <body class="login-body">
-
+<body class="login-body">
     <div class="container">
-
       <form class="form-signin" action="{{ route('login') }}" method="POST">
         @csrf
         <h2 class="form-signin-heading">sign in now</h2>
         <div class="login-wrap">
-            {{-- <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
-
-                @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
-
-                @error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror --}}
-            <input type="email" class="form-control" name="email" placeholder="User ID" autofocus>
-            <input type="password" class="form-control" name="password" placeholder="Password">
+            <input type="email" name="email" class="form-control" placeholder="User ID" autofocus >
+            @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+            <br>
+            <input type="password" name="password" class="form-control" placeholder="Password">
+            @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
             <label class="checkbox">
                 <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> Remember me
                 <span class="pull-right">
                     <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
-
                 </span>
             </label>
             <button class="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
@@ -77,11 +71,8 @@
                     Create an account
                 </a>
             </div>
-
         </div>
-
-          <!-- Modal -->
-          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+          {{-- <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
               <div class="modal-dialog">
                   <div class="modal-content">
                       <div class="modal-header">
@@ -99,19 +90,12 @@
                       </div>
                   </div>
               </div>
-          </div>
-          <!-- modal -->
-
+          </div> --}}
       </form>
-
     </div>
 
-
-
-    <!-- js placed at the end of the document so the pages load faster -->
-    <script src="{{ asset('bower_components/Asset-FW-Admin/js/jquery.js') }}"></script>
-    <script src="{{ asset('bower_components/Asset-FW-Admin/js/bootstrap.min.js') }}"></script>
-
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
   </body>
 

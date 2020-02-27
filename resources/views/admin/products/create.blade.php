@@ -28,16 +28,8 @@
                                 <input id="title" type="text" name="product_code" class="form-control" placeholder="Enter a product code ... ">
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="message">
-                                    Image |
-                                    <button type="button" class="btn btn-sm addImage"><i class="fa fa-plus"></i></button>
-                                </label>
-                                <div class="row add_main">
-                                    <div class="col-md-3 image">
-                                        <input onchange="changeImg(this)" style="display: none;" id="input_img1" type="file" name="image" class="form-control">
-                                        <img style="width: 150px;" id="img1" src="{{ asset('bower_components/Asset-FW-Admin/img/photos/add_photo.png') }}" alt="">
-                                    </div>
-                                </div>
+                                <label class="control-label" for="message">Image</label>
+                                <input id="input-res-1" name="image[]" type="file" multiple>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" for="title">Price</label>

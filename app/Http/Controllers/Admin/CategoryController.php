@@ -5,9 +5,19 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Repositories\Category\CategoryRepositoryInterface;
 
 class CategoryController extends Controller
 {
+    private $categoryRepository;
+
+    public function __construct (
+        CategoryRepositoryInterface  $categoryRepository
+    )
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +25,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->getSubCategories(0);
+        $categories = $this->categoryRepository->getSubCategories(0);
+
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -26,28 +37,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = $this->getSubCategories(0);
+        $categories = $this->categoryRepository->getSubCategories(0);
+
         return view('admin.categories.create', compact('categories'));
-    }
-
-    /**
-     * Get the sub categories.
-     * 
-     * @param int $parent_id
-     * @return mix
-     */
-    private function getSubCategories($parent_id, $ignore_id = null)
-    {
-        $categories = Category::where('parent_id', $parent_id)
-            ->where('id', '<>', $ignore_id)
-            ->get()
-            ->map(function($query) use($ignore_id){
-                $query->sub = $this->getSubCategories($query->id, $ignore_id);
-
-                return $query;
-            });
-
-        return $categories;
     }
 
     /**
@@ -63,7 +55,7 @@ class CategoryController extends Controller
             'name' => $request->get('name'),
             'description' => $request->get('description'),
         ];
-        Category::create($attr);
+        $this->categoryRepository->create($attr);
 
         return redirect()->route('admin.categories.index');
     }
@@ -88,8 +80,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         try {
-            $category = Category::findOrFail($id);
-            $categories = $this->getSubCategories(0, $id);
+            $category = $this->categoryRepository->find($id);
+            $categories = $this->categoryRepository->getSubCategories(0, $id);
 
             return view('admin.categories.edit',compact('categories','category'));
         } catch (Exception $e) {
@@ -106,7 +98,19 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $category = $this->categoryRepository->find($id);
+            $attr = [
+                'parent_id' => $request->get('parent_id'),
+                'name' => $request->get('name'),
+                'description' => $request->get('description'),
+            ];
+            $category->update($attr);
+
+            return redirect()->route('admin.categories.index');
+        } catch (Exception $e) {
+            return redirect()->back()->with($e->getMessage());
+        }
     }
 
     /**
@@ -117,6 +121,13 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $category = $this->categoryRepository->find($id);
+            $category->delete();
+
+            return redirect()->route('admin.categories.index');
+        } catch (Exception $e) {
+            return redirect()->back()->with($e->getMessage());
+        }
     }
 }

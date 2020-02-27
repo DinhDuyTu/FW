@@ -29,15 +29,15 @@
                                 <input id="title" type="text" name="product_code" class="form-control" placeholder="Enter a product code ... " value="{{ $product->product_code }}">
                             </div>
                             <div class="form-group">
-                                <label class="control-label" for="message">
-                                    Image |
-                                    <button type="button" class="btn btn-sm addImage"><i class="fa fa-plus"></i></button>
-                                </label>
-                                <div class="row add_main">
-                                    <div class="col-md-3 image">
-                                        <input onchange="changeImg(this)" style="display: none;" id="input_img1" type="file" name="image" class="form-control">
-                                        <img style="width: 150px;" id="img1" src="{{ $product->image }}" alt="">
-                                    </div>
+                                <label class="control-label" for="message">Image</label>
+                                <input id="input-res-2" name="image[]" type="file" multiple>
+                                <hr>
+                                <div class="row" style="border: 1px solid silver; border-radius: 5px;">
+                                    @foreach ($images as $image)
+                                        <div class="col-md-3" style="padding: 20px;">
+                                            <img height="200px" src="{{ $image->image }}" alt="">
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="form-group">
@@ -73,7 +73,7 @@
                         </div>
                         <div class="col-md-2"></div>
                     </div>
-                {{-- </form> --}}
+                </form>
             </div>
         </div>
     </section>

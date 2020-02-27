@@ -3,7 +3,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
             <li>
-                <a class="active" href="index.html">
+                <a class="active" href="{{ route('admin.dashboard.index') }}">
                     <i class="fa fa-dashboard"></i>
                     <span>Dashboard</span>
                 </a>
@@ -15,8 +15,8 @@
                     <span>Products</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="product_list.html">List Products</a></li>
-                    <li><a href="product_details.html">Create Products</a></li>
+                    <li><a href="{{ route('admin.products.index') }}">List Products</a></li>
+                    <li><a href="{{ route('admin.products.create') }}">Create Products</a></li>
                 </ul>
             </li>
             
@@ -26,14 +26,19 @@
                     <span>Categories</span>
                 </a>
                 <ul class="sub">
-                    <li><a href="general.html">General</a></li>
-                    <li><a href="buttons.html">Buttons</a></li>
-                    <li><a href="modal.html">Modal</a></li>
-                    <li><a href="toastr.html">Toastr Notifications</a></li>
-                    <li><a href="widget.html">Widget</a></li>
-                    <li><a href="slider.html">Slider</a></li>
-                    <li><a href="nestable.html">Nestable</a></li>
-                    <li><a href="font_awesome.html">Font Awesome</a></li>
+                    <li><a href="{{ route('admin.categories.index') }}">List Category</a></li>
+                    <li><a href="{{ route('admin.categories.create') }}">Create Category</a></li>
+                </ul>
+            </li>
+
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-user"></i>
+                    <span>User</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="{{ route('admin.users.index') }}">List User</a></li>
+                    <li><a href="{{ route('admin.users.create') }}">Create User</a></li>
                 </ul>
             </li>
 

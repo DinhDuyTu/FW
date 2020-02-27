@@ -1,0 +1,14 @@
+{
+  "name": "Asset-FW-Client",
+  "homepage": "https://github.com/DinhDuyTu/Asset-FW-Client",
+  "_release": "e0e5d8940b",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "e0e5d8940b39f66db3f6d14d5ca4cc8717e22663"
+  },
+  "_source": "https://github.com/DinhDuyTu/Asset-FW-Client.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/DinhDuyTu/Asset-FW-Client.git",
+  "_direct": true
+}

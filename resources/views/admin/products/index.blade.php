@@ -11,9 +11,11 @@
                 <div class="adv-table editable-table ">
                     <div class="clearfix">
                         <div class="btn-group">
-                            <button id="editable-sample_new" class="btn green">
-                                Add New <i class="fa fa-plus"></i>
-                            </button>
+                            <a href="{{ route('admin.products.create') }}">
+                                <button class="btn green">
+                                    Add New <i class="fa fa-plus"></i>
+                                </button>
+                            </a>
                         </div>
                         <div class="btn-group pull-right">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
@@ -30,7 +32,7 @@
                         <thead>
                             <tr>
                                 <th>STT</th>
-                                <th>Image</th>
+                                <th style="width: 110px;">Image</th>
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th>Price Sale</th>
@@ -47,7 +49,13 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>
-                                        <a href="{{ route('admin.products.edit', $product->id) }}"><img style="width: 100px" src="{{ $product->image }}" alt=""></a>
+                                        <a href="{{ route('admin.products.edit', $product->id) }}">
+                                            @foreach ($images as $image)
+                                                @if ($product->id == $image->product_id)
+                                                    <img style="width: 100px" src="{{ $image->image }}" alt="">
+                                                @endif
+                                            @endforeach
+                                        </a>
                                     </td>
                                     <td>
                                         <ul>

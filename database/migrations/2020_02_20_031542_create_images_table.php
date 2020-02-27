@@ -17,6 +17,7 @@ class CreateImagesTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('product_id')->nullable();
             $table->string('image')->nullable();
+            $table->boolean('image_default')->nullable()->default(false);
             $table->timestamps();
         });
     }

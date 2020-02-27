@@ -7,9 +7,9 @@
     <meta name="description" content="">
     <meta name="author" content="Mosaddek">
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <link rel="shortcut icon" href="img/favicon.html">
+    <link rel="shortcut icon" href="{{ asset('images/icon.jpg') }}">
 
-    <title>FlatLab - Flat & Responsive Bootstrap Admin Template</title>
+    <title>Admin-Ecom</title>
 
     <link href="{{ asset('bower_components/Asset-FW-Admin/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bower_components/Asset-FW-Admin/css/bootstrap-reset.css') }}" rel="stylesheet">
@@ -20,6 +20,12 @@
     <link href="{{ asset('bower_components/Asset-FW-Admin/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('bower_components/Asset-FW-Admin/css/style-responsive.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('bower_components/Asset-FW-Admin/assets/data-tables/DT_bootstrap.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/css/fileinput.min.css" media="all" type="text/css"> 
+    <style>
+        .kv-file-upload {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -54,6 +60,7 @@
     <script type="text/javascript" src="{{ asset('bower_components/Asset-FW-Admin/assets/data-tables/DT_bootstrap.js') }}"></script>
     <script src="{{ asset('bower_components/Asset-FW-Admin/js/editable-table.js') }}"></script>
     <script src="assets/toastr-master/toastr.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/js/fileinput.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -75,71 +82,49 @@
           });
     </script>
     <script>
-        $(document).ready(function (){
-            $('#img1').click(function(){
-                $('#input_img1').click();
-            });
-        });
-
         $(document).ready(function() {
-            var i = 1;
-            $('.addImage').click(function() {
-                if (++i <= 4) {
-                    $('.add_main').append('<div class="col-md-3 image"><input onchange="changeImg'+i+'(this)" style="display: none;" id="input_img'+i+'" type="file" name="prd_image[]" class="form-control input_image"><img style="width: 150px;" class="imageA" id="img'+i+'" src="{{ asset('bower_components/Asset-FW-Admin/img/photos/add_photo.png') }}" alt=""><button type="button" style="width: 100%" class="btn btn-danger btn_remove">Remove</button></div>');
-                    $(".imageA").click(function () {
-                        var id = this.id;
-                        id = '#input_' + id;
-                        $(id).click();
-                    });
-                } else {
-                    alert('Fail');
-                }
-            });
-            $(document).on('click','.btn_remove',function(){
-                $(this).parents('.image').remove();
+            $("#input-res-1").fileinput({
+                showCaption: false,
+                allowedFileExtensions: ["jpg", "gif", "png", "jpeg"],
+                enableResumableUpload: true,
+                maxFileCount: 4,
+                theme: 'fas',
+                showRemove: true,
+                showUpload: false,
+                initialPreview:false,
             });
         });
-
-        function changeImg(input){
-            if(input.files && input.files[0]){
-                var reader = new FileReader();
-                reader.onload = function(e){
-                    $('#img1').attr('src',e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function changeImg2(input){
-            if(input.files && input.files[0]){
-                var reader = new FileReader();
-                reader.onload = function(e){
-                    $('#img2').attr('src',e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function changeImg3(input){
-            if(input.files && input.files[0]){
-                var reader = new FileReader();
-                reader.onload = function(e){
-                    $('#img3').attr('src',e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function changeImg4(input){
-            if(input.files && input.files[0]){
-                var reader = new FileReader();
-                reader.onload = function(e){
-                    $('#img4').attr('src',e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
+        $(document).ready(function() {
+            $("#input-res-2").fileinput({
+                showCaption: false,
+                allowedFileExtensions: ["jpg", "gif", "png", "jpeg"],
+                enableResumableUpload: true,
+                maxFileCount: 4,
+                theme: 'fas',
+                showRemove: true,
+                showUpload: false,
+                initialPreview:false,
+            });
+            $("#input-res-2").change(function () {
+                $(this).parents('.form-group').find('.row').remove();
+            });
+        });
+        $(document).ready(function() {
+            $("#input-res-3").fileinput({
+                showCaption: false,
+                allowedFileExtensions: ["jpg", "gif", "png", "jpeg"],
+                enableResumableUpload: true,
+                maxFileCount: 1,
+                theme: 'fas',
+                showRemove: true,
+                showUpload: false,
+                initialPreview:false,
+            });
+            $("#input-res-3").change(function () {
+                $(this).parents('.form-group').find('.row').remove();
+            });
+        });
+        </script>
 </body>
 
 </html>
