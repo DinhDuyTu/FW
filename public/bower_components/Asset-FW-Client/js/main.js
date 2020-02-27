@@ -1,241 +1,284 @@
-
 jQuery(document).ready(function() {
-	"use strict";
-
-/*  Menu */
-    jQuery(".toggle").on("click", function() {
-        return jQuery(".submenu").is(":hidden") ? jQuery(".submenu").slideDown("fast") : jQuery(".submenu").slideUp("fast"), !1
-    }), jQuery(".topnav").accordion({
-        accordion: !1,
-        speed: 300,
-        closedSign: "+",
-        openedSign: "-"
-    }), jQuery("#nav > li").hover(function() {
-        var e = $(this).find(".level-a-wrapper");
-        e.hide(), e.css("left", "0"), e.stop(true, true).delay(150).fadeIn(300, "easeOutCubic")
-    }, function() {
-        jQuery(this).find(".level-a-wrapper").stop(true, true).delay(300).fadeOut(300, "easeInCubic")
-    });
-    jQuery("#nav li.level-a.drop-menu").mouseover(function() {
-            return jQuery(window).width() >= 740 && jQuery(this).children("ul.level-b").fadeIn(100), !1
-        }).mouseleave(function() {
-            return jQuery(window).width() >= 740 && jQuery(this).children("ul.level-b").fadeOut(100), !1
-        }), jQuery("#nav li.level-a.drop-menu li").mouseover(function() {
-            if (jQuery(window).width() >= 740) {
-                jQuery(this).children("ul").css({
-                    top: 0,
-                    left: "185px"
-                });
-                var e = jQuery(this).offset();
-                e && jQuery(window).width() < e.left + 325 ? (jQuery(this).children("ul").removeClass("right-sub"), jQuery(this).children("ul").addClass("left-sub"), jQuery(this).children("ul").css({
-                    top: 0,
-                    left: "-167px"
-                })) : (jQuery(this).children("ul").removeClass("left-sub"), jQuery(this).children("ul").addClass("right-sub")), jQuery(this).children("ul").fadeIn(100)
-            }
-        }).mouseleave(function() {
-            jQuery(window).width() >= 740 && jQuery(this).children("ul").fadeOut(100)
-        }),
-
-        /* Mobile Menu */
-
-        jQuery("#mobile-menu").mobileMenu({
-            MenuWidth: 250,
-            SlideSpeed: 300,
-            WindowsMaxWidth: 767,
-            PagePush: !0,
-            FromLeft: !0,
-            Overlay: !0,
-            CollapseMenu: !0,
-            ClassName: "mobile-menu"
-        })
+"use strict";
 
 
-
-
-})
-
-
-var isTouchDevice = "ontouchstart" in window || navigator.msMaxTouchPoints > 0;
-jQuery.extend(jQuery.easing, {
-        easeInCubic: function(e, t, n, i, s) {
-            return i * (t /= s) * t * t + n
-        },
-        easeOutCubic: function(e, t, n, i, s) {
-            return i * ((t = t / s - 1) * t * t + 1) + n
-        }
-    }),
-    function(e) {
-        e.fn.extend({
-            accordion: function() {
-                return this.each(function() {})
-            }
-        })
-    }(jQuery)
-	
 /******************************************
-   Navigation
+   Newsletter popup
+******************************************/
+   
+    jQuery('#myModal').appendTo("body");
+          function show_modal(){
+            jQuery('#myModal').modal('show');
+          }
+
+            jQuery('#myModal').modal({
+            keyboard: false,
+           backdrop:false
+          }); 
+
+/******************************************
+ jQuery MeanMenu
+******************************************/
+
+	jQuery('.mobile-menu nav').meanmenu({
+		meanScreenWidth: "1200",
+		meanMenuContainer: ".mobile-menu",
+	});
+
+/******************************************
+ main slider
+******************************************/
+	jQuery('#mainSlider').nivoSlider({
+		directionNav: true,
+		animSpeed: 500,
+		slices: 18,
+		pauseTime: 5000,
+		pauseOnHover: false,
+		controlNav: false,
+		prevText: '<i class="fa fa-angle-left nivo-prev-icon"></i>',
+		nextText: '<i class="fa fa-angle-right nivo-next-icon"></i>'
+	});		
+
+/******************************************
+ wow js active
+******************************************/
+	new WOW().init();
+	
+
+/******************************************
+   All slider
+******************************************/
+
+jQuery("#all-slider .slider-items").owlCarousel({
+		items: 3,
+		itemsDesktop: [1024, 3],
+		itemsDesktopSmall: [980, 2],
+		itemsTablet: [640, 2],
+		itemsMobile: [390, 1],
+		navigation: !0,
+		navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
+		slideSpeed: 500,
+		pagination: !1,
+		autoPlay: false
+	}),
+
+/******************************************
+   womem slider
+******************************************/
+
+jQuery("#women-slider .slider-items").owlCarousel({
+		items: 3,
+		itemsDesktop: [1024, 3],
+		itemsDesktopSmall: [980, 2],
+		itemsTablet: [640, 2],
+		itemsMobile: [390, 1],
+		navigation: !0,
+		navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
+		slideSpeed: 500,
+		pagination: !1,
+		autoPlay: false
+	}),
+
+/******************************************
+   Men slider
+******************************************/
+
+jQuery("#men-slider .slider-items").owlCarousel({
+		items: 3,
+		itemsDesktop: [1024, 3],
+		itemsDesktopSmall: [980, 2],
+		itemsTablet: [640, 2],
+		itemsMobile: [390, 1],
+		navigation: !0,
+		navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
+		slideSpeed: 500,
+		pagination: !1,
+		autoPlay: false
+	}),
+/******************************************
+   Kids slider
+******************************************/
+
+jQuery("#kids-slider .slider-items").owlCarousel({
+		items: 3,
+		itemsDesktop: [1024, 3],
+		itemsDesktopSmall: [980, 2],
+		itemsTablet: [640, 2],
+		itemsMobile: [390, 1],
+		navigation: !0,
+		navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
+		slideSpeed: 500,
+		pagination: !1,
+		autoPlay: false
+	}),			
+/******************************************
+   Best selling slider
+******************************************/
+
+jQuery("#best-selling-slider .slider-items").owlCarousel({
+		items: 3,
+		itemsDesktop: [1024, 3],
+		itemsDesktopSmall: [980, 2],
+		itemsTablet: [640, 2],
+		itemsMobile: [390, 1],
+		navigation: !0,
+		navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
+		slideSpeed: 500,
+		pagination: !1,
+		autoPlay: false
+	}),
+
+/******************************************
+	Featured products slider
+******************************************/
+
+jQuery("#featured-products-slider .slider-items").owlCarousel({
+		items: 4,
+		itemsDesktop: [1024, 3],
+		itemsDesktopSmall: [980, 2],
+		itemsTablet: [640, 3],
+		itemsMobile: [480, 2],
+		navigation: !0,
+		navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
+		slideSpeed: 500,
+		pagination: !1,
+		autoPlay: false
+	}),
+		
+/******************************************
+   Best sale  slider
 ******************************************/	
-jQuery("#hot-deal-slider .slider-items").owlCarousel({
-		items: 1, //10 items above 1000px browser width
-		itemsDesktop: [1024, 1], //5 items between 1024px and 901px
-		itemsDesktopSmall: [900, 1], // 3 items betweem 900px and 601px
-		itemsTablet: [768, 1], //2 items between 600 and 0;
-		itemsMobile: [360, 1],
-		navigation: false,
-		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+jQuery("#best-sale-slider .slider-items").owlCarousel({
+	items: 1,
+		itemsDesktop: [1024, 1],
+		itemsDesktopSmall: [900, 1],
+		itemsTablet: [640, 1],
+		itemsMobile: [390, 1],
+		navigation: !0,
+		navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
 		slideSpeed: 500,
 		pagination: false,
 		autoPlay: true,
-	});
-	
+		singleItem: true,
+        transitionStyle: "goDown"
+	}),
+
 /******************************************
-   Navigation
-******************************************/	
-	jQuery("#bestsell-slider .slider-items").owlCarousel({
-		items: 5, //10 items above 1000px browser width
-		itemsDesktop: [1024, 4], //5 items between 1024px and 901px
-		itemsDesktopSmall: [900, 3], // 3 items betweem 900px and 601px
-		itemsTablet: [767, 2], //2 items between 600 and 0;
-		itemsMobile: [360, 1],
-		navigation: true,
-		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
-		slideSpeed: 500,
-		pagination: false
-	});
+	testimonials slider
+******************************************/
 
-	/* New arrivals slider */
-	jQuery("#special-slider .slider-items").owlCarousel({
-		items: 3, //10 items above 1000px browser width
-		itemsDesktop: [1024, 3], //5 items between 1024px and 901px
-		itemsDesktopSmall: [900, 3], // 3 items betweem 900px and 601px
-		itemsTablet: [768, 2], //2 items between 600 and 0;
-		itemsMobile: [360, 1],
-		navigation: true,
-		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+	jQuery("#testimonials-slider .slider-items").owlCarousel({
+		items: 1,
+		itemsDesktop: [1024, 1],
+		itemsDesktopSmall: [900, 1],
+		itemsTablet: [640, 1],
+		itemsMobile: [390, 1],
+		navigation: !0,
+		navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
 		slideSpeed: 500,
-		pagination: false
-	});
-	/* Brand logo slider */
-	jQuery("#brand-logo-slider .slider-items").owlCarousel({
+		pagination: false,
 		autoPlay: true,
-		items: 3, //10 items above 1000px browser width
-		itemsDesktop: [1024, 3], //5 items between 1024px and 901px
-		itemsDesktopSmall: [900, 3], // 3 items betweem 900px and 601px
-		itemsTablet: [600, 2], //2 items between 600 and 0;
-		itemsMobile: [320, 1],
-		navigation: true,
-		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
-		slideSpeed: 500,
-		pagination: false
-	});
-	/* Category desc slider */
-	jQuery("#category-desc-slider .slider-items").owlCarousel({
-		autoPlay: true,
-		items: 1, //10 items above 1000px browser width
-		itemsDesktop: [1024, 1], //5 items between 1024px and 901px
-		itemsDesktopSmall: [900, 1], // 3 items betweem 900px and 601px
-		itemsTablet: [600, 1], //2 items between 600 and 0;
-		itemsMobile: [320, 1],
-		navigation: true,
-		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
-		slideSpeed: 500,
-		pagination: false
-	});
-	/* Related products slider */
-	jQuery("#related-products-slider .slider-items").owlCarousel({
-		items: 4, //10 items above 1000px browser width
-		itemsDesktop: [1024, 3], //5 items between 1024px and 901px
-		itemsDesktopSmall: [900, 3], // 3 items betweem 900px and 601px
-		itemsTablet: [768, 2], //2 items between 600 and 0;
-		itemsMobile: [360, 1],
-		navigation: true,
-		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
-		slideSpeed: 500,
-		pagination: false
-	});
-	/* Upsell products slider */
-	jQuery("#upsell-products-slider .slider-items").owlCarousel({
-		items: 4, //10 items above 1000px browser width
-		itemsDesktop: [1024, 3], //5 items between 1024px and 901px
-		itemsDesktopSmall: [900, 3], // 3 items betweem 900px and 601px
-		itemsTablet: [768, 2], //2 items between 600 and 0;
-		itemsMobile: [360, 1],
-		navigation: true,
-		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
-		slideSpeed: 500,
-		pagination: false
-	});
-	/* Mobile menu */
-	jQuery("#jtv-mobile-menu").mobileMenu({
-		MenuWidth: 250,
-		SlideSpeed: 300,
-		WindowsMaxWidth: 767,
-		PagePush: true,
-		FromLeft: true,
-		Overlay: true,
-		CollapseMenu: true,
-		ClassName: "jtv-mobile-menu"
-	});
-	/* side nav categories */
+		singleItem: true,
+        transitionStyle: "backSlide"
+	}),
+/******************************************
+	Our clients slider
+******************************************/
 
-	
-	if (jQuery('.subDropdown')[0]) {
-		jQuery('.subDropdown').on("click", function() {
-			jQuery(this).toggleClass('plus');
-			jQuery(this).toggleClass('minus');
-			jQuery(this).parent().find('ul').slideToggle();
-		});
-	}
-	jQuery.extend(jQuery.easing, {
-		easeInCubic: function(x, t, b, c, d) {
-			return c * (t /= d) * t * t + b;
-		},
-		easeOutCubic: function(x, t, b, c, d) {
-			return c * ((t = t / d - 1) * t * t + 1) + b;
-		},
-	});
-	(function(jQuery) {
-		jQuery.fn.extend({
-			accordion: function() {
-				return this.each(function() {
-					function activate(el, effect) {
-						jQuery(el).siblings(panelSelector)[(effect || activationEffect)](((effect == "show") ? activationEffectSpeed : false), function() {
-							jQuery(el).parents().show();
-						});
-					}
-				});
-			}
-		});
-	})(jQuery);
-	jQuery(function(jQuery) {
-		jQuery('.accordion').accordion();
-		jQuery('.accordion').each(function(index) {
-			var activeItems = jQuery(this).find('li.active');
-			activeItems.each(function(i) {
-				jQuery(this).children('ul').css('display', 'block');
-				if (i == activeItems.length - 1) {
-					jQuery(this).addClass("current");
-				}
-			});
-		});
-	});
-	/* Top Cart js */
-	function slideEffectAjax() {
-		jQuery('.jtv-top-cart-box').mouseenter(function() {
-			jQuery(this).find(".jtv-top-cart-content").stop(true, true).slideDown();
-		});
-		jQuery('.jtv-top-cart-box').mouseleave(function() {
-			jQuery(this).find(".jtv-top-cart-content").stop(true, true).slideUp();
-		});
-	}
-	jQuery(document).ready(function() {
-		slideEffectAjax();
-	});
-	/*  sticky header  */
-	jQuery(window).scroll(function() {
-		jQuery(this).scrollTop() > 100 ? jQuery("nav").addClass("jtv-sticky-header") : jQuery("nav").removeClass("jtv-sticky-header")
-		
-	});
+	jQuery("#our-clients-slider .slider-items").owlCarousel({
+		items: 4,
+		itemsDesktop: [1024, 4],
+		itemsDesktopSmall: [900, 3],
+		itemsTablet: [640, 2],
+		itemsMobile: [360, 1],
+		navigation: false,
+		navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
+		slideSpeed: 500,
+		pagination: false,
+		autoPlay: true
+	}),
+
+/******************************************
+	Latest news slider
+******************************************/
+
+	jQuery("#latest-news-slider .slider-items").owlCarousel({
+		autoplay: !0,
+		items: 3,
+		itemsDesktop: [1024, 3],
+		itemsDesktopSmall: [980, 2],
+		itemsTablet: [640, 2],
+		itemsMobile: [360, 1],
+		navigation: !0,
+		navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
+		slideSpeed: 500,
+		pagination: !1
+	}),
+
+
+/******************************************
+   Upsell product slider
+******************************************/
+
+jQuery("#upsell-product-slider .slider-items").owlCarousel({
+		items: 4,
+		itemsDesktop: [1024, 4],
+		itemsDesktopSmall: [900, 3],
+		itemsTablet: [640, 2],
+		itemsMobile: [390, 1],
+		navigation: !0,
+		navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
+		slideSpeed: 500,
+		pagination: !1,
+		autoPlay: false
+	}),
+
+/******************************************
+	Related product slider
+******************************************/
+
+	jQuery("#related-product-slider .slider-items").owlCarousel({
+		items: 4,
+		itemsDesktop: [1024, 4],
+		itemsDesktopSmall: [900, 3],
+		itemsTablet: [640, 2],
+		itemsMobile: [390, 1],
+		navigation: !0,
+		navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
+		slideSpeed: 500,
+		pagination: !1,
+		autoPlay: true
+	}),
+
+/******************************************
+	Related posts
+******************************************/
+
+	jQuery("#related-posts .slider-items").owlCarousel({
+		items: 3,
+		itemsDesktop: [1024, 3],
+		itemsDesktopSmall: [900, 3],
+		itemsTablet: [640, 2],
+		itemsMobile: [390, 1],
+		navigation: !0,
+		navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
+		slideSpeed: 500,
+		pagination: !1,
+		autoPlay: true
+	}),
+
+
+
+
+
+/******************************************
+	subDropdown
+******************************************/
+
+	jQuery(".subDropdown")[0] && jQuery(".subDropdown").on("click", function() {
+		jQuery(this).toggleClass("plus"), jQuery(this).toggleClass("minus"), jQuery(this).parent().find("ul").slideToggle()
+	})
+
 
 /******************************************
     PRICE FILTER
@@ -262,74 +305,99 @@ jQuery('.slider-range-price').each(function() {
 	});
 })
 
-/*---------------------------------------------------
-   tooltips
------------------------------------------------------ */
-jQuery('[data-toggle=\'tooltip\']').tooltip({container: 'body'});
+/******************************************
+    Footer expander
+******************************************/
 
-
-/*  UItoTop */
-jQuery.fn.UItoTop = function(options) {
-	var defaults = {
-		text: '',
-		min: 200,
-		inDelay: 600,
-		outDelay: 400,
-		containerID: 'toTop',
-		containerHoverID: 'toTopHover',
-		scrollSpeed: 1200,
-		easingType: 'linear'
-	};
-	var settings = jQuery.extend(defaults, options);
-	var containerIDhash = '#' + settings.containerID;
-	var containerHoverIDHash = '#' + settings.containerHoverID;
-	jQuery('body').append('<a href="#" id="' + settings.containerID + '">' + settings.text + '</a>');
-	jQuery(containerIDhash).hide().on("click", function() {
-		jQuery('html, body').animate({
-			scrollTop: 0
-		}, settings.scrollSpeed, settings.easingType);
-		jQuery('#' + settings.containerHoverID, this).stop().animate({
-			'opacity': 0
-		}, settings.inDelay, settings.easingType);
-		return false;
-	}).prepend('<span id="' + settings.containerHoverID + '"></span>').hover(function() {
-		jQuery(containerHoverIDHash, this).stop().animate({
-			'opacity': 1
-		}, 600, 'linear');
-	}, function() {
-		jQuery(containerHoverIDHash, this).stop().animate({
-			'opacity': 0
-		}, 700, 'linear');
-	});
-	jQuery(window).scroll(function() {
-		var sd = jQuery(window).scrollTop();
-		if (typeof document.body.style.maxHeight === "undefined") {
-			jQuery(containerIDhash).css({
-				'position': 'absolute',
-				'top': jQuery(window).scrollTop() + jQuery(window).height() - 50
-			});
-		}
-		if (sd > settings.min) jQuery(containerIDhash).fadeIn(settings.inDelay);
-		else jQuery(containerIDhash).fadeOut(settings.Outdelay);
-	});
-};
-/* mobileMenu */
-var isTouchDevice = ('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0);
-jQuery(window).on("load", function() {
-	if (isTouchDevice) {
-		jQuery('#nav a.level-top').on("click", function(e) {
-			jQueryt = jQuery(this);
-			jQueryparent = jQueryt.parent();
-			if (jQueryparent.hasClass('parent')) {
-				if (!jQueryt.hasClass('menu-ready')) {
-					jQuery('#nav a.level-top').removeClass('menu-ready');
-					jQueryt.addClass('menu-ready');
-					return false;
-				} else {
-					jQueryt.removeClass('menu-ready');
-				}
-			}
-		});
-	}
-	jQuery().UItoTop();
+jQuery(".collapsed-block .expander").on("click", function(e) {
+	var collapse_content_selector = jQuery(this).attr("href");
+	var expander = jQuery(this);
+	if (!jQuery(collapse_content_selector).hasClass("open")) expander.addClass("open").html("&minus;");
+	else expander.removeClass("open").html("+");
+	if (!jQuery(collapse_content_selector).hasClass("open")) jQuery(collapse_content_selector).addClass("open").slideDown("normal");
+	else jQuery(collapse_content_selector).removeClass("open").slideUp("normal");
+	e.preventDefault()
 });
+
+/******************************************
+    Category sidebar
+******************************************/
+
+jQuery(function() {
+	jQuery(".category-sidebar ul > li.cat-item.cat-parent > ul").hide();
+	jQuery(".category-sidebar ul > li.cat-item.cat-parent.current-cat-parent > ul").show();
+	jQuery(".category-sidebar ul > li.cat-item.cat-parent.current-cat.cat-parent > ul").show();
+	jQuery(".category-sidebar ul > li.cat-item.cat-parent").on("click", function() {
+		if (jQuery(this).hasClass('current-cat-parent')) {
+			var li = jQuery(this).closest('li');
+			li.find(' > ul').slideToggle('fast');
+			jQuery(this).toggleClass("close-cat");
+		} else {
+			var li = jQuery(this).closest('li');
+			li.find(' > ul').slideToggle('fast');
+			jQuery(this).toggleClass("cat-item.cat-parent open-cat");
+		}
+	});
+	jQuery(".category-sidebar ul.children li.cat-item,ul.children li.cat-item > a").on("click", function(e) {
+		e.stopPropagation();
+	});
+});
+
+/******************************************
+    colosebut
+******************************************/
+
+jQuery("#colosebut1").on("click", function() {
+	jQuery("#div1").fadeOut("slow");
+});
+jQuery("#colosebut2").on("click", function() {
+	jQuery("#div2").fadeOut("slow");
+});
+jQuery("#colosebut3").on("click", function() {
+	jQuery("#div3").fadeOut("slow");
+});
+jQuery("#colosebut4").on("click", function() {
+	jQuery("#div4").fadeOut("slow");
+});
+
+
+
+
+
+
+/******************************************
+    tooltip
+******************************************/
+
+
+jQuery('[data-toggle="tooltip"]').tooltip();})
+
+ /******************************************
+    totop
+    ******************************************/
+    // browser window scroll (in pixels) after which the "back to top" link is shown
+    var offset = 300,
+        //browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+        offset_opacity = 1200,
+        //duration of the top scrolling animation (in ms)
+        scroll_top_duration = 700,
+        //grab the "back to top" link
+        jQueryback_to_top = jQuery('.totop');
+
+    //hide or show the "back to top" link
+    jQuery(window).scroll(function() {
+        (jQuery(this).scrollTop() > offset) ? jQueryback_to_top.addClass('totop-is-visible'): jQueryback_to_top.removeClass('totop-is-visible totop-fade-out');
+        if (jQuery(this).scrollTop() > offset_opacity) {
+            jQueryback_to_top.addClass('totop-fade-out');
+        }
+    });
+
+    //smooth scroll to top
+    jQueryback_to_top.on('click', function(event) {
+        event.preventDefault();
+        jQuery('body,html').animate({
+            scrollTop: 0,
+        }, scroll_top_duration);
+    });	
+
+(jQuery);

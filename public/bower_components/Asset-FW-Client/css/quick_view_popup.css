@@ -42,32 +42,50 @@
 	display: none;
 	position: absolute;
 	right: -6px;
-	top: -10px;
+	top: -6px;
 	z-index: 1103;
 	font-size: 25px;
 	color: #e84c3d;
 }
+#quick_view_popup-content .product-view-area .product-name h1 {
+	font-size: 22px;
+}
+#quick_view_popup-content .product-view-area {
+	border: medium none;
+	padding: 0;
+	margin: 10px 0 10px 15px;
+}
+#quick_view_popup-content .product-view-area .product-details-area .price {
+	font-size: 22px;
+}
+#quick_view_popup-content .product-view-area .short-description h2 {
+	display: none;
+}
+#quick_view_popup-content .product-view-area .flexslider-thumb {
+	padding: 20px 48px;
+}
+#quick_view_popup-content .product-view-area .flexslider-thumb .flex-prev {
+	left: 5px;
+}
+#quick_view_popup-content .product-view-area .flexslider-thumb .flex-next {
+	right: 10px;
+}
+#quick_view_popup-content .product-color-size-area .size-area {
+	width: 51%;
+}
+#quick_view_popup-content .cart-plus-minus label {
+	display: none;
+}
+#quick_view_popup-content .product-cart-option ul li:last-child {
+	margin: auto;
+}
+#quick_view_popup-content .product-cart-option ul li {
+	margin-right: 10px;
+	padding-right: 10px;
+}
 .quick_view_popup {
 	background: #333;
 	position: absolute;
-}
-
-#quick_view_popup-content .product-view .product-img-box .product-image .more-views-items img{ max-width:100%}
-#quick_view_popup-content .product-view .product-name h1 {
-    font-size: 26px;
-    margin: 0 0 2px;
-    padding-bottom: 6px;
-    padding-right: 0px;
-    letter-spacing: 0.2px;
-}
-#quick_view_popup-content .product-view .product-shop .add-to-box {
-    padding: 10px 0px 0px;
-
-    border-bottom: 0px dotted #ddd;
-}
-#quick_view_popup-content .email-addto-box {
-    display: inline-block;
-    margin-left: 0px; margin-top:12px;
 }
 @media only screen and (min-width:300px) and (max-width:767px) {
 #quick_view_popup-content {
@@ -94,6 +112,12 @@
 	width: 90%;
 }
 #quick_view_popup-content {
+	width: 100%;
+}
+#quick_view_popup-content button.button.pro-add-to-cart {
+	margin-top: 15px;
+}
+#quick_view_popup-content .product-color-size-area .size-area, #quick_view_popup-content .product-color-size-area .color-area {
 	width: 100%;
 }
 }

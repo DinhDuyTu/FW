@@ -11,8 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('client.index');
+Route::group(['namespace' => 'Client'], function () {
+    Route::get('/', "HomeController@index")->name('home'); 
+
+    Route::get('/list_products', "ProductController@index")->name('list_product');
+    Route::get('/single_product/{id}', "ProductController@show")->name('single_product');
+
+    Route::post('cart/add_to_cart', "CartController@addToCart")->name('add_to_cart');
 });
 
 Auth::routes();
