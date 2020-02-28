@@ -67,27 +67,7 @@
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			}
 		});
-		// $(document).ready(function () {
-			// $('.add_to_cart').on('click', function(e) {
-			// 	e.preventDefault();
-				// let id = $(this).attr('data-id');
-				// let _this = $(this);
-				// if (confirm('Bạn có chắc muốn xóa không?')) {
-				// 	$.ajax({
-				// 		url: '/gio-hang/destroy',
-				// 		method: 'POST',
-				// 		data: {
-				// 			id: id
-				// 		},
-				// 		success: function() {
-				// 			_this.parents('.product-cart').remove();
-				// 		},
-				// 		error: function() {
-				// 		}
-				// 	});
-				// }
-            //     alert('oke');
-			// });
+		
         $(document).ready(function () {
             $('.addToCart').click(function (e) {
                 e.preventDefault();
@@ -100,15 +80,20 @@
                         'id': id,
                         'quantity': quantity
                     },
-                    success: function () {
-                        console.log('success')
+                    success: function (scs) {
+                        console.log(scs.product_detail);
+                        // alert('success');
+                        // $('#miniCart').append('<li class="item odd"><a href="#" title="Ipsums Dolors Untra" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img07.jpg') }}" alt="Lorem ipsum dolor" width="65"></a><div class="product-details"> <a href="#" title="Remove This Item" class="remove-cart"><i class="icon-close"></i></a><p class="product-name"><a href="#">Lorem ipsum dolor sit amet Consectetur</a> </p><strong>1</strong> x <span class="price">$20.00</span> </div></li>');
+                        $('#qty-product').text(scs.quantity);
+                        $('#cart-sidebar').append('<li class="item odd"><a href="#" title="Ipsums Dolors Untra" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img07.jpg') }}" alt="Lorem ipsum dolor" width="65"></a><div class="product-details"> <a href="#" title="Remove This Item" class="remove-cart"><i class="icon-close"></i></a><p class="product-name"><a href="#">'+scs.product_name+'</a> </p><strong>'+scs.quantity+'</strong> x <span class="price">'+scs.product_price+'</span> </div></li>');
                     },
                     error: function () {
-                        console.log('fail')
+                        console.log($quantity)
                     }
                 })
             });
         });
+
     </script>
 </body>
 

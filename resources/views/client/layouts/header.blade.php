@@ -114,7 +114,12 @@
                             <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle">
                                 <a href="#">
                                     <div class="cart-icon"><i class="fa fa-shopping-cart"></i></div>
-                                    <div class="shoppingcart-inner"><span class="cart-title">Shopping Cart</span> <span class="cart-total">4 Item(s): $520.00</span></div>
+                                    <div class="shoppingcart-inner">
+                                        <span class="cart-title">Shopping Cart</span>
+                                        <span class="cart-total">
+                                            <b id="qty-product">0</b> Item(s): <i>0</i> VND
+                                        </span>
+                                    </div>
                                 </a>
                             </div>
                             <div>

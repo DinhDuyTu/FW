@@ -32,20 +32,23 @@ class CartController extends Controller
         $cart = unserialize($request->cookie('cart'));
         if (isset ($cart[$product_id]) ) {
             $product = $this->productRepository->find($product_id);
-            $qty = $product->quantity;
+            // $qty = $product->quantity;
             $product_num = $product_num + $cart[$product_id]["product_num"];
-                $cart[$request->product_id] = $this->getProductDetail($product_id, $product_num);
-                $cookie = cookie('cart', serialize($cart), 60);
-                $qty = count($cart);
+            $cart[$request->product_id] = $this->getProductDetail($product_id, $product_num);
+            $cookie = cookie('cart', serialize($cart), 60);
+            $qty = count($cart);
+            $product_detail = $this->getProductDetail($product_id, $product_num);
         }
         else {
             $cart[$request->product_id] = $this->getProductDetail($product_id, $product_num);
             $cookie = cookie('cart', serialize($cart), 60);
             $qty = count($cart);
+            $product_detail = $this->getProductDetail($product_id, $product_num);
         }
         return response()->json([
             'quantity' => $qty,
             'cart' => $cart,
+            'product_detail' => $product_detail,
         ], 200)->withCookie($cookie);
     }
 
