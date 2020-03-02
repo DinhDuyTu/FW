@@ -22,6 +22,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/Asset-FW-Client/css/meanmenu.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/Asset-FW-Client/css/nivo-slider.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/Asset-FW-Client/css/style.css') }}" media="all">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 
 <body class="cms-index-index cms-home-page">
@@ -77,21 +78,130 @@
                     type: 'POST',
                     url: '/cart/add_to_cart',
                     data: {
-                        'id': id,
+                        'product_id': id,
                         'quantity': quantity
                     },
                     success: function (scs) {
-                        console.log(scs.product_detail);
-                        // alert('success');
-                        // $('#miniCart').append('<li class="item odd"><a href="#" title="Ipsums Dolors Untra" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img07.jpg') }}" alt="Lorem ipsum dolor" width="65"></a><div class="product-details"> <a href="#" title="Remove This Item" class="remove-cart"><i class="icon-close"></i></a><p class="product-name"><a href="#">Lorem ipsum dolor sit amet Consectetur</a> </p><strong>1</strong> x <span class="price">$20.00</span> </div></li>');
                         $('#qty-product').text(scs.quantity);
-                        $('#cart-sidebar').append('<li class="item odd"><a href="#" title="Ipsums Dolors Untra" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img07.jpg') }}" alt="Lorem ipsum dolor" width="65"></a><div class="product-details"> <a href="#" title="Remove This Item" class="remove-cart"><i class="icon-close"></i></a><p class="product-name"><a href="#">'+scs.product_name+'</a> </p><strong>'+scs.quantity+'</strong> x <span class="price">'+scs.product_price+'</span> </div></li>');
+                        Swal.fire(
+                            'Success!',
+                            'Add to cart successfully!',
+                            'success'
+                        )
                     },
                     error: function () {
-                        console.log($quantity)
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                        })
                     }
                 })
             });
+
+            $('.mini-cart').hover(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: '/cart/show_mini_cart',
+                    success: function (scs) {
+                        let cart = scs.cart;
+                        console.log(cart);
+                        $(cart).each(function(res){
+                            console.log(cart['product_id']);
+                        });
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                        })
+                    }
+                })
+            });
+
+            $('.input-quantity').change(function () {
+                let data = {
+                    id: $(this).attr('data-id'),
+                    quantity: $(this).val()
+                };
+                let _this = $(this);
+                $.ajax({
+                    url: '/cart/update',
+                    data: data,
+                    method: "POST",
+                    success: function (scs) {
+                        let summedPrice = number_format(scs.summedPrice);
+                        let total_price = number_format(scs.total_price);
+                        _this.parents('.product-cart').find('.summed-price').text(`${summedPrice} VND`);
+                        $('.total_price').text(`${total_price} VND`);
+                    },
+                    error: function () {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong!',
+                        })
+                    }
+                });
+            });
+
+            $(document).on('click', '.deleteCart', function (e) {
+                e.preventDefault();
+                let product_id = $(this).attr('data-id');
+                let _this = $(this);
+                Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: 'POST',
+                            url: '/cart/delete',
+                            data: {
+                                'product_id': product_id
+                            },
+                            success: function (scs) {
+                                let total_price = number_format(scs.total_price);
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Your file has been deleted.',
+                                    'success'
+                                )
+                                $('.total_price').text(`${total_price} VND`);
+                                _this.parents('.product-cart').remove();
+                            },
+                            error: function () {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Something went wrong!',
+                                    footer: '<a href>Why do I have this issue?</a>'
+                                })
+                            }
+                        })
+                    }
+                })
+            });
+
+            function number_format(nStr)
+            {
+                nStr += '';
+                x = nStr.split('.');
+                x1 = x[0];
+                x2 = x.length > 1 ? '.' + x[1] : '';
+                var rgx = /(\d+)(\d{3})/;
+                while (rgx.test(x1)) {
+                    x1 = x1.replace(rgx, '$1' + ',' + '$2');
+                }
+                return x1 + x2;
+            }
+
         });
 
     </script>

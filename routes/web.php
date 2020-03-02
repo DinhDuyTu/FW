@@ -18,6 +18,10 @@ Route::group(['namespace' => 'Client'], function () {
     Route::get('/single_product/{id}', "ProductController@show")->name('single_product');
 
     Route::post('cart/add_to_cart', "CartController@addToCart")->name('add_to_cart');
+    Route::get('cart/show_mini_cart', "CartController@showMiniCart")->name('show_mini_cart');
+    Route::get('cart', "CartController@index")->name('cart.index');
+    Route::post('cart/update', "CartController@update")->name('cart.update');
+    Route::post('cart/delete', "CartController@delete")->name('cart.delete');
 });
 
 Auth::routes();
