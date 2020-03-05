@@ -11,6 +11,10 @@ use App\Repositories\Image\ImageRepository;
 use App\Repositories\Image\ImageRepositoryInterface;
 use App\Repositories\User\UserRepository;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Repositories\Size\SizeRepository;
+use App\Repositories\Size\SizeRepositoryInterface;
+use App\Repositories\Color\ColorRepository;
+use App\Repositories\Color\ColorRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -39,6 +43,15 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             UserRepositoryInterface::class,
             UserRepository::class
+        );
+
+        $this->app->singleton(
+            SizeRepositoryInterface::class,
+            SizeRepository::class
+        );
+        $this->app->singleton(
+            ColorRepositoryInterface::class,
+            ColorRepository::class
         );
     }
 

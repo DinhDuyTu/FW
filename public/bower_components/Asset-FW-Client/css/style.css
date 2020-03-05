@@ -4009,7 +4009,7 @@ h2.saider-bar-title {
 }
 .color ul li a {
 	clear: both;
-	background: #000000;
+	/* background: #000000; */
 	float: left;
 	font-size: 11px;
 	font-weight: 700;
@@ -4018,7 +4018,7 @@ h2.saider-bar-title {
 	width: 20px;
 	border: 1px solid #e0e0e0
 }
-.color ul li:nth-child(2) a {
+/* .color ul li:nth-child(2) a {
 	background: #e32b00
 }
 .color ul li:nth-child(3) a {
@@ -4032,7 +4032,7 @@ h2.saider-bar-title {
 }
 .color ul li:nth-child(6) a {
 	background: #FFFFFF
-}
+} */
 .size-area {
 	margin-bottom: 8px;
 	overflow: hidden
@@ -7524,4 +7524,29 @@ button.button.btn-proceed-checkout span {
 	width: 100%;
 	margin: 15px 0px;
 }
+}
+.size_checked {
+	border: 2px solid red !important;
+}
+.color_red {
+	background: #e32b00
+}
+.color_yellow {
+	background: #ff9000
+}
+.color_green {
+	background: #8BC44A
+}
+.color_blue {
+	background: #10b9b9
+}
+.color_white {
+	background: #FFFFFF
+}
+.color_black {
+	background: #000000
+}
+
+.color_checked {
+	border: 2px solid silver !important;
 }

@@ -67,24 +67,12 @@
                                 <h2 class="saider-bar-title">Color</h2>
                                 <div class="color">
                                     <ul>
-                                        <li>
-                                            <a href="#"></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"></a>
-                                        </li>
-                                        <li>
-                                            <a href="#"></a>
-                                        </li>
+                                        @foreach ($color_prd as $color)
+                                            <li class="color_main">
+                                                <a class="color_prd {{ $color->color }}"></a>
+                                                <input style="display: none" type="checkbox" class="check_color" data-color="{{ $color->name }}">
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -92,11 +80,12 @@
                                 <h2 class="saider-bar-title">Size</h2>
                                 <div class="size">
                                     <ul>
-                                        <li><a href="#">S</a></li>
-                                        <li><a href="#">L</a></li>
-                                        <li><a href="#">M</a></li>
-                                        <li><a href="#">XL</a></li>
-                                        <li><a href="#">XXL</a></li>
+                                        @foreach ($size_prd as $size)
+                                            <li class="size_main">
+                                                <a class="size_prd">{{ $size->size }}</a>
+                                                <input style="display: none" type="checkbox" name="size" class="rad_size" data-size="{{ $size->size }}">
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>

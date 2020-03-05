@@ -6216,3 +6216,32 @@ header.blue-bg .search:focus {
     float: right;
 }
 
+.color ul li a {
+	clear: both;
+	/* background: #000000; */
+	float: left;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	height: 20px;
+	width: 20px;
+	border: 1px solid #e0e0e0
+}
+.color_red {
+	background: #e32b00
+}
+.color_yellow {
+	background: #ff9000
+}
+.color_green {
+	background: #8BC44A
+}
+.color_blue {
+	background: #10b9b9
+}
+.color_white {
+	background: #FFFFFF
+}
+.color_black {
+	background: #000000
+}

@@ -41,17 +41,19 @@ class CartController extends Controller
     {
         $product_id = $request->product_id;
         $product_num = $request->quantity;
+        $size = $request->size;
+        $color = $request->color;
         $cart = unserialize($request->cookie('cart'));
-        if (isset ($cart[$product_id]) ) {
+        if (isset($cart[$product_id]) && isset($cart[$size]) && isset($cart['color'])) {
             $product = $this->productRepository->find($product_id);
             // $qty = $product->quantity;
-            $product_num = $product_num + $cart[$product_id]["product_num"];
-            $cart[$request->product_id] = $this->getProductDetail($product_id, $product_num);
+            $product_num = $product_num + $cart[$product_id.$size.$color]["product_num"];
+            $cart[$request->product_id.$size.$color] = $this->getProductDetail($product_id, $product_num, $size, $color);
             $cookie = cookie('cart', serialize($cart), 60);
             $qty = count($cart);
         }
         else {
-            $cart[$request->product_id] = $this->getProductDetail($product_id, $product_num);
+            $cart[$request->product_id.$size.$color] = $this->getProductDetail($product_id, $product_num, $size, $color);
             $cookie = cookie('cart', serialize($cart), 60);
             $qty = count($cart);
         }
@@ -61,7 +63,7 @@ class CartController extends Controller
         ], 200)->withCookie($cookie);
     }
 
-    public function getProductDetail($id, $num)
+    public function getProductDetail($id, $num, $size, $color)
     {
         $product = $this->productRepository->find($id);
         $product_price = $product->price;
@@ -80,6 +82,8 @@ class CartController extends Controller
             'product_num' => $num,
             'num_price' => $num_price,
             'product_image' => $image,
+            'size' => $size,
+            'color' => $color,
         ];
 
         return $product_detail;

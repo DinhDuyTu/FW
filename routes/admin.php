@@ -31,4 +31,14 @@ Route::group(['middleware' => ['auth']], function () {
             'parameters' => ['users' => 'id']
         ]);
     });
+    Route::group(['as' => 'admin.'], function () {
+        Route::resource('sizes', 'SizeController', [
+            'parameters' => ['sizes' => 'id']
+        ]);
+    });
+    Route::group(['as' => 'admin.'], function () {
+        Route::resource('colors', 'ColorController', [
+            'parameters' => ['colors' => 'id']
+        ]);
+    });
 });

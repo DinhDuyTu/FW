@@ -10,22 +10,30 @@ use App\Models\Image;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Image\ImageRepositoryInterface;
+use App\Repositories\Size\SizeRepositoryInterface;
+use App\Repositories\Color\ColorRepositoryInterface;
 
 class ProductController extends Controller
 {
     private $productRepository;
     private $categoryRepository;
     private $imageRepository;
+    private $sizeRepository;
+    private $colorRepository;
 
     public function __construct (
         ProductRepositoryInterface  $productRepository,
         CategoryRepositoryInterface  $categoryRepository,
-        ImageRepositoryInterface  $imageRepository
+        ImageRepositoryInterface  $imageRepository,
+        SizeRepositoryInterface  $sizeRepository,
+        ColorRepositoryInterface  $colorRepository
     )
     {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
         $this->imageRepository = $imageRepository;
+        $this->sizeRepository = $sizeRepository;
+        $this->colorRepository = $colorRepository;
     }
 
     /**
@@ -49,8 +57,10 @@ class ProductController extends Controller
     public function create()
     {
         $categories = $this->categoryRepository->getSubCategories(0);
+        $sizes = $this->sizeRepository->getAll();
+        $colors = $this->colorRepository->getAll();
 
-        return view('admin.products.create', compact('categories'));
+        return view('admin.products.create', compact('categories', 'sizes', 'colors'));
     }
 
     /**
@@ -100,6 +110,8 @@ class ProductController extends Controller
             'image_default' => '1',
         ];
         $image_default->update($attr);
+        $product->sizes()->attach($request->sizes);
+        $product->colors()->attach($request->colors);
         
         return redirect()->route('admin.products.index');
     }
@@ -135,8 +147,12 @@ class ProductController extends Controller
         $product = $this->productRepository->find($id);
         $categories = $this->categoryRepository->getSubCategories(0, $id);
         $images = $this->imageRepository->getAll()->where('product_id', $id);
+        $sizes = $this->sizeRepository->getAll();
+        $size_product = $product->sizes()->get();
+        $colors = $this->colorRepository->getAll();
+        $color_product = $product->colors()->get();
 
-        return view('admin.products.edit', compact('categories', 'product', 'images'));
+        return view('admin.products.edit', compact('categories', 'product', 'images', 'sizes', 'size_product', 'colors', 'color_product'));
     }
 
     /**
@@ -185,6 +201,8 @@ class ProductController extends Controller
             'image_default' => '1',
         ];
         $image_default->update($attr);
+        $product->sizes()->sync($request->sizes);
+        $product->colors()->sync($request->colors);
         
         return redirect()->route('admin.products.index');
     }

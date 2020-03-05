@@ -70,33 +70,76 @@
 		});
 		
         $(document).ready(function () {
+            var temp_size = 0;
+            var temp_color = 0;
+            var size;
+            $('.size_prd').click(function () {
+                $(this).parents('.size_main').find('.rad_size').click();
+            });
+            
+            $('.rad_size').change(function () {
+                if ($(this).prop('checked')) {
+                    temp_size++;
+                    size = $(this).attr('data-size');
+                    $(this).parents('.size_main').find('.size_prd').addClass("size_checked");
+                } else {
+                    temp_size--;
+                    $(this).parents('.size_main').find('.size_prd').removeClass("size_checked");
+                }
+            });
+
+            $('.color_prd').click(function () {
+                $(this).parents('.color_main').find('.check_color').click();
+            });
+
+            $('.check_color').change(function () {
+                if ($(this).prop('checked')) {
+                    temp_color++;
+                    color = $(this).attr('data-color');
+                    $(this).parents('.color_main').find('.color_prd').html('<i style="color: white;padding-left: 6px;padding-top: 6px;" class="fa fa-check" aria-hidden="true"></i>');
+                } else {
+                    temp_color--;
+                    $(this).parents('.color_main').find('.color_prd').html("");
+                }
+            });
+
             $('.addToCart').click(function (e) {
                 e.preventDefault();
                 let id = $(this).attr('data-id');
                 let quantity = $('#qty').val();
-                $.ajax({
-                    type: 'POST',
-                    url: '/cart/add_to_cart',
-                    data: {
-                        'product_id': id,
-                        'quantity': quantity
-                    },
-                    success: function (scs) {
-                        $('#qty-product').text(scs.quantity);
-                        Swal.fire(
-                            'Success!',
-                            'Add to cart successfully!',
-                            'success'
-                        )
-                    },
-                    error: function () {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Something went wrong!',
-                        })
-                    }
-                })
+                if (temp_size == 1 && temp_color == 1) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/cart/add_to_cart',
+                        data: {
+                            'product_id': id,
+                            'quantity': quantity,
+                            'size': size,
+                            'color': color
+                        },
+                        success: function (scs) {
+                            $('#qty-product').text(scs.quantity);
+                            Swal.fire(
+                                'Success!',
+                                'Add to cart successfully!',
+                                'success'
+                            )
+                        },
+                        error: function () {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                            })
+                        }
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    })
+                }
             });
 
             $('.mini-cart').hover(function () {

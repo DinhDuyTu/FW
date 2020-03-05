@@ -8,7 +8,7 @@
                 Toastr
             </header>
             <div class="panel-body">
-                <form action="{{ route('admin.products.store') }}" method="post" enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row toastr-row">
                         <div class="col-md-2"></div>
@@ -47,27 +47,6 @@
                                 <label class="control-label" for="title">Highlight</label> <br>
                                 <input type="checkbox" name="is_highlight" id=""> Product Highlight
                             </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label class="control-label" for="title">Size</label> <br>
-                                        @foreach ($sizes as $size)
-                                            <input name="sizes[]" id="closeButton" type="checkbox" checked="" class="input-small" value="{{ $size->id }}"> Size {{ $size->size }} <br>
-                                        @endforeach
-                                    </div>
-                                    <div class="col-md-6 color">
-                                        <label class="control-label" for="title">Color</label> <br>
-                                        <ul>
-                                            @foreach ($colors as $color)
-                                                <li>
-                                                    <a class="{{ $color->color }}"></a><input type="checkbox" name="colors[]" value="{{ $color->id }}" checked>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
                             <div class="form-group">
                                 <label class="control-label" for="message">Detail</label>
                                 <textarea class="form-control" name="detail" id="message" rows="3" placeholder="Enter a detail ..."></textarea>

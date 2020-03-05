@@ -36,8 +36,10 @@ class ProductController extends Controller
             $product = $this->productRepository->find($id);
             $image_product = $this->imageRepository->getAll()->where('product_id', $id);
             $image_default = $image_product->where('image_default', '1');
+            $size_prd = $product->sizes()->get();
+            $color_prd = $product->colors()->get();
 
-            return view('client.products.single_product', compact('product', 'image_product', 'image_default'));
+            return view('client.products.single_product', compact('product', 'image_product', 'image_default', 'size_prd', 'color_prd'));
         } catch (\Throwable $th) {
             //throw $th;
         }

@@ -33,4 +33,14 @@ class Product extends Model
     {
         return $this->belongsToMany(Order::class, 'order_detail')->withTimestamps();
     }
+
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class, 'product_size')->withTimestamps();
+    }
+
+    public function colors()
+    {
+        return $this->belongsToMany(Color::class, 'color_product');
+    }
 }

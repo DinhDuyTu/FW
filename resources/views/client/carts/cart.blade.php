@@ -31,7 +31,9 @@
                                                         <a href="#"><img src="{{ $cart['product_image'] }}" alt="Product"></a>
                                                     </td>
                                                     <td class="cart_description">
-                                                        <p class="product-name"><a href="#">{{ $cart['product_name'] }}</a></p>
+                                                        <p class="product-name"><a href="#">Name: {{ $cart['product_name'] }}</a></p>
+                                                        <p class="product-name"><a href="#">Color: {{ $cart['color'] }}</a></p>
+                                                        <p class="product-name"><a href="#">Size: {{ $cart['size'] }}</a></p>
                                                     <td class="price"><span>{{ number_format($cart['product_price']) }} VND</span></td>
                                                     <td class="qty">
                                                         <input class="input-quantity" class="form-control input-sm" type="text" value="{{ $cart['product_num'] }}" data-id="{{ $cart['product_id'] }}">
