@@ -248,6 +248,14 @@
         });
 
     </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.reply').click(function () {
+                $(this).parents('.display-comment').find('.hidden_cmt').removeClass('hidden_cmt');
+            });
+        });
+    </script>
 </body>
 
 </html>

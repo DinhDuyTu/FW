@@ -43,4 +43,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Color::class, 'color_product');
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class)->whereNull('parent_id');
+    }
 }

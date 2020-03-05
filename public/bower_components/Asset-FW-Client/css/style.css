@@ -7550,3 +7550,37 @@ button.button.btn-proceed-checkout span {
 .color_checked {
 	border: 2px solid silver !important;
 }
+
+.hidden_input_reply {
+	display: none;
+}
+
+#hidden_button_reply {
+	display: none;
+}
+
+.hidden_cmt {
+	display: none;
+}
+
+.reply {
+	color: #F02640;
+	margin-left: 20px;
+}
+
+.display-comment {
+	background: #D8D8D8;
+	border-radius: 10px;
+}
+
+.profile_user {
+	margin-left: 20px;
+}
+
+.profile_user img {
+	margin-top: 20px;
+}
+
+.content_comment {
+	margin-top: 10px;
+}

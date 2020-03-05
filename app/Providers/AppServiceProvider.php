@@ -15,6 +15,8 @@ use App\Repositories\Size\SizeRepository;
 use App\Repositories\Size\SizeRepositoryInterface;
 use App\Repositories\Color\ColorRepository;
 use App\Repositories\Color\ColorRepositoryInterface;
+use App\Repositories\Comment\CommentRepository;
+use App\Repositories\Comment\CommentRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -49,9 +51,15 @@ class AppServiceProvider extends ServiceProvider
             SizeRepositoryInterface::class,
             SizeRepository::class
         );
+
         $this->app->singleton(
             ColorRepositoryInterface::class,
             ColorRepository::class
+        );
+
+        $this->app->singleton(
+            CommentRepositoryInterface::class,
+            CommentRepository::class
         );
     }
 

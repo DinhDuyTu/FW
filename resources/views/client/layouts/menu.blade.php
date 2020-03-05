@@ -40,7 +40,10 @@
                         </ul>
                     </nav>
                     <!-- Signup -->
-                    <p class="top-Signup"><a href="#" class="" role="button" data-toggle="modal" data-target="#login-modal">Login/Signup</a></p>
+                    @if (Auth::check())
+                    @else
+                        <p class="top-Signup"><a href="#" class="" role="button" data-toggle="modal" data-target="#login-modal">Login/Signup</a></p>
+                    @endif
                     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -48,11 +51,12 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>
                                 </div>
                                 <div id="div-forms">
-                                    <form id="login-form">
+                                    <form class="form-signin" action="{{ route('login') }}" method="POST">
+                                        @csrf
                                         <div class="modal-body">
                                             <div id="div-login-msg"> <span id="text-login-msg">Username or email address </span> </div>
-                                            <input id="login_username" class="form-control" type="text" placeholder="Username" required>
-                                            <input id="login_password" class="form-control" type="password" placeholder="Password" required>
+                                            <input id="login_username" type="email" name="email" class="form-control" placeholder="User ID" autofocus >
+                                            <input id="login_password" type="password" name="password" class="form-control" placeholder="Password">
                                             <div class="checkbox">
                                                 <label>
                                                     <input type="checkbox"> Remember me </label>
@@ -62,9 +66,9 @@
                                             <div>
                                                 <button type="submit" class="btn-login">Login</button>
                                             </div>
-                                            <div>
+                                            {{-- <div>
                                                 <button onclick="location.href='account_page.html'" id="login_register_btn" type="button" class="btn btn-link">Register</button>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </form>
                                 </div>

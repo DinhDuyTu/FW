@@ -22,6 +22,8 @@ Route::group(['namespace' => 'Client'], function () {
     Route::get('cart', "CartController@index")->name('cart.index');
     Route::post('cart/update', "CartController@update")->name('cart.update');
     Route::post('cart/delete', "CartController@delete")->name('cart.delete');
+
+    Route::post('comment', "CommentController@store")->name('comments.store');
 });
 
 Auth::routes();
