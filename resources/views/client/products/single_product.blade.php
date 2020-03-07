@@ -103,9 +103,13 @@
                         </div>
                         <div class="product-cart-option">
                             <ul>
-                                <li><a href="#"><i class="fa fa-heart"></i><span>Add to Wishlist</span></a></li>
-                                <li><a href="#"><i class="fa fa-retweet"></i><span>Add to Compare</span></a></li>
-                                <li><a href="#"><i class="fa fa-envelope"></i><span>Email to a Friend</span></a></li>
+                                @if (Auth::check())
+                                    <li><a class="addToWishlist" @if ($wishlist == 1) style="color: #F02640" @endif data-user_id="{{ Auth::user()->id }}" data-product_id="{{ $product->id }}"><i class="fa fa-heart wishlist" @if ($wishlist == 1) style="color: #F02640" @endif></i><span>Add to Wishlist</span></a></li>
+                                @else
+                                    <li><a data-toggle="modal" data-target="#login-modal"><i class="fa fa-heart" ></i><span>Add to Wishlist</span></a></li>
+                                @endif
+                                <li><a><i class="fa fa-retweet"></i><span>Add to Compare</span></a></li>
+                                <li><a><i class="fa fa-envelope"></i><span>Email to a Friend</span></a></li>
                             </ul>
                         </div>
                     </div>

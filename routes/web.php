@@ -22,8 +22,14 @@ Route::group(['namespace' => 'Client'], function () {
     Route::get('cart', "CartController@index")->name('cart.index');
     Route::post('cart/update', "CartController@update")->name('cart.update');
     Route::post('cart/delete', "CartController@delete")->name('cart.delete');
+    Route::post('cart/checkout', "CartController@checkout")->name('cart.checkout');
 
     Route::post('comment', "CommentController@store")->name('comments.store');
+
+    Route::post('single_product/add_to_wishlist', "WithlistController@addToWithlist")->name('add_to_withlist');
+    Route::get('wishlist/index', "WithlistController@index")->name('wishlist.index');
+    Route::post('wishlist/del_wishlist', "WithlistController@delWishlist")->name('del_wishlist');
+    Route::get('count_wishlist', "WithlistController@countWishlist")->name('count.wishlist');
 });
 
 Auth::routes();

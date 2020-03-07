@@ -17,6 +17,12 @@ use App\Repositories\Color\ColorRepository;
 use App\Repositories\Color\ColorRepositoryInterface;
 use App\Repositories\Comment\CommentRepository;
 use App\Repositories\Comment\CommentRepositoryInterface;
+use App\Repositories\Wishlist\WishlistRepository;
+use App\Repositories\Wishlist\WishlistRepositoryInterface;
+use App\Repositories\Order\OrderRepository;
+use App\Repositories\Order\OrderRepositoryInterface;
+use App\Repositories\OrderDetail\OrderDetailRepository;
+use App\Repositories\OrderDetail\OrderDetailRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -60,6 +66,21 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             CommentRepositoryInterface::class,
             CommentRepository::class
+        );
+
+        $this->app->singleton(
+            WishlistRepositoryInterface::class,
+            WishlistRepository::class
+        );
+
+        $this->app->singleton(
+            OrderRepositoryInterface::class,
+            OrderRepository::class
+        );
+
+        $this->app->singleton(
+            OrderDetailRepositoryInterface::class,
+            OrderDetailRepository::class
         );
     }
 

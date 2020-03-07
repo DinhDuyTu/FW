@@ -5492,7 +5492,7 @@ input#coupon_code {
 	margin: 0;
 }
 button.button.btn-proceed-checkout {
-	background: #ff7474;
+	background: #F02640;
 	padding: 15px 5px;
 	color: #fff;
 	width: 100%;
@@ -7583,4 +7583,8 @@ button.button.btn-proceed-checkout span {
 
 .content_comment {
 	margin-top: 10px;
+}
+
+.added {
+	color: #F02640;
 }

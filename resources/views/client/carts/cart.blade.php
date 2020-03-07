@@ -36,7 +36,7 @@
                                                         <p class="product-name"><a href="#">Size: {{ $cart['size'] }}</a></p>
                                                     <td class="price"><span>{{ number_format($cart['product_price']) }} VND</span></td>
                                                     <td class="qty">
-                                                        <input class="input-quantity" class="form-control input-sm" type="text" value="{{ $cart['product_num'] }}" data-id="{{ $cart['product_id'] }}">
+                                                        <input class="input-quantity" class="form-control input-sm" type="text" value="{{ $cart['product_num'] }}" data-id="{{ $cart['product_id'] }}" data-color="{{ $cart['color'] }}" data-size="{{ $cart['size'] }}">
                                                     </td>
                                                     <td class="summed-price"><span>{{ number_format($cart['num_price']) }} VND</span></td>
                                                     <td class="action"><a><i class="icon-close deleteCart" data-id="{{ $cart['product_id'] }}"></i></a></td>
@@ -52,8 +52,6 @@
                                         <tr class="first last">
                                             <td colspan="50" class="a-right last">
                                                 <button type="button" title="Continue Shopping" class="button btn-continue" onclick="setLocation('#')"><span>Continue Shopping</span></button>
-                                                <button type="submit" name="update_cart_action" value="update_qty" title="Update Cart" class="button btn-update"><span>Update Cart</span></button>
-                                                <button type="submit" name="update_cart_action" value="empty_cart" title="Clear Cart" class="button btn-empty" id="empty_cart_button"><span>Clear Cart</span></button>
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -90,15 +88,51 @@
                                     </table>
                                     <ul class="checkout">
                                         <li>
-                                            <button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout"><span>Proceed to Checkout</span></button>
+                                            @if (Auth::check())
+                                                <button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout" data-toggle="modal" data-target="#checkout-modal"><span>Proceed to Checkout</span></button>
+                                            @else
+                                                <button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout" data-toggle="modal" data-target="#login-modal"><span>Proceed to Checkout</span></button>
+                                            @endif
                                         </li>
                                         <br>
-                                        <li><a href="multiple_addresses.html" title="Checkout with Multiple Addresses">Checkout with Multiple Addresses</a> </li>
+                                        {{-- <li><a href="multiple_addresses.html" title="Checkout with Multiple Addresses">Checkout with Multiple Addresses</a> </li> --}}
                                         <br>
                                     </ul>
                                 </div>
-                                <!--inner-->
-
+                                <div class="modal fade" id="checkout-modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header"> <img id="img_logo" src="{{ asset('bower_components/Asset-FW-Client/images/logo.png') }}" alt="logo">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>
+                                            </div>
+                                            <div id="div-forms">
+                                                <form class="form-signin" action="{{ route('cart.checkout') }}" method="POST">
+                                                    @csrf
+                                                    <div class="modal-body">
+                                                        <div class="profile_guest">
+                                                            <p>Name : {{ Auth::user()->name }}</p>
+                                                            <input name="name" type="hidden" value="{{ Auth::user()->name }}">
+                                                            <p>Email : {{ Auth::user()->email }}</p>
+                                                            <input name="email" type="hidden" value="{{ Auth::user()->email }}">
+                                                            <p>Address : {{ Auth::user()->address }}</p>
+                                                            <input name="address" type="hidden" value="{{ Auth::user()->address }}">
+                                                            <p>Phone : {{ Auth::user()->phone }}</p>
+                                                            <input name="phone" type="hidden" value="{{ Auth::user()->phone }}">
+                                                            <label>Note</label>
+                                                            <textarea style="width: 100%; height: 100px;" name="note" id="" cols="30" rows="30"></textarea>
+                                                            <button type="button" class="btn-login use_other_information">Use other information</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <div>
+                                                            <button type="submit" class="btn-login">Checkout</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

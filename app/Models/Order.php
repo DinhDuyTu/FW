@@ -8,17 +8,21 @@ class Order extends Model
 {
     protected $fillable = [
         'user_id',
-        'total',
+        'name',
+        'phone',
+        'address',
+        'email',
+        'total_price',
         'status',
     ];
-
-    public function products()
-    {
-        return $this->belongsToMany(Product::class, 'order_detail')->withTimestamps();
-    }
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
     }
 }

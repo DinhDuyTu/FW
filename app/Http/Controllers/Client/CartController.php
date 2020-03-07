@@ -7,22 +7,31 @@ use Illuminate\Http\Request;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\Image\ImageRepositoryInterface;
+use App\Repositories\Order\OrderRepositoryInterface;
+use App\Repositories\OrderDetail\OrderDetailRepositoryInterface;
+use Auth;
 
 class CartController extends Controller
 {
     private $categoryRepository;
     private $productRepository;
     private $imageRepository;
+    private $orderRepository;
+    private $orderdetailRepository;
 
     public function __construct (
         CategoryRepositoryInterface  $categoryRepository,
         ProductRepositoryInterface  $productRepository,
-        ImageRepositoryInterface  $imageRepository
+        ImageRepositoryInterface  $imageRepository,
+        OrderRepositoryInterface  $orderRepository,
+        OrderDetailRepositoryInterface  $orderdetailRepository
     )
     {
         $this->categoryRepository = $categoryRepository;
         $this->productRepository = $productRepository;
         $this->imageRepository = $imageRepository;
+        $this->orderRepository = $orderRepository;
+        $this->orderdetailRepository = $orderdetailRepository;
     }
 
     public function index(Request $request)
@@ -49,12 +58,12 @@ class CartController extends Controller
             // $qty = $product->quantity;
             $product_num = $product_num + $cart[$product_id.$size.$color]["product_num"];
             $cart[$request->product_id.$size.$color] = $this->getProductDetail($product_id, $product_num, $size, $color);
-            $cookie = cookie('cart', serialize($cart), 60);
+            $cookie = cookie('cart', serialize($cart), 60*30);
             $qty = count($cart);
         }
         else {
             $cart[$request->product_id.$size.$color] = $this->getProductDetail($product_id, $product_num, $size, $color);
-            $cookie = cookie('cart', serialize($cart), 60);
+            $cookie = cookie('cart', serialize($cart), 60*30);
             $qty = count($cart);
         }
         return response()->json([
@@ -99,14 +108,16 @@ class CartController extends Controller
     {
         $product_id = $request->id;
         $product_num = $request->quantity;
+        $color = $request->color;
+        $size = $request->size;
         $cart = unserialize($request->cookie('cart'));
-        $cart[$product_id]["product_num"] = $product_num;
+        $cart[$product_id.$size.$color]["product_num"] = $product_num;
         $product = $this->productRepository->find($product_id);
-        $cart[$product_id]["num_price"] = $product_num * $cart[$product_id]["product_price"];
-        $cookie = cookie('cart', serialize($cart), 60);
+        $cart[$product_id.$size.$color]["num_price"] = $product_num * $cart[$product_id.$size.$color]["product_price"];
+        $cookie = cookie('cart', serialize($cart), 60*30);
         $carts = unserialize($cookie->getValue());
         $total_price = $this->getTotalPrice($carts);
-        $summedPrice = $cart[$product_id]["num_price"];
+        $summedPrice = $cart[$product_id.$size.$color]["num_price"];
 
         return response()->json(compact('total_price', 'summedPrice'), 200)->withCookie($cookie);
     }
@@ -129,11 +140,47 @@ class CartController extends Controller
         if ($cart[$product_id]) {
             unset($cart[$product_id]);
         }
-        $cookie = cookie('cart', serialize($cart), 60);
+        $cookie = cookie('cart', serialize($cart), 60*30);
         $carts = unserialize($cookie->getValue());
         $quantity = count($carts);
         $total_price = $this->getTotalPrice($carts);
 
         return response()->json(compact('quantity', 'total_price'), 200)->withCookie($cookie);
+    }
+
+    public function checkout(Request $request)
+    {
+        if (Auth::check()) {
+            $profile_guest = [
+                'user_id' => Auth::user()->id,
+                'name' => $request->get('name'),
+                'phone' => $request->get('phone'),
+                'email' => $request->get('email'),
+                'address' => $request->get('address'),
+                'note' => $request->get('note'),
+            ];
+            dd($profile_guest);
+            $cart = unserialize($request->cookie('cart'));
+            $total_price = 0;
+            foreach ($cart as $key => $val) {
+                $total_price += $val["num_price"];
+            }
+            $profile_guest['total_price'] = $total_price;
+            $order = $this->orderRepository->create($profile_guest);
+            foreach ($cart as $value) {
+                $attr = [
+                    'product_id' => $value['product_id'],
+                    'order_id' => $order->id,
+                    'quantity' => $value['product_num'],
+                    'price' => $value['product_price'],
+                    'size' => $value['size'],
+                    'color' => $value['color'],
+                ];
+                $this->orderdetailRepository->create($attr);
+            }
+            $cookie  = cookie('cart', null);
+
+            return redirect()->back()->withCookie($cookie);
+        }
     }
 }

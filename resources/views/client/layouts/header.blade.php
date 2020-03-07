@@ -107,7 +107,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-4 col-xs-12 top-cart">
                     <div class="link-wishlist">
-                        <a href="#"> <span class="wishlist-count">3</span> <i class="fa fa-heart fa-lg"></i> </a>
+                        <a href="{{ route('wishlist.index') }}"> <span class="wishlist-count"></span> <i class="fa fa-heart fa-lg"></i> </a>
                     </div>
                     <div class="top-cart-contain">
                         <div class="mini-cart">
@@ -135,8 +135,8 @@
                                     </ul>
                                     <div class="top-subtotal">Subtotal: <span class="price">$520.00</span></div>
                                     <div class="actions">
-                                        <button onclick="location.href='checkout.html'" class="btn-checkout" type="button"><i class="fa fa-check"></i><span>Checkout</span></button>
-                                        <button onclick="location.href='shopping_cart.html'" class="view-cart" type="button"><i class="fa fa-shopping-cart"></i> <span>View Cart</span></button>
+                                        <button onclick="location.href='{{ route('cart.checkout') }}'" class="btn-checkout" type="button"><i class="fa fa-check"></i><span>Checkout</span></button>
+                                        <button onclick="location.href='{{ route('cart.index') }}'" class="view-cart" type="button"><i class="fa fa-shopping-cart"></i> <span>View Cart</span></button>
                                     </div>
                                 </div>
                             </div>
