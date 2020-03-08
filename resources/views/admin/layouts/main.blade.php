@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mosaddek">
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" href="{{ asset('images/icon.jpg') }}">
 
     <title>Admin-Ecom</title>
@@ -21,6 +22,7 @@
     <link href="{{ asset('bower_components/Asset-FW-Admin/css/style-responsive.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('bower_components/Asset-FW-Admin/assets/data-tables/DT_bootstrap.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/css/fileinput.min.css" media="all" type="text/css"> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <style>
         .kv-file-upload {
             display: none;
@@ -124,6 +126,43 @@
                 $(this).parents('.form-group').find('.row').remove();
             });
         });
+        </script>
+        <script>
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $(document).ready(function () {
+                $('#status').change(function () {
+                    let status = $(this).val();
+                    let order_id = $(this).attr('data-order_id');
+                    $.ajax({
+                        type: 'POST',
+                        url: '/admin/orders/change_status',
+                        data: {
+                            'status': status,
+                            'order_id': order_id
+                        },
+                        success: function (scs) {
+                            Swal.fire(
+                                'Success!',
+                                'Add to cart successfully!',
+                                'success'
+                            )
+                        },
+                        error: function () {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Something went wrong!',
+                            })
+                        }
+                    });
+                    status--;
+                    $('#'+status+'').attr('disabled', 'disabled');
+                });
+            });
         </script>
 </body>
 

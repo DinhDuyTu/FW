@@ -42,6 +42,39 @@
                 </ul>
             </li>
 
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-th-list" aria-hidden="true"></i>
+                    <span>Size</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="{{ route('admin.sizes.index') }}">List Size</a></li>
+                    <li><a href="{{ route('admin.sizes.create') }}">Create Size</a></li>
+                </ul>
+            </li>
+
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-tint" aria-hidden="true"></i>
+                    <span>Color</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="{{ route('admin.colors.index') }}">List Color</a></li>
+                    <li><a href="{{ route('admin.colors.create') }}">Create Color</a></li>
+                </ul>
+            </li>
+
+            <li class="sub-menu">
+                <a href="javascript:;">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>Order</span>
+                </a>
+                <ul class="sub">
+                    <li><a href="{{ route('admin.orders.index') }}">List Order</a></li>
+                    <li><a href="{{ route('admin.colors.create') }}">processed Order</a></li>
+                </ul>
+            </li>
+
             <hr>
             <li class="sub-menu">
                 <a href="javascript:;">

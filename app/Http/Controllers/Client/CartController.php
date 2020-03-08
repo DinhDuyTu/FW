@@ -159,7 +159,6 @@ class CartController extends Controller
                 'address' => $request->get('address'),
                 'note' => $request->get('note'),
             ];
-            dd($profile_guest);
             $cart = unserialize($request->cookie('cart'));
             $total_price = 0;
             foreach ($cart as $key => $val) {

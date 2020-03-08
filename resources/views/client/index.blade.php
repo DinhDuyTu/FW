@@ -210,14 +210,14 @@
                                                                     <div class="btn-quickview"> <a href="quick_view.html"><span>Quick View</span></a></div>
                                                                     @foreach ($images_defult as $image)
                                                                         @if ($image->product_id == $product->id)
-                                                                            <a href="single_product.html" class="product-item-photo"> <img class="product-image-photo" src="{{ $image->image }}" alt=""></a>
+                                                                            <a href="{{ route('single_product', $product->id) }}" class="product-item-photo"> <img class="product-image-photo" src="{{ $image->image }}" alt=""></a>
                                                                         @endif
                                                                     @endforeach
                                                                 </div>
                                                                 <div class="pro-box-info">
                                                                     <div class="item-info">
                                                                         <div class="info-inner">
-                                                                            <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html"> {{ $product->name }} {{ $product->id }}</a> </div>
+                                                                            <div class="item-title"> <a title="Ipsums Dolors Untra" href="{{ route('single_product', $product->id) }}"> {{ $product->name }} {{ $product->id }}</a> </div>
                                                                             <div class="item-content">
                                                                                 <div class="rating">
                                                                                     <i class="fa fa-star"></i>

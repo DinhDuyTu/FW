@@ -43,8 +43,12 @@ class ProductController extends Controller
             $image_default = $image_product->where('image_default', '1');
             $size_prd = $product->sizes()->get();
             $color_prd = $product->colors()->get();
-            $user_id = Auth::user()->id;
-            $wishlist = $this->wishlistRepository->getAll()->where('user_id', $user_id)->where('product_id', $id)->count();
+            if (Auth::check()) {
+                $user_id = Auth::user()->id;
+                $wishlist = $this->wishlistRepository->getAll()->where('user_id', $user_id)->where('product_id', $id)->count();
+            } else {
+                $wishlist = 0;
+            }
 
             return view('client.products.single_product', compact('product', 'image_product', 'image_default', 'size_prd', 'color_prd', 'wishlist'));
         } catch (\Throwable $th) {

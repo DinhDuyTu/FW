@@ -44,7 +44,7 @@
                                             @endforeach
                                         @else
                                             <tr>
-                                                <td colspan="6">Giỏ Hàng Trống!!!</td>
+                                                <td colspan="6">Cart Empty!!!</td>
                                             </tr>
                                         @endif
                                     </tbody>
@@ -87,16 +87,15 @@
                                         </tbody>
                                     </table>
                                     <ul class="checkout">
-                                        <li>
-                                            @if (Auth::check())
-                                                <button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout" data-toggle="modal" data-target="#checkout-modal"><span>Proceed to Checkout</span></button>
-                                            @else
-                                                <button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout" data-toggle="modal" data-target="#login-modal"><span>Proceed to Checkout</span></button>
-                                            @endif
-                                        </li>
-                                        <br>
-                                        {{-- <li><a href="multiple_addresses.html" title="Checkout with Multiple Addresses">Checkout with Multiple Addresses</a> </li> --}}
-                                        <br>
+                                        @if ($carts != false)
+                                            <li>
+                                                @if (Auth::check())
+                                                    <button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout" data-toggle="modal" data-target="#checkout-modal"><span>Proceed to Checkout</span></button>
+                                                @else
+                                                    <button type="button" title="Proceed to Checkout" class="button btn-proceed-checkout" data-toggle="modal" data-target="#login-modal"><span>Proceed to Checkout</span></button>
+                                                @endif
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                                 <div class="modal fade" id="checkout-modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">

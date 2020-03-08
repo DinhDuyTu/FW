@@ -14,6 +14,7 @@ class Order extends Model
         'email',
         'total_price',
         'status',
+        'note',
     ];
 
     public function user()

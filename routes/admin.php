@@ -41,4 +41,11 @@ Route::group(['middleware' => ['auth']], function () {
             'parameters' => ['colors' => 'id']
         ]);
     });
+    Route::group(['as' => 'admin.'], function () {
+        Route::resource('orders', 'OrderController', [
+            'parameters' => ['orders' => 'id']
+        ]);
+    });
+
+    Route::post('orders/change_status', "OrderController@change_status")->name('admin.orders.change_status');
 });

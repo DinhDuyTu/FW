@@ -7588,3 +7588,12 @@ button.button.btn-proceed-checkout span {
 .added {
 	color: #F02640;
 }
+
+.avatar_profile {
+	width: 100%;
+	border-radius: 50%;
+}
+
+#edit_profile:hover {
+	color: white !important;
+}
