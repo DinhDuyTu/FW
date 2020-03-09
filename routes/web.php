@@ -31,7 +31,8 @@ Route::group(['namespace' => 'Client'], function () {
     Route::post('wishlist/del_wishlist', "WithlistController@delWishlist")->name('del_wishlist');
     Route::get('count_wishlist', "WithlistController@countWishlist")->name('count.wishlist');
 
-    Route::get('user', "UserController@index")->name('user.index');
+    Route::get('user/{id}/profile', "UserController@show")->name('user.profile');
+    Route::get('user/{id}/order-of-user', "UserController@order_of_user")->name('user.order');
 });
 
 Auth::routes();

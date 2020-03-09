@@ -146,12 +146,17 @@
                 $.ajax({
                     type: 'GET',
                     url: '/cart/show_mini_cart',
-                    success: function (scs) {
-                        let cart = scs.cart;
-                        console.log(cart);
-                        $(cart).each(function(res){
-                            console.log(cart['product_id']);
+                    success: function (response) {
+                        let html;
+                        let sub_total_price = 0;
+                        $.each(response.cart, function (key, value) {
+                            let product_price = number_format(value.product_price);
+                            sub_total_price = sub_total_price + (value.product_num * value.product_price);
+                            html += '<li class="item odd"><a href="#" title="' + value.product_name + '" class="product-image"><img src="' + value.product_image +'" alt="' + value.product_name + '" width="65"></a><div class="product-details"> <a href="#" title="Remove This Item" class="remove-cart"><i class="icon-close"></i></a><p class="product-name"><a href="#">' + value.product_name + '</a> </p><strong>' + value.product_num + '</strong> x <span class="price">' + product_price + ' VND</span> </div></li>';
                         });
+                        $('#cart-sidebar').html(html);
+                        let total_price = number_format(sub_total_price);
+                        $('#total_price').html(total_price + " VND");
                     },
                     error: function () {
                         Swal.fire({

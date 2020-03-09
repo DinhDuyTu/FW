@@ -126,14 +126,14 @@
                                 <div class="top-cart-content">
                                     <div class="block-subtitle hidden-xs">Recently added item(s)</div>
                                     <ul id="cart-sidebar" class="mini-products-list">
-                                        <li class="item odd">
+                                        {{-- <li class="item odd">
                                             <a href="#" title="Ipsums Dolors Untra" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img07.jpg') }}" alt="Lorem ipsum dolor" width="65"></a>
                                             <div class="product-details"> <a href="#" title="Remove This Item" class="remove-cart"><i class="icon-close"></i></a>
                                                 <p class="product-name"><a href="#">Lorem ipsum dolor sit amet Consectetur</a> </p>
                                                 <strong>1</strong> x <span class="price">$20.00</span> </div>
-                                        </li>
+                                        </li> --}}
                                     </ul>
-                                    <div class="top-subtotal">Subtotal: <span class="price">$520.00</span></div>
+                                    <div class="top-subtotal">Subtotal: <span class="price" id="total_price">0 VND</span></div>
                                     <div class="actions">
                                         <button onclick="location.href='{{ route('cart.checkout') }}'" class="btn-checkout" type="button"><i class="fa fa-check"></i><span>Checkout</span></button>
                                         <button onclick="location.href='{{ route('cart.index') }}'" class="view-cart" type="button"><i class="fa fa-shopping-cart"></i> <span>View Cart</span></button>

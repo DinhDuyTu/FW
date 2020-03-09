@@ -16,7 +16,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-main col-sm-9 col-xs-12 col-sm-push-3">
-                    {{-- <div class="profile">
+                    <div class="profile">
                         <div class="page-title">
                             <h2>My Profile </h2>
                             <p>Manage profile information for account security</p>
@@ -26,184 +26,20 @@
                             <div class="row">
                                 <div class="col-md-1"></div>
                                 <div class="col-md-2">
-                                    <p>Name :</p>
-                                    <p>Email :</p>
-                                    <p>Address :</p>
+                                    <p><b>Name :</b></p>
+                                    <p><b>Email :</b></p>
+                                    <p><b>Phone :</b></p>
+                                    <p><b>Address :</b></p>
+                                    <p><b>Sex :</b></p>
+                                    <p><b>Date Of Birth :</b></p>
                                 </div>
                                 <div class="col-md-9">
-                                    <p>Duy Tu</p>
-                                    <p>duytuhubt@gmail.com</p>
-                                    <p>Ha Noi</p>
+                                    <p>{{ $user->name }}</p>
+                                    <p>{{ $user->email }}</p>
+                                    <p>{{ $user->phone }}</p>
+                                    <p>{{ $user->address }}</p>
                                 </div>
                             </div>
-                        </div>
-                    </div> --}}
-                    <div class="my-order">
-                        <div class="toolbar">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item">
-                                    <a style="padding: 10px 30px;" class="nav-link active" data-toggle="tab" href="#home">All Order</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a style="padding: 10px 30px;" class="nav-link" data-toggle="tab" href="#menu1">Shipping</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a style="padding: 10px 30px;" class="nav-link" data-toggle="tab" href="#menu2">Processed</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a style="padding: 10px 30px;" class="nav-link" data-toggle="tab" href="#menu2">Cancel</a>
-                                </li>
-                            </ul>
-                            <div class="tab-content" style="margin-top: 0;">
-                                <div id="home" class="container tab-pane active">
-                                    <table class="table table-striped">
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div id="menu1" class="container tab-pane fade">
-                                    <table class="table table-striped">
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div id="menu2" class="container tab-pane fade">
-                                    <table class="table table-striped">
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            {{-- <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Product</th>
-                                    <th>Size</th>
-                                    <th>Color</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total Price</th>
-                                </tr>
-                            </thead> --}}
-                            {{-- <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Nothing Nothing Nothing</td>
-                                    <td>Size M</td>
-                                    <td>Color Blue</td>
-                                    <td>999,000 VND</td>
-                                    <td>2</td>
-                                    <td>999,000 VND</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Nothing Nothing Nothing</td>
-                                    <td>Size M</td>
-                                    <td>Color Blue</td>
-                                    <td>999,000 VND</td>
-                                    <td>2</td>
-                                    <td>999,000 VND</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Nothing Nothing Nothing</td>
-                                    <td>Size M</td>
-                                    <td>Color Blue</td>
-                                    <td>999,000 VND</td>
-                                    <td>2</td>
-                                    <td>999,000 VND</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Nothing Nothing Nothing</td>
-                                    <td>Size M</td>
-                                    <td>Color Blue</td>
-                                    <td>999,000 VND</td>
-                                    <td>2</td>
-                                    <td>999,000 VND</td>
-                                </tr>
-                            </tbody> --}}
                         </div>
                     </div>
                 </div>
@@ -211,11 +47,11 @@
                     <div class="block shop-by-side">
                         <div class="sidebar-bar-title">
                             <div>
-                                <img class="avatar_profile img-fluid" src="{{ asset('images/avatar/avatar5e634954043b5.jpeg') }}" alt="">
+                                <img class="avatar_profile img-fluid" src="{{ $user->avatar }}" alt="">
                             </div>
                             <hr>
                             <div class="text-center">
-                                <b>Đinh Duy Tự</b>
+                                <b>{{ $user->name }}</b>
                             </div>
                             <div class="text-center">
                                 <a id="edit_profile">Edit Profile <i class="fa fa-pencil" aria-hidden="true"></i></a>

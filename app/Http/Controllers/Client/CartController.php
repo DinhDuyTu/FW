@@ -101,6 +101,7 @@ class CartController extends Controller
     public function showMiniCart(Request $request)
     {
         $cart = unserialize($request->cookie('cart'));
+        
         return response()->json(['cart' => $cart], 200);
     }
 

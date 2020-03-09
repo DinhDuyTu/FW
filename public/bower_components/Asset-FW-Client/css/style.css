@@ -7597,3 +7597,9 @@ button.button.btn-proceed-checkout span {
 #edit_profile:hover {
 	color: white !important;
 }
+.profile {
+	border: 1px solid silver;
+	padding: 20px;
+	background: #f5f5f5;
+	line-height: 40px;
+}
