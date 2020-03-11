@@ -213,8 +213,26 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        try {
+            $id = $request->id;
+            $product = $this->productRepository->find($id);
+            $size_products = $product->sizes;
+            foreach ($size_products as $key => $size_prd) {
+                $size = $this->sizeRepository->find($size_prd->id);
+                $size->delete();
+            }
+            $color_products = $product->colors;
+            foreach ($color_products as $key => $color_prd) {
+                $color = $this->colorRepository->find($color_prd->id);
+                $color->delete();
+            }
+            $product->delete();
+
+            return redirect()->route('admin.products.index');
+        } catch (Exception $e) {
+            return redirect()->back()->with($e->getMessage());
+        }
     }
 }

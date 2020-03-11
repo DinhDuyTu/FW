@@ -40,13 +40,13 @@
                                 <th>Highlight</th>
                                 <th>Detail</th>
                                 <th>Description</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th><i class="fa fa-pencil" aria-hidden="true"></i></th>
+                                <th><i class="fa fa-trash-o" aria-hidden="true"></i></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($products as $key => $product)
-                                <tr>
+                                <tr class="product-main">
                                     <td>{{ $key + 1 }}</td>
                                     <td>
                                         <a href="{{ route('admin.products.edit', $product->id) }}">
@@ -69,8 +69,14 @@
                                     <td class="center"><input type="checkbox" @if ($product->is_highlight == 1) checked @endif></td>
                                     <td>{{ $product->detail }}</td>
                                     <td>{{ $product->description }}</td>
-                                    <td><a class="edit" href="javascript:;">Edit</a></td>
-                                    <td><a class="delete" href="javascript:;">Delete</a></td>
+                                    <td><a href="{{ route('admin.products.edit', $product->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                                    <td>
+                                        <form class="delete-product" action="{{ route('admin.products.destroy', $product->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <a class="btn-delete-product"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

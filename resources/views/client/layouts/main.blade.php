@@ -152,7 +152,7 @@
                         $.each(response.cart, function (key, value) {
                             let product_price = number_format(value.product_price);
                             sub_total_price = sub_total_price + (value.product_num * value.product_price);
-                            html += '<li class="item odd"><a href="#" title="' + value.product_name + '" class="product-image"><img src="' + value.product_image +'" alt="' + value.product_name + '" width="65"></a><div class="product-details"> <a href="#" title="Remove This Item" class="remove-cart"><i class="icon-close"></i></a><p class="product-name"><a href="#">' + value.product_name + '</a> </p><strong>' + value.product_num + '</strong> x <span class="price">' + product_price + ' VND</span> </div></li>';
+                            html += '<li class="item odd"><a href="'+value.product_id+'" title="' + value.product_name + '" class="product-image"><img src="' + value.product_image +'" alt="' + value.product_name + '" width="65"></a><div class="product-details"> <a href="#" title="Remove This Item" class="remove-cart"><i class="icon-close"></i></a><p class="product-name"><a href="' + value.product_id + '">' + value.product_name + '</a> </p><strong>' + value.product_num + '</strong> x <span class="price">' + product_price + ' VND</span> </div></li>';
                         });
                         $('#cart-sidebar').html(html);
                         let total_price = number_format(sub_total_price);
@@ -352,6 +352,29 @@
                     })
                 }
             });
+            $.ajax({
+                type: 'GET',
+                url: '/support_cart',
+                success: function (response) {
+                    $('#qty-product').html(response.quantity);
+                    let total_price = number_format(response.total_price);
+                    $('#sub_total_price').html(total_price);
+                },
+                error: function () {
+                }
+            });
+            function number_format(nStr)
+            {
+                nStr += '';
+                x = nStr.split('.');
+                x1 = x[0];
+                x2 = x.length > 1 ? '.' + x[1] : '';
+                var rgx = /(\d+)(\d{3})/;
+                while (rgx.test(x1)) {
+                    x1 = x1.replace(rgx, '$1' + ',' + '$2');
+                }
+                return x1 + x2;
+            }
         });
     </script>
     <script>
@@ -359,6 +382,32 @@
             $('.use_other_information').click(function (){
                 $(this).parents('.modal-body').append('<div><div class="form-group"><label>Name</label><input class="form-control" type="text" name="name"></div><div class="form-group"><label>Email</label><input class="form-control" type="text" name="email"></div><div class="form-group"><label>Address</label><input class="form-control" type="text" name="address"></div><div class="form-group"><label>Phone</label><input class="form-control" type="text" name="phone"></div><div class="form-group"><label>Note</label><textarea style="width: 100%; height: 100px;" name="note" id="" cols="30" rows="30"></textarea></div></div>');
                 $('.profile_guest').remove();
+            });
+        });
+        $(document).ready(function () {
+            $("#logout").click(function(e) {
+                e.preventDefault();
+                $("#logout-form").submit();
+            });
+            $(document).on('click', '.btn-register', function () {
+                $(this).parents('.main-login').remove();
+                $("#div-forms").append('<div class="main-register"><form action="{{ route('user.create') }}" method="POST">@csrf<div class="modal-body"><div id="div-login-msg"> <span id="text-login-msg">Register Account My Store</span> </div><input style="margin-bottom: 10px;" id="login_password" type="text" name="name" class="form-control" placeholder="User Name" autofocus ><input id="login_username" type="email" name="email" class="form-control" placeholder="User ID" ><input id="login_password" type="password" name="password" class="form-control" placeholder="Password"><input id="login_password" type="password" name="confirm_password" class="form-control" placeholder="Confirm Password"></div><div class="modal-footer"><div><button type="submit" class="btn-login">Register</button><button style="margin-top: 10px;" type="button" class="btn-login btn-form-login">Login</button></div></div></form></div>')
+            });
+            $(document).on('click', '.btn-form-login', function () {
+                $(this).parents('.main-register').remove();
+                $("#div-forms").append('<div class="main-login"><form class="form-signin" action="{{ route('login') }}" method="POST">@csrf<div class="modal-body"><div id="div-login-msg"> <span id="text-login-msg">Username or email address </span> </div><input id="login_username" type="email" name="email" class="form-control" placeholder="User ID" autofocus ><input id="login_password" type="password" name="password" class="form-control" placeholder="Password"><div class="checkbox"><label><input type="checkbox"> Remember me </label></div></div><div class="modal-footer"><div><button type="submit" class="btn-login">Login</button><button style="margin-top: 10px;" type="button" class="btn-login btn-register">Register</button><div class="row" style="margin-top: 10px;"><div class="col-md-6"><button style="background: #4266B1" type="button" class="btn-login"> <i class="fa fa-facebook" aria-hidden="true"></i> Facebook</button></div><div class="col-md-6"><button style="background: #D93025" type="button" class="btn-login"><i class="fa fa-google" aria-hidden="true"></i> Google</button></div></div></div></div></form></div>');
+            });
+            $(document).on('change', '#login_confirm_password', function (e) {
+                e.preventDefault();
+                let password = $('#login_password').val();
+                let confirm_password = $('#login_confirm_password').val();
+                console.log(password);
+                console.log(confirm_password);
+                if (confirm_password == password) {
+                    $('.alert-password').html('<p style="color: #7CC576; margin-left: 10px "><i class="fa fa-check" aria-hidden="true"></i> Success!</p>');
+                } else {
+                    $('.alert-password').html('<p style="color: red; margin-left: 10px "><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Password does not match!</p>');
+                }
             });
         });
     </script>

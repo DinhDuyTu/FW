@@ -17,7 +17,7 @@
                             <div class="form-group">
                                 <label class="control-label" for="title">Category Parent</label>
                                 <select class="form-control" name="parent_id" id="">
-                                    <option value="0">Category 1</option>
+                                    <option value="0">ROOT</option>
                                     @include('admin.partials.categories_options', ['level' => 0])
                                 </select>
                             </div>

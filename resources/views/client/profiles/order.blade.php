@@ -19,7 +19,7 @@
                     <div class="my-order">
                         <div class="toolbar">
                             <ul class="nav nav-tabs" role="tablist">
-                                <li class="nav-item">
+                                <li class="nav-item active">
                                     <a style="padding: 10px 30px;" class="nav-link active" data-toggle="tab" href="#home">All Order</a>
                                 </li>
                                 <li class="nav-item">
@@ -36,99 +36,108 @@
                                 <div id="home" class="container tab-pane active">
                                     <table class="table table-striped">
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
+                                            @if (isset($all_order))
+                                                @foreach ($all_order as $key => $all)
+                                                    @foreach ($products as $product)
+                                                        @if ($product->id == $all->product_id)
+                                                            <tr>
+                                                                <td style="width: 5%;">{{ $key + 1 }}</td>
+                                                                @foreach ($images as $image)
+                                                                    @if ($image->product_id == $product->id)
+                                                                        <td style="width: 10%">
+                                                                            <img style="width: 100px;" src="{{ $image->image }}" alt="">
+                                                                        </td>
+                                                                    @endif
+                                                                @endforeach
+                                                                <td style="width: 20%;">
+                                                                    <strong>{{ $product->name }}</strong>
+                                                                    <br>
+                                                                    <strong>Size : </strong> {{ $all->size }}
+                                                                    <br>
+                                                                    <strong>Color : </strong> {{ $all->color }}
+                                                                    
+                                                                </td>
+                                                                <td style="width: 10%">{{ number_format($all->price) }} VND</td>
+                                                                <td width="5%">{{ $all->quantity }}</td>
+                                                                <td style="width: 10%">{{ number_format($all->quantity * $all->price) }} VND</td>
+                                                                <td><button class="alert alert-warning">Waitting</button></td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
                                 <div id="menu1" class="container tab-pane fade">
                                     <table class="table table-striped">
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
+                                            @if (isset($order_waiting))
+                                                @foreach ($order_waiting as $key => $waitting)
+                                                    @foreach ($products as $product)
+                                                        @if ($product->id == $waitting->product_id)
+                                                            <tr>
+                                                                <td style="width: 5%;">{{ $key + 1 }}</td>
+                                                                @foreach ($images as $image)
+                                                                    @if ($image->product_id == $product->id)
+                                                                        <td style="width: 10%">
+                                                                            <img style="width: 100px;" src="{{ $image->image }}" alt="">
+                                                                        </td>
+                                                                    @endif
+                                                                @endforeach
+                                                                <td style="width: 20%;">
+                                                                    <strong>{{ $product->name }}</strong>
+                                                                    <br>
+                                                                    <strong>Size : </strong> {{ $waitting->size }}
+                                                                    <br>
+                                                                    <strong>Color : </strong> {{ $waitting->color }}
+                                                                    
+                                                                </td>
+                                                                <td style="width: 10%">{{ number_format($waitting->price) }} VND</td>
+                                                                <td width="5%">{{ $waitting->quantity }}</td>
+                                                                <td style="width: 10%">{{ number_format($waitting->quantity * $waitting->price) }} VND</td>
+                                                                <td><button class="alert alert-warning">Waitting</button></td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
                                 <div id="menu2" class="container tab-pane fade">
                                     <table class="table table-striped">
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Nothing Nothing Nothing</td>
-                                                <td>Size M</td>
-                                                <td>Color Blue</td>
-                                                <td>999,000 VND</td>
-                                                <td>2</td>
-                                                <td>999,000 VND</td>
-                                            </tr>
+                                            @if (isset($order_processed))
+                                                @foreach ($order_processed as $key => $processed)
+                                                    @foreach ($products as $product)
+                                                        @if ($product->id == $processed->product_id)
+                                                            <tr>
+                                                                <td style="width: 5%;">{{ $key + 1 }}</td>
+                                                                @foreach ($images as $image)
+                                                                    @if ($image->product_id == $product->id)
+                                                                        <td style="width: 10%">
+                                                                            <img style="width: 100px;" src="{{ $image->image }}" alt="">
+                                                                        </td>
+                                                                    @endif
+                                                                @endforeach
+                                                                <td style="width: 20%;">
+                                                                    <strong>{{ $product->name }}</strong>
+                                                                    <br>
+                                                                    <strong>Size : </strong> {{ $processed->size }}
+                                                                    <br>
+                                                                    <strong>Color : </strong> {{ $processed->color }}
+                                                                    
+                                                                </td>
+                                                                <td style="width: 10%">{{ number_format($processed->price) }} VND</td>
+                                                                <td width="5%">{{ $processed->quantity }}</td>
+                                                                <td style="width: 10%">{{ number_format($processed->quantity * $processed->price) }} VND</td>
+                                                                <td><button class="alert alert-success">Processed</button></td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>

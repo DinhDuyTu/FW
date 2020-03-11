@@ -90,7 +90,7 @@ class WithlistController extends Controller
     public function countWishlist()
     {
         if (Auth::user()) {
-            $count = $this->wishlistRepository->getAll()->count();
+            $count = $this->wishlistRepository->getAll()->where('user_id', Auth::user()->id)->count();
 
             return response()->json(compact('count'), 200);
         } else {

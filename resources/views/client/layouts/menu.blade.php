@@ -17,7 +17,7 @@
                                 </ul>
                             </li>
                             <li class="megamenu"><a href="shop_grid.html">Men</a>
-                                <div class="mega-menu"> <span> <a class="mega-title" href="#">Clothing </a> <a href="shop_grid.html">Casual shirt</a> <a href="shop_grid.html">Trousers</a> <a href="shop_grid.html">Suits & Blazers </a> <a href="shop_grid.html">Sportswear </a> </span> <span> <a class="mega-title" href="#">Jewellery </a> <a href="shop_grid.html">Gold</a> <a href="shop_grid.html">Platinum</a> <a href="shop_grid.html">Rings </a> <a href="shop_grid.html">Neckwear </a> </span> <span> <a class="mega-title" href="#">Shoes </a> <a href="shop_grid.html">Sports & Outdoor</a> <a href="shop_grid.html">Mocassins</a> <a href="shop_grid.html">Sneakers </a> <a href="shop_grid.html">Formal Shoes </a> </span> <span class="mega-menu-img hidden-sm"> <a href="shop_grid.html"><img src="{{ asset('bower_components/Asset-FW-Client/images/menu-img1.jpg') }}" alt="Bannar 1"></a> </span> <span> <a class="mega-title" href="#">Eyewear </a> <a href="shop_grid.html">Backpacks</a> <a href="shop_grid.html">Ray-Ban</a> <a href="shop_grid.html">Opium </a> <a href="shop_grid.html">Joe Black </a> </span> <span> <a class="mega-title" href="#">Watches </a> <a href="shop_grid.html">Fastrack </a> <a href="shop_grid.html">Timex </a> <a href="shop_grid.html">Citizen</a> <a href="shop_grid.html">Titan </a> </span> <span> <a class="mega-title" href="#">Accessories </a> <a href="shop_grid.html">Handbags</a> <a href="shop_grid.html">Sunglasses</a> <a href="shop_grid.html">Clutches </a> <a href="shop_grid.html">Backpacks </a> </span> </div>
+                                <div class="mega-menu"><span> <a class="mega-title" href="#">Clothing </a> <a href="shop_grid.html">Casual shirt</a> <a href="shop_grid.html">Trousers</a> <a href="shop_grid.html">Suits & Blazers </a> <a href="shop_grid.html">Sportswear </a> </span> <span> <a class="mega-title" href="#">Jewellery </a> <a href="shop_grid.html">Gold</a> <a href="shop_grid.html">Platinum</a> <a href="shop_grid.html">Rings </a> <a href="shop_grid.html">Neckwear </a> </span> <span> <a class="mega-title" href="#">Shoes </a> <a href="shop_grid.html">Sports & Outdoor</a> <a href="shop_grid.html">Mocassins</a> <a href="shop_grid.html">Sneakers </a> <a href="shop_grid.html">Formal Shoes </a> </span> <span class="mega-menu-img hidden-sm"> <a href="shop_grid.html"><img src="{{ asset('bower_components/Asset-FW-Client/images/menu-img1.jpg') }}" alt="Bannar 1"></a> </span> <span> <a class="mega-title" href="#">Eyewear </a> <a href="shop_grid.html">Backpacks</a> <a href="shop_grid.html">Ray-Ban</a> <a href="shop_grid.html">Opium </a> <a href="shop_grid.html">Joe Black </a> </span> <span> <a class="mega-title" href="#">Watches </a> <a href="shop_grid.html">Fastrack </a> <a href="shop_grid.html">Timex </a> <a href="shop_grid.html">Citizen</a> <a href="shop_grid.html">Titan </a> </span> <span> <a class="mega-title" href="#">Accessories </a> <a href="shop_grid.html">Handbags</a> <a href="shop_grid.html">Sunglasses</a> <a href="shop_grid.html">Clutches </a> <a href="shop_grid.html">Backpacks </a> </span> </div>
                             </li>
                             <li class="megamenu"><a href="shop_grid.html">Women</a>
                                 <div class="mega-menu"> <span class="mega-menu-img left hidden-sm"> <a href="shop_grid.html"><img src="{{ asset('bower_components/Asset-FW-Client/images/menu-img2.jpg') }}" alt="Bannar 2"></a> </span> <span> <a class="mega-title" href="#">Clothing </a> <a href="shop_grid.html">Casual shirt</a> <a href="shop_grid.html">Trousers</a> <a href="shop_grid.html">Suits & Blazers </a> <a href="shop_grid.html">Sportswear </a> </span> <span> <a class="mega-title" href="#">Jewellery </a> <a href="shop_grid.html">Gold</a> <a href="shop_grid.html">Platinum</a> <a href="shop_grid.html">Rings </a> <a href="shop_grid.html">Neckwear </a> </span> <span> <a class="mega-title" href="#">Shoes </a> <a href="shop_grid.html">Sports & Outdoor</a> <a href="shop_grid.html">Mocassins</a> <a href="shop_grid.html">Sneakers </a> <a href="shop_grid.html">Formal Shoes </a> </span> <span> <a class="mega-title" href="#">Eyewear </a> <a href="shop_grid.html">Backpacks</a> <a href="shop_grid.html">Ray-Ban</a> <a href="shop_grid.html">Opium </a> <a href="shop_grid.html">Joe Black </a> </span> <span> <a class="mega-title" href="#">Watches </a> <a href="shop_grid.html">Fastrack </a> <a href="shop_grid.html">Timex </a> <a href="shop_grid.html">Citizen</a> <a href="shop_grid.html">Titan </a> </span> <span> <a class="mega-title" href="#">Accessories </a> <a href="shop_grid.html">Handbags</a> <a href="shop_grid.html">Sunglasses</a> <a href="shop_grid.html">Clutches </a> <a href="shop_grid.html">Backpacks </a> </span> </div>
@@ -51,26 +51,57 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>
                                 </div>
                                 <div id="div-forms">
-                                    <form class="form-signin" action="{{ route('login') }}" method="POST">
-                                        @csrf
-                                        <div class="modal-body">
-                                            <div id="div-login-msg"> <span id="text-login-msg">Username or email address </span> </div>
-                                            <input id="login_username" type="email" name="email" class="form-control" placeholder="User ID" autofocus >
-                                            <input id="login_password" type="password" name="password" class="form-control" placeholder="Password">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Remember me </label>
+                                    {{-- <div class="main-login">
+                                        <form class="form-signin" action="{{ route('login') }}" method="POST">
+                                            @csrf
+                                            <div class="modal-body">
+                                                <div id="div-login-msg"> <span id="text-login-msg">Username or email address </span> </div>
+                                                <input id="login_username" type="email" name="email" class="form-control" placeholder="User ID" autofocus >
+                                                <input id="login_password" type="password" name="password" class="form-control" placeholder="Password">
+                                                <div class="checkbox">
+                                                    <label><input type="checkbox"> Remember me </label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <div>
-                                                <button type="submit" class="btn-login">Login</button>
+                                            <div class="modal-footer">
+                                                <div>
+                                                    <button type="submit" class="btn-login">Login</button>
+                                                    <button style="margin-top: 10px;" type="button" class="btn-login btn-register">Register</button>
+                                                    <div class="row" style="margin-top: 10px;">
+                                                        <div class="col-md-6">
+                                                            <button style="background: #4266B1" type="button" class="btn-login"> <i class="fa fa-facebook" aria-hidden="true"></i> Facebook</button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button style="background: #D93025" type="button" class="btn-login"><i class="fa fa-google" aria-hidden="true"></i> Google</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            {{-- <div>
-                                                <button onclick="location.href='account_page.html'" id="login_register_btn" type="button" class="btn btn-link">Register</button>
-                                            </div> --}}
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div> --}}
+                                    <div class="main-register">
+                                        <form action="{{ route('user.create') }}" method="POST">
+                                            @csrf
+                                            <div class="modal-body">
+                                                <div id="div-login-msg"> <span id="text-login-msg">Register Account My Store</span> </div>
+                                                <input style="margin-bottom: 10px;" type="text" name="name" class="form-control" placeholder="User Name" autofocus >
+                                                <input id="login_username" type="email" name="email" class="form-control" placeholder="User ID" >
+                                                <input id="login_password" type="password" name="password" class="form-control" placeholder="Password">
+                                                <input id="login_confirm_password" type="password" name="confirm_password" class="form-control" placeholder="Confirm Password">
+                                                <div class="alert-password">
+
+                                                </div>
+                                                {{-- <p style="color: red; margin-left: 10px "><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Password does not match!</p> --}}
+
+                                                {{-- <p style="color: #7CC576; margin-left: 10px "><i class="fa fa-check" aria-hidden="true"></i> Success!</p> --}}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div>
+                                                    <button type="button" class="btn-login">Register</button>
+                                                    <button style="margin-top: 10px;" type="button" class="btn-login btn-form-login">Login</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>

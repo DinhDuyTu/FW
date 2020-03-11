@@ -27,7 +27,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $categories = $this->categoryRepository->getAll();
+        $categories = $this->categoryRepository->getAll()->where('parent_id', 0);
         $products = $this->productRepository->getAll();
         $images_defult = $this->imageRepository->getAll()->where('image_default', 1);
         return view('client.index', compact('categories', 'products', 'images_defult'));   

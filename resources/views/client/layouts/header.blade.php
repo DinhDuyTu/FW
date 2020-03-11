@@ -48,16 +48,20 @@
                     <div class="headerlinkmenu col-lg-6 col-md-6 col-sm-7 col-xs-6 text-right">
                         <div class="links">
                             <div class="jtv-user-info">
-                                <div class="dropdown"> <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span>My Account </span> <i class="fa fa-angle-down"></i></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="account_page.html">Account</a></li>
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="account_page.html">Log In</a></li>
-                                        <li><a href="account_page.html">Sign Up</a></li>
-                                    </ul>
-                                </div>
+                                @if (Auth::check())
+                                    <div class="dropdown"> <a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><span>My Account </span> <i class="fa fa-angle-down"></i></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="{{ route('user.profile', Auth::user()->id) }}">Profile</a></li>
+                                            <li><a href="{{ route('wishlist.index') }}">Wishlist</a></li>
+                                            <li><a href="checkout.html">Checkout</a></li>
+                                            <li class="divider"></li>
+                                            <li><a id="logout">Log Out</a></li>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                                @csrf
+                                            </form>
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
                             <div class="services hidden-xs"><a title="servicesg" href="#">Services</a></div>
                             <div class="myaccount hidden-xs"><a title="My Account" href="#">My Support</a></div>
@@ -117,7 +121,7 @@
                                     <div class="shoppingcart-inner">
                                         <span class="cart-title">Shopping Cart</span>
                                         <span class="cart-total">
-                                            <b id="qty-product">0</b> Item(s): <i>0</i> VND
+                                            <b id="qty-product">0</b> Item(s): <i id="sub_total_price">0</i> VND
                                         </span>
                                     </div>
                                 </a>
@@ -126,12 +130,6 @@
                                 <div class="top-cart-content">
                                     <div class="block-subtitle hidden-xs">Recently added item(s)</div>
                                     <ul id="cart-sidebar" class="mini-products-list">
-                                        {{-- <li class="item odd">
-                                            <a href="#" title="Ipsums Dolors Untra" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img07.jpg') }}" alt="Lorem ipsum dolor" width="65"></a>
-                                            <div class="product-details"> <a href="#" title="Remove This Item" class="remove-cart"><i class="icon-close"></i></a>
-                                                <p class="product-name"><a href="#">Lorem ipsum dolor sit amet Consectetur</a> </p>
-                                                <strong>1</strong> x <span class="price">$20.00</span> </div>
-                                        </li> --}}
                                     </ul>
                                     <div class="top-subtotal">Subtotal: <span class="price" id="total_price">0 VND</span></div>
                                     <div class="actions">

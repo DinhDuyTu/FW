@@ -104,31 +104,33 @@
                                             <div class="modal-header"> <img id="img_logo" src="{{ asset('bower_components/Asset-FW-Client/images/logo.png') }}" alt="logo">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>
                                             </div>
-                                            <div id="div-forms">
-                                                <form class="form-signin" action="{{ route('cart.checkout') }}" method="POST">
-                                                    @csrf
-                                                    <div class="modal-body">
-                                                        <div class="profile_guest">
-                                                            <p>Name : {{ Auth::user()->name }}</p>
-                                                            <input name="name" type="hidden" value="{{ Auth::user()->name }}">
-                                                            <p>Email : {{ Auth::user()->email }}</p>
-                                                            <input name="email" type="hidden" value="{{ Auth::user()->email }}">
-                                                            <p>Address : {{ Auth::user()->address }}</p>
-                                                            <input name="address" type="hidden" value="{{ Auth::user()->address }}">
-                                                            <p>Phone : {{ Auth::user()->phone }}</p>
-                                                            <input name="phone" type="hidden" value="{{ Auth::user()->phone }}">
-                                                            <label>Note</label>
-                                                            <textarea style="width: 100%; height: 100px;" name="note" id="" cols="30" rows="30"></textarea>
-                                                            <button type="button" class="btn-login use_other_information">Use other information</button>
+                                            @if (Auth::check())
+                                                <div id="div-forms">
+                                                    <form class="form-signin" action="{{ route('cart.checkout') }}" method="POST">
+                                                        @csrf
+                                                        <div class="modal-body">
+                                                            <div class="profile_guest">
+                                                                <p>Name : {{ Auth::user()->name }}</p>
+                                                                <input name="name" type="hidden" value="{{ Auth::user()->name }}">
+                                                                <p>Email : {{ Auth::user()->email }}</p>
+                                                                <input name="email" type="hidden" value="{{ Auth::user()->email }}">
+                                                                <p>Address : {{ Auth::user()->address }}</p>
+                                                                <input name="address" type="hidden" value="{{ Auth::user()->address }}">
+                                                                <p>Phone : {{ Auth::user()->phone }}</p>
+                                                                <input name="phone" type="hidden" value="{{ Auth::user()->phone }}">
+                                                                <label>Note</label>
+                                                                <textarea style="width: 100%; height: 100px;" name="note" id="" cols="30" rows="30"></textarea>
+                                                                <button type="button" class="btn-login use_other_information">Use other information</button>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <div>
-                                                            <button type="submit" class="btn-login">Checkout</button>
+                                                        <div class="modal-footer">
+                                                            <div>
+                                                                <button type="submit" class="btn-login">Checkout</button>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </form>
-                                            </div>
+                                                    </form>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

@@ -48,4 +48,6 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::post('orders/change_status', "OrderController@change_status")->name('admin.orders.change_status');
+    Route::post('categories/delete_category', "CategoryController@destroy")->name('admin.category.delete_category');
+    Route::post('products/delete_product', "ProductController@destroy")->name('admin.product.delete_product');
 });

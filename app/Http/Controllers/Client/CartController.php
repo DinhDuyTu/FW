@@ -183,4 +183,13 @@ class CartController extends Controller
             return redirect()->back()->withCookie($cookie);
         }
     }
+
+    public function support(Request $request)
+    {
+        $cart = unserialize($request->cookie('cart'));
+        $quantity = count($cart);
+        $total_price = $this->getTotalPrice($cart);
+        
+        return response()->json(compact('quantity', 'total_price'), 200);
+    }
 }

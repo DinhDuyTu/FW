@@ -6250,3 +6250,10 @@ header.blue-bg .search:focus {
 .color_black {
 	background: #000000
 }
+.dd3-content a {
+    margin-left: 10px;
+}
+
+.icon_category {
+    float: right;
+}
