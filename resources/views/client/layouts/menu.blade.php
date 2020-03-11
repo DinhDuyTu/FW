@@ -51,7 +51,7 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>
                                 </div>
                                 <div id="div-forms">
-                                    {{-- <div class="main-login">
+                                    <!-- <div class="main-login">
                                         <form class="form-signin" action="{{ route('login') }}" method="POST">
                                             @csrf
                                             <div class="modal-body">
@@ -77,30 +77,28 @@
                                                 </div>
                                             </div>
                                         </form>
-                                    </div> --}}
+                                    </div> -->
                                     <div class="main-register">
-                                        <form action="{{ route('user.create') }}" method="POST">
-                                            @csrf
-                                            <div class="modal-body">
-                                                <div id="div-login-msg"> <span id="text-login-msg">Register Account My Store</span> </div>
-                                                <input style="margin-bottom: 10px;" type="text" name="name" class="form-control" placeholder="User Name" autofocus >
-                                                <input id="login_username" type="email" name="email" class="form-control" placeholder="User ID" >
-                                                <input id="login_password" type="password" name="password" class="form-control" placeholder="Password">
-                                                <input id="login_confirm_password" type="password" name="confirm_password" class="form-control" placeholder="Confirm Password">
-                                                <div class="alert-password">
+                                        <div class="modal-body">
+                                            <div id="div-login-msg"> <span id="text-login-msg">Register Account My Store</span> </div>
+                                            <input id="login_name" style="margin-bottom: 10px;" type="text" name="name" class="form-control" placeholder="User Name" autofocus >
+                                            <div class="alert-name"></div>
+                                            <input id="login_username" type="email" name="email" class="form-control" placeholder="Email" >
+                                            <div class="alert-email"></div>
+                                            <input id="login_password" type="password" name="password" class="form-control" placeholder="Password">
+                                            <input id="login_confirm_password" type="password" name="confirm_password" class="form-control" placeholder="Confirm Password">
+                                            <div class="alert-password">
 
-                                                </div>
-                                                {{-- <p style="color: red; margin-left: 10px "><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Password does not match!</p> --}}
-
-                                                {{-- <p style="color: #7CC576; margin-left: 10px "><i class="fa fa-check" aria-hidden="true"></i> Success!</p> --}}
                                             </div>
-                                            <div class="modal-footer">
-                                                <div>
-                                                    <button type="button" class="btn-login">Register</button>
-                                                    <button style="margin-top: 10px;" type="button" class="btn-login btn-form-login">Login</button>
-                                                </div>
+                                            <!-- <p style="color: red; margin-left: 10px "><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Password does not match!</p> -->
+                                            <!-- <p style="color: #7CC576; margin-left: 10px "><i class="fa fa-check" aria-hidden="true"></i> Success!</p> -->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div>
+                                                <button type="button" class="btn-login btn-submit-register">Register</button>
+                                                <button style="margin-top: 10px;" type="button" class="btn-login btn-form-login">Login</button>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

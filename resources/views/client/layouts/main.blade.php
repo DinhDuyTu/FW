@@ -152,7 +152,7 @@
                         $.each(response.cart, function (key, value) {
                             let product_price = number_format(value.product_price);
                             sub_total_price = sub_total_price + (value.product_num * value.product_price);
-                            html += '<li class="item odd"><a href="'+value.product_id+'" title="' + value.product_name + '" class="product-image"><img src="' + value.product_image +'" alt="' + value.product_name + '" width="65"></a><div class="product-details"> <a href="#" title="Remove This Item" class="remove-cart"><i class="icon-close"></i></a><p class="product-name"><a href="' + value.product_id + '">' + value.product_name + '</a> </p><strong>' + value.product_num + '</strong> x <span class="price">' + product_price + ' VND</span> </div></li>';
+                            html += '<li class="item odd"><a href="#" title="' + value.product_name + '" class="product-image"><img src="' + value.product_image +'" alt="' + value.product_name + '" width="65"></a><div class="product-details"> <a href="#" title="Remove This Item" class="remove-cart"><i class="icon-close"></i></a><p class="product-name"><a href="#">' + value.product_name + '</a> </p><strong>' + value.product_num + '</strong> x <span class="price">' + product_price + ' VND</span> </div></li>';
                         });
                         $('#cart-sidebar').html(html);
                         let total_price = number_format(sub_total_price);
@@ -352,29 +352,6 @@
                     })
                 }
             });
-            $.ajax({
-                type: 'GET',
-                url: '/support_cart',
-                success: function (response) {
-                    $('#qty-product').html(response.quantity);
-                    let total_price = number_format(response.total_price);
-                    $('#sub_total_price').html(total_price);
-                },
-                error: function () {
-                }
-            });
-            function number_format(nStr)
-            {
-                nStr += '';
-                x = nStr.split('.');
-                x1 = x[0];
-                x2 = x.length > 1 ? '.' + x[1] : '';
-                var rgx = /(\d+)(\d{3})/;
-                while (rgx.test(x1)) {
-                    x1 = x1.replace(rgx, '$1' + ',' + '$2');
-                }
-                return x1 + x2;
-            }
         });
     </script>
     <script>
@@ -406,6 +383,26 @@
                 if (confirm_password == password) {
                     $('.alert-password').html('<p style="color: #7CC576; margin-left: 10px "><i class="fa fa-check" aria-hidden="true"></i> Success!</p>');
                 } else {
+                    $('.alert-password').html('<p style="color: red; margin-left: 10px "><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Password does not match!</p>');
+                }
+            });
+            $('#login_name').blur(function () {
+                let name = $(this).val();
+                name = name.trim();
+                if (!name) {
+                    $('.alert-name').html('<p style="color: red; margin-left: 10px "><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Name is not null!</p>');
+                } else {
+                    $('.alert-name').html('<p style="color: #7CC576; margin-left: 10px "><i class="fa fa-check" aria-hidden="true"></i> Success!</p>');
+                }
+            })
+            $(document).on('click', '.btn-submit-register', function () {
+                // e.preventDefault();
+                let name = $('#login_name').val();
+                let email = $('#login_username').val();
+                let password = $('#logim_password').val();
+                let confirm_password = $('#login_confirm_password').val();
+                if (password <> confirm_password) {
+                    console.log('null');
                     $('.alert-password').html('<p style="color: red; margin-left: 10px "><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Password does not match!</p>');
                 }
             });
