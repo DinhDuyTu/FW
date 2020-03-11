@@ -21,7 +21,8 @@
     <link href="{{ asset('bower_components/Asset-FW-Admin/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('bower_components/Asset-FW-Admin/css/style-responsive.css') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('bower_components/Asset-FW-Admin/assets/data-tables/DT_bootstrap.css') }}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/css/fileinput.min.css" media="all" type="text/css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/css/fileinput.min.css" media="all" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/Asset-FW-Admin/assets/nestable/jquery.nestable.css') }}" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <style>
         .kv-file-upload {
@@ -61,7 +62,9 @@
     <script type="text/javascript" src="{{ asset('bower_components/Asset-FW-Admin/assets/data-tables/jquery.dataTables.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/Asset-FW-Admin/assets/data-tables/DT_bootstrap.js') }}"></script>
     <script src="{{ asset('bower_components/Asset-FW-Admin/js/editable-table.js') }}"></script>
-    <script src="assets/toastr-master/toastr.js"></script>
+    <script src="{{ asset('bower_components/Asset-FW-Admin/assets/toastr-master/toastr.js') }}"></script>
+    <script src="{{ asset('bower_components/Asset-FW-Admin/assets/nestable/jquery.nestable.js') }}"></script>
+    <script src="{{ asset('bower_components/Asset-FW-Admin/js/nestable.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/js/fileinput.min.js"></script>
 
     <script>
@@ -161,6 +164,96 @@
                     });
                     status--;
                     $('#'+status+'').attr('disabled', 'disabled');
+                });
+                $('.btn-del-category').click(function () {
+                    let id = $(this).attr('data-id');
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.value) {
+                            $.ajax({
+                                type: 'POST',
+                                url: '/admin/categories/delete_category',
+                                data: {
+                                    'id': id
+                                },
+                                success: function (response) {
+                                    Swal.fire(
+                                        'Deleted!',
+                                        'Your file has been deleted.',
+                                        'success'
+                                    )
+                                },
+                                error: function () {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'Something went wrong!',
+                                    })
+                                }
+                            });
+                            $(this).parents('.dd3-item-children').remove();
+                        }
+                    })
+                });
+                $('.btn-del-category-parent').click(function () {
+                    let id = $(this).attr('data-id');
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.value) {
+                            $.ajax({
+                                type: 'POST',
+                                url: '/admin/categories/delete_category',
+                                data: {
+                                    'id': id
+                                },
+                                success: function (response) {
+                                    Swal.fire(
+                                        'Deleted!',
+                                        'Your file has been deleted.',
+                                        'success'
+                                    )
+                                },
+                                error: function () {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Oops...',
+                                        text: 'Something went wrong!',
+                                    })
+                                }
+                            });
+                            $(this).parents('.dd3-item-parent').remove();
+                        }
+                    })
+                    
+                });
+                $('.btn-delete-product').click(function () {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.value) {
+                            $(this).parents('.delete-product').submit();
+                        }
+                    })
                 });
             });
         </script>

@@ -26,8 +26,9 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = $this->categoryRepository->getSubCategories(0);
+        $categories_children = $this->categoryRepository->getAll()->where('parent_id', '<>', 0);
 
-        return view('admin.categories.index', compact('categories'));
+        return view('admin.categories.index', compact('categories', 'categories_children'));
     }
 
     /**
@@ -119,13 +120,22 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         try {
+            $id = $request->id;
             $category = $this->categoryRepository->find($id);
+            $category_children = $this->categoryRepository->getAll()->where('parent_id', $category->id);
+            $count = count($category_children);
+            if ($count > 0) {
+                foreach ($category_children as $key => $cat_children) {
+                    $children = $this->categoryRepository->find($cat_children->id);
+                    $children->delete();
+                }
+            }
             $category->delete();
 
-            return redirect()->route('admin.categories.index');
+            return response()->json(compact('children'), 200);
         } catch (Exception $e) {
             return redirect()->back()->with($e->getMessage());
         }

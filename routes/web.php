@@ -23,6 +23,7 @@ Route::group(['namespace' => 'Client'], function () {
     Route::post('cart/update', "CartController@update")->name('cart.update');
     Route::post('cart/delete', "CartController@delete")->name('cart.delete');
     Route::post('cart/checkout', "CartController@checkout")->name('cart.checkout');
+    Route::get('support_cart', "CartController@support")->name('cart.support');
 
     Route::post('comment', "CommentController@store")->name('comments.store');
 
@@ -33,6 +34,7 @@ Route::group(['namespace' => 'Client'], function () {
 
     Route::get('user/{id}/profile', "UserController@show")->name('user.profile');
     Route::get('user/{id}/order-of-user', "UserController@order_of_user")->name('user.order');
+    Route::post('user/create', "UserController@store")->name('user.create');
 });
 
 Auth::routes();
