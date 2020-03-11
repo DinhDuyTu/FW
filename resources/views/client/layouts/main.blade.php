@@ -156,8 +156,8 @@
                         });
                         $('#cart-sidebar').html(html);
                         let total_price = number_format(sub_total_price);
-                        $('#total_price').html(total_price + " VND");
-                    },
+                        $('#total_price').html(total_price + " zxVND");
+                    }, 
                     error: function () {
                         Swal.fire({
                             icon: 'error',
