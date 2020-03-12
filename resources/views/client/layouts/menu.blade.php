@@ -42,7 +42,8 @@
                     <!-- Signup -->
                     @if (Auth::check())
                     @else
-                        <p class="top-Signup"><a href="#" class="" role="button" data-toggle="modal" data-target="#login-modal">Login/Signup</a></p>
+                        <p class="top-Signup"><a href="#" class="" role="button" data-toggle="modal" data-target="#login-modal"> Login</a></p> 
+                        <p class="top-Signup"><a href="#" class="" role="button" data-toggle="modal" data-target="#register-modal">Register</a></p>
                     @endif
                     <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog">
@@ -51,7 +52,7 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>
                                 </div>
                                 <div id="div-forms">
-                                    <!-- <div class="main-login">
+                                    <div class="main-login">
                                         <form class="form-signin" action="{{ route('login') }}" method="POST">
                                             @csrf
                                             <div class="modal-body">
@@ -65,7 +66,6 @@
                                             <div class="modal-footer">
                                                 <div>
                                                     <button type="submit" class="btn-login">Login</button>
-                                                    <button style="margin-top: 10px;" type="button" class="btn-login btn-register">Register</button>
                                                     <div class="row" style="margin-top: 10px;">
                                                         <div class="col-md-6">
                                                             <button style="background: #4266B1" type="button" class="btn-login"> <i class="fa fa-facebook" aria-hidden="true"></i> Facebook</button>
@@ -77,7 +77,18 @@
                                                 </div>
                                             </div>
                                         </form>
-                                    </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header" style="text-align: center"> <img id="img_logo" src="{{ asset('bower_components/Asset-FW-Client/images/logo.png') }}" alt="logo">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>
+                                </div>
+                                <div id="div-forms">
                                     <div class="main-register">
                                         <div class="modal-body">
                                             <div id="div-login-msg"> <span id="text-login-msg">Register Account My Store</span> </div>
@@ -86,17 +97,15 @@
                                             <input id="login_username" type="email" name="email" class="form-control" placeholder="Email" >
                                             <div class="alert-email"></div>
                                             <input id="login_password" type="password" name="password" class="form-control" placeholder="Password">
+                                            <div class="alert-password"></div>
                                             <input id="login_confirm_password" type="password" name="confirm_password" class="form-control" placeholder="Confirm Password">
-                                            <div class="alert-password">
-
-                                            </div>
+                                            <div class="alert-confirm-password"></div>
                                             <!-- <p style="color: red; margin-left: 10px "><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Password does not match!</p> -->
                                             <!-- <p style="color: #7CC576; margin-left: 10px "><i class="fa fa-check" aria-hidden="true"></i> Success!</p> -->
                                         </div>
                                         <div class="modal-footer">
                                             <div>
                                                 <button type="button" class="btn-login btn-submit-register">Register</button>
-                                                <button style="margin-top: 10px;" type="button" class="btn-login btn-form-login">Login</button>
                                             </div>
                                         </div>
                                     </div>
@@ -104,7 +113,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- END # MODAL LOGIN -->
                 </div>
             </div>
         </div>

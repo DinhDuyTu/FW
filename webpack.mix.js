@@ -11,5 +11,11 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+mix.js([
+   'resources/js/jsclient.js',
+   'resources/js/app.js',
+   'resources/js/logout.js',
+   'resources/js/addToCart.js',
+   'resources/js/login.js',
+], 'public/js')
+.sass('resources/sass/app.scss', 'public/css');
