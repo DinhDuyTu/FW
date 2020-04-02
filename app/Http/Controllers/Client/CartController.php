@@ -66,9 +66,12 @@ class CartController extends Controller
             $cookie = cookie('cart', serialize($cart), 60*30);
             $qty = count($cart);
         }
+        $total_price = $this->getTotalPrice($cart);
+
         return response()->json([
             'quantity' => $qty,
             'cart' => $cart,
+            'total_price' => $total_price,
         ], 200)->withCookie($cookie);
     }
 
@@ -187,9 +190,19 @@ class CartController extends Controller
     public function support(Request $request)
     {
         $cart = unserialize($request->cookie('cart'));
-        $quantity = count($cart);
-        $total_price = $this->getTotalPrice($cart);
+        if ($cart != false) {
+            $quantity = count($cart);
+            $total_price = $this->getTotalPrice($cart);
+        } else {
+            $quantity = 0;
+            $total_price = 0;
+        }
         
         return response()->json(compact('quantity', 'total_price'), 200);
+    }
+
+    public function countMiniCart()
+    {
+        # code...
     }
 }

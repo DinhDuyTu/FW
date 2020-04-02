@@ -53,9 +53,13 @@ class WithlistController extends Controller
             ->where('user_id', $user_id)
             ->where('product_id', $product_id)
             ->count();
+        $wishlistOfUser = $this->wishlistRepository->getAll()
+            ->where('user_id', $user_id)
+            ->count();
         if ($count < 1) {
             $this->wishlistRepository->create($attr);
             $status = "added";
+            $wishlistOfUser++;
         } else {
             $wishlist = $this->wishlistRepository->getAll()
                 ->where('user_id', $user_id)
@@ -66,9 +70,10 @@ class WithlistController extends Controller
             $del_wishlist = $this->wishlistRepository->find($wishlist_id);
             $del_wishlist->delete();
             $status = "deleted";
+            $wishlistOfUser--;
         }
 
-        return response()->json(compact('status'), 200);
+        return response()->json(compact('status', 'wishlistOfUser'), 200);
     }
 
     public function delWishlist(Request $request)

@@ -75,7 +75,7 @@
                 <div class="col-sm-3 col-md-3 col-xs-12">
                     <!-- Header Logo -->
                     <div class="logo">
-                        <a title="e-commerce" href="index.html"><img alt="e-commerce" src="{{ asset('bower_components/Asset-FW-Client/images/logo.png') }}"></a>
+                        <a title="e-commerce" href="/"><img alt="e-commerce" src="{{ asset('bower_components/Asset-FW-Client/images/logo.png') }}"></a>
                     </div>
                     <!-- End Header Logo -->
                 </div>

@@ -53,7 +53,9 @@ $(document).ready(function () {
                     'color': color
                 },
                 success: function (scs) {
+                    let total_price = number_format(scs.total_price);
                     $('#qty-product').text(scs.quantity);
+                    $('#sub_total_price').text(total_price);
                     Swal.fire(
                         'Success!',
                         'Add to cart successfully!',
@@ -91,7 +93,7 @@ $(document).ready(function () {
                 });
                 $('#cart-sidebar').html(html);
                 let total_price = number_format(sub_total_price);
-                $('#total_price').html(total_price + " zxVND");
+                $('#total_price').html(total_price + " VND");
             }, 
             error: function () {
                 Swal.fire({

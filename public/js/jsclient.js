@@ -144,7 +144,9 @@ $(document).ready(function () {
           'color': color
         },
         success: function success(scs) {
+          var total_price = number_format(scs.total_price);
           $('#qty-product').text(scs.quantity);
+          $('#sub_total_price').text(total_price);
           Swal.fire('Success!', 'Add to cart successfully!', 'success');
         },
         error: function error() {
@@ -177,7 +179,7 @@ $(document).ready(function () {
         });
         $('#cart-sidebar').html(html);
         var total_price = number_format(sub_total_price);
-        $('#total_price').html(total_price + " zxVND");
+        $('#total_price').html(total_price + " VND");
       },
       error: function error() {
         Swal.fire({
@@ -346,6 +348,8 @@ $(document).ready(function () {
           $('.wishlist').css("color", "");
           Swal.fire('Success!', 'Delete to Wishlist successfully!', 'success');
         }
+
+        $('.wishlist-count').text(scs.wishlistOfUser);
       },
       error: function error() {
         Swal.fire({
@@ -399,12 +403,37 @@ $(window).on('load', function () {
     }
   });
 });
+$(window).on('load', function () {
+  $.ajax({
+    type: 'GET',
+    url: '/support_cart',
+    success: function success(scs) {
+      var total_price = number_format(scs.total_price);
+      $('#qty-product').text(scs.quantity);
+      $('#sub_total_price').text(total_price);
+    }
+  });
+});
 $(document).ready(function () {
   $('.use_other_information').click(function () {
     $(this).parents('.modal-body').append('<div><div class="form-group"><label>Name</label><input class="form-control" type="text" name="name"></div><div class="form-group"><label>Email</label><input class="form-control" type="text" name="email"></div><div class="form-group"><label>Address</label><input class="form-control" type="text" name="address"></div><div class="form-group"><label>Phone</label><input class="form-control" type="text" name="phone"></div><div class="form-group"><label>Note</label><textarea style="width: 100%; height: 100px;" name="note" id="" cols="30" rows="30"></textarea></div></div>');
     $('.profile_guest').remove();
   });
 });
+
+function number_format(nStr) {
+  nStr += '';
+  x = nStr.split('.');
+  x1 = x[0];
+  x2 = x.length > 1 ? '.' + x[1] : '';
+  var rgx = /(\d+)(\d{3})/;
+
+  while (rgx.test(x1)) {
+    x1 = x1.replace(rgx, '$1' + ',' + '$2');
+  }
+
+  return x1 + x2;
+}
 
 /***/ }),
 
