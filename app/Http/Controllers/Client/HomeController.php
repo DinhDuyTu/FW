@@ -30,6 +30,9 @@ class HomeController extends Controller
         $categories = $this->categoryRepository->getAll()->where('parent_id', 0);
         $products = $this->productRepository->getAll();
         $images_defult = $this->imageRepository->getAll()->where('image_default', 1);
-        return view('client.index', compact('categories', 'products', 'images_defult'));   
+        $products_sale = $products->where('price_sale', '<>', 0);
+        $featured_products = $products->where('is_highlight', '1');
+
+        return view('client.index', compact('categories', 'products', 'images_defult', 'products_sale', 'featured_products'));   
     }
 }

@@ -6,8 +6,9 @@
                 <div class="main-slider">
                     <div class="slider">
                         <div id="mainSlider" class="nivoSlider slider-image"> 
-                            <img src="{{ asset('bower_components/Asset-FW-Client/images/slider/slider-img1.jpg') }}" alt="main slider" title="#htmlcaption1" /> 
-                            <img src="{{ asset('bower_components/Asset-FW-Client/images/slider/slider-img2.jpg') }}" alt="main slider" title="#htmlcaption2" />
+                            <img src="{{ asset('bower_components/Asset-FW-Client/images/slider/slider1.jpg') }}" alt="main slider" title="#htmlcaption1" /> 
+                            <img src="{{ asset('bower_components/Asset-FW-Client/images/slider/slider4.jpg') }}" alt="main slider" title="#htmlcaption2" />
+                            <img src="{{ asset('bower_components/Asset-FW-Client/images/slider/slider3.jpg') }}" alt="main slider" title="#htmlcaption3" />
                         </div>
                         <!-- Slider Caption One -->
                         <div id="htmlcaption1" class="nivo-html-caption slider-caption-1">
@@ -16,8 +17,8 @@
                                 <div class="middle-text">
                                     <div class="cap-dec">
                                         <h1 class="cap-dec wow rubberBand" data-wow-duration="1.1s" data-wow-delay="0s">Fashion</h1>
-                                        <h2 class="cap-dec wow rubberBand" data-wow-duration="1.3s" data-wow-delay="0s">sale 2016</h2>
-                                        <p class="cap-dec wow rubberBand" data-wow-duration="1.5s" data-wow-delay="0s"> up to 35% off Fahion collection</p>
+                                        <h2 class="cap-dec wow rubberBand" data-wow-duration="1.3s" data-wow-delay="0s">sale 2020</h2>
+                                        <p style="color: white" class="cap-dec wow rubberBand" data-wow-duration="1.5s" data-wow-delay="0s"> up to 35% off Fahion collection</p>
                                     </div>
                                     <div class="cap-readmore wow rubberBand" data-wow-duration=".9s" data-wow-delay=".5s"> <a href="#">Shop Now</a> </div>
                                 </div>
@@ -30,6 +31,20 @@
                                 <div class="middle-text">
                                     <div class="cap-dec">
                                         <h1 class="wow swing" data-wow-duration="1.1s" data-wow-delay="0s">Hard  </h1>
+                                        <h2 class="wow swing" data-wow-duration="1.1s" data-wow-delay="0s">Discount</h2>
+                                        <p class="wow swing" data-wow-duration="1.3s" data-wow-delay="0s"> the new design collection</p>
+                                    </div>
+                                    <div class="cap-readmore wow swing" data-wow-duration="1.3s" data-wow-delay=".3s"> <a href="#">Click to buy</a> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slider Caption 3 -->
+                        <div id="htmlcaption3" class="nivo-html-caption slider-caption-2">
+                            <div class="slider-progress"></div>
+                            <div class="slide-text slide-text-2">
+                                <div class="middle-text">
+                                    <div class="cap-dec">
+                                        <h1 class="wow swing" data-wow-duration="1.1s" data-wow-delay="0s">Hard  Ne</h1>
                                         <h2 class="wow swing" data-wow-duration="1.1s" data-wow-delay="0s">Discount</h2>
                                         <p class="wow swing" data-wow-duration="1.3s" data-wow-delay="0s"> the new design collection</p>
                                     </div>

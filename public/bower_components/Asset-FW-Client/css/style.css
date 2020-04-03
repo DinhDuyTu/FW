@@ -7607,3 +7607,8 @@ button.button.btn-proceed-checkout span {
 	    margin-bottom: 0px;
     margin-top: 0px;
 } */
+
+#mainSlider img {
+	width: 1170px;
+	height: 530px;
+}

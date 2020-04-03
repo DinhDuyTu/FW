@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>MyStore premium HTML5 &amp; CSS3 template</title>
+    <title>My Store</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/Asset-FW-Client/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/Asset-FW-Client/css/font-awesome.css') }}" media="all">
@@ -50,7 +50,7 @@
     <script src="{{ asset('js/jsclient.js') }}"></script>
     <script type="text/javascript">
         var dthen1 = new Date("12/25/16 11:59:00 PM");
-        start = "08/04/15 03:02:11 AM";
+        start = "12/22/16 03:02:11 AM";
         start_date = Date.parse(start);
         var dnow1 = new Date(start_date);
         if (CountStepper > 0)
