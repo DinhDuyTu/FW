@@ -122,7 +122,6 @@
                             <div class="product-tab-inner">
                                 <ul id="product-detail-tab" class="nav nav-tabs product-tabs">
                                     <li class="active"> <a href="#description" data-toggle="tab"> Description </a> </li>
-                                    <li> <a href="#reviews" data-toggle="tab">Comments</a> </li>
                                     <li><a href="#product_tags" data-toggle="tab">Tags</a></li>
                                     <li> <a href="#custom_tabs" data-toggle="tab">Custom Tab</a> </li>
                                 </ul>
@@ -133,28 +132,28 @@
                                             <p> Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer enim purus, posuere at ultricies eu, placerat a felis. Suspendisse aliquet urna pretium eros convallis interdum. Quisque in arcu id dui vulputate mollis eget non arcu. Aenean et nulla purus. Mauris vel tellus non nunc mattis lobortis.</p>
                                             <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
                                         </div>
-                                    </div>
-                                    <div id="reviews" class="tab-pane fade">
-                                        <div class="col-sm-12 col-lg-12 col-md-12">
-                                            <div class="reviews-content-right">
-                                                <form method="post" action="{{ route('comments.store') }}">
-                                                    @csrf
-                                                    <div class="form-area">
-                                                        <div class="form-element">
-                                                            <label>Comment</label>
-                                                            <textarea style="width: 90%; color: black" name="content" id="" cols="30" rows="10"></textarea>
-                                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <div>
+                                            <div class="col-sm-12 col-lg-12 col-md-12">
+                                                <div class="reviews-content-right">
+                                                    <form method="post" action="{{ route('comments.store') }}">
+                                                        @csrf
+                                                        <div class="form-area" style="margin-bottom: 15px;">
+                                                            <div class="form-element">
+                                                                <label>Comment</label>
+                                                                <textarea style="width: 100%; color: black" name="content" id="" cols="30" rows="10"></textarea>
+                                                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                            </div>
+                                                            <div class="buttons-set"  style="width: 100%">
+                                                                @if (Auth::check())
+                                                                    <button class="button submit" title="Submit Review" type="submit"><span><i class="fa fa-comments" aria-hidden="true"></i> Comment</span></button>
+                                                                @else
+                                                                <button class="button submit" title="Submit Review" type="button" data-toggle="modal" data-target="#login-modal"><span><i class="fa fa-comments" aria-hidden="true"></i> Comment</span></button>
+                                                                @endif
+                                                            </div>
                                                         </div>
-                                                        <div class="buttons-set"  style="width: 90%">
-                                                            @if (Auth::check())
-                                                                <button class="button submit" title="Submit Review" type="submit"><span><i class="fa fa-comments" aria-hidden="true"></i> Comment</span></button>
-                                                            @else
-                                                            <button class="button submit" title="Submit Review" type="button" data-toggle="modal" data-target="#login-modal"><span><i class="fa fa-comments" aria-hidden="true"></i> Comment</span></button>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                                @include('client.products.commentsDisplay', ['comments' => $product->comments, 'product_id' => $product->id])
+                                                    </form>
+                                                    @include('client.products.commentsDisplay', ['comments' => $product->comments, 'product_id' => $product->id])
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

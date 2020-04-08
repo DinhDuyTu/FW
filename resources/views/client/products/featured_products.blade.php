@@ -8,7 +8,6 @@
                         <div class="item-inner">
                             <div class="product-thumbnail">
                                 <div class="icon-sale-label sale-left">Sale</div>
-                                <div class="btn-quickview"> <a href="quick_view.html"><span>Quick View</span></a></div>
                                 @foreach ($images_defult as $image)
                                     @if ($image->product_id == $featured_prd->id)
                                         <a href="{{ route('single_product', $featured_prd->id) }}" class="product-item-photo"> <img class="product-image-photo" src="{{ $image->image }}" alt=""></a>
@@ -31,7 +30,7 @@
                                 <div class="box-hover">
                                     <div class="product-item-actions">
                                         <div class="pro-actions">
-                                            <button class="action add-to-cart" type="button" title="Add to Cart"> <span>Add to Cart</span> </button>
+                                            <button class="action add-to-cart btn-quickview" type="button" title="Add to Cart" data-id="{{ $featured_prd->id }}" data-toggle="modal" data-target="#quick-view-modal"> <span>Add to Cart</span> </button>
                                         </div>
                                         <div class="add-to-links" data-role="add-to-links">
                                             <a href="wishlist.html" class="action add-to-wishlist" title="Add to Wishlist"> <span>Wishlist</span> </a>

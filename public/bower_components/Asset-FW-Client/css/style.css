@@ -7633,3 +7633,12 @@ button.button.btn-proceed-checkout span {
 	margin-top: -75px;
 	margin-left: -75px;
 }
+
+.product-item .item-inner:hover .pro-box-info .box-hover .add-to-links .action.add-to-wishlist-active {
+	margin-left: -97px;
+}
+
+.product-item .item-inner .pro-box-info .box-hover .add-to-links .action.add-to-wishlist-active:before {
+	content: "\f004";
+	color: red;
+}

@@ -59,7 +59,7 @@ jQuery("#all-slider .slider-items").owlCarousel({
 		navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
 		slideSpeed: 500,
 		pagination: !1,
-		autoPlay: false
+		autoPlay: true
 	}),
 
 /******************************************
@@ -133,7 +133,7 @@ jQuery("#best-selling-slider .slider-items").owlCarousel({
 ******************************************/
 
 jQuery("#featured-products-slider .slider-items").owlCarousel({
-		items: 4,
+		items: 3,
 		itemsDesktop: [1024, 3],
 		itemsDesktopSmall: [980, 2],
 		itemsTablet: [640, 3],
@@ -221,7 +221,7 @@ jQuery("#best-sale-slider .slider-items").owlCarousel({
 ******************************************/
 
 jQuery("#upsell-product-slider .slider-items").owlCarousel({
-		items: 4,
+		items: 3,
 		itemsDesktop: [1024, 4],
 		itemsDesktopSmall: [900, 3],
 		itemsTablet: [640, 2],
@@ -238,7 +238,7 @@ jQuery("#upsell-product-slider .slider-items").owlCarousel({
 ******************************************/
 
 	jQuery("#related-product-slider .slider-items").owlCarousel({
-		items: 4,
+		items: 3,
 		itemsDesktop: [1024, 4],
 		itemsDesktopSmall: [900, 3],
 		itemsTablet: [640, 2],
