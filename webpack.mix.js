@@ -17,5 +17,8 @@ mix.js([
    'resources/js/logout.js',
    'resources/js/addToCart.js',
    'resources/js/login.js',
+   'resources/js/loading.js',
+   'resources/js/quickview.js',
+   'resources/js/seemore.js',
 ], 'public/js')
 .sass('resources/sass/app.scss', 'public/css');

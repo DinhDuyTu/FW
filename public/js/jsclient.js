@@ -441,6 +441,19 @@ function number_format(nStr) {
 
 /***/ }),
 
+/***/ "./resources/js/loading.js":
+/*!*********************************!*\
+  !*** ./resources/js/loading.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(window).on('load', function (event) {
+  $('.load').delay(1000).fadeOut('fast');
+});
+
+/***/ }),
+
 /***/ "./resources/js/login.js":
 /*!*******************************!*\
   !*** ./resources/js/login.js ***!
@@ -519,6 +532,206 @@ $(document).ready(function () {
 
 /***/ }),
 
+/***/ "./resources/js/quickview.js":
+/*!***********************************!*\
+  !*** ./resources/js/quickview.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  var temp_size = 0;
+  var temp_color = 0;
+  var size;
+  $('.btn-quickview').click(function () {
+    var id = $(this).attr('data-id');
+    temp_color = 0;
+    temp_size = 0;
+    $.ajax({
+      url: '/product/quick-view',
+      data: {
+        'id': id
+      },
+      method: "GET",
+      success: function success(scs) {
+        var price = number_format(scs.price);
+        var price_sale = number_format(scs.price_sale);
+        var image;
+        var color = '';
+        var size_prd = '';
+        $('.addToCart').attr('data-id', id);
+        $('.product-name h1').html(scs.name);
+        $('.special-price span:nth-child(2)').html(price_sale + " VND");
+        $('.old-price span:nth-child(2)').html(price + " VND");
+        $.each(scs.image_default, function (key, value) {
+          image = value.image;
+        });
+        $('.large-image').html('<a href="' + image + '" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img class="zoom-img" src="' + image + '"> </a>');
+        $('.short-description p').html(scs.detail);
+        $.each(scs.color_prd, function (key, value) {
+          color += '<li class="color_main"><a class="color_prd ' + value.color + '"></a><input style="display: none" type="checkbox" class="check_color" data-color="' + value.name + '"></li>';
+        });
+        $('.color ul').html(color);
+        $.each(scs.size_prd, function (key, value) {
+          size_prd += '<li class="size_main"><a class="size_prd">' + value.size + '</a><input style="display: none" type="checkbox" name="size" class="rad_size" data-size="' + value.size + '"></li>';
+        });
+        $('.size ul').html(size_prd);
+      },
+      error: function error() {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!'
+        });
+      }
+    });
+  });
+  $(document).on('click', '.size_prd', function () {
+    $(this).parents('.size_main').find('.rad_size').click();
+  });
+  $(document).on('click', '.rad_size', function () {
+    if ($(this).prop('checked')) {
+      temp_size++;
+      size = $(this).attr('data-size');
+      $(this).parents('.size_main').find('.size_prd').addClass("size_checked");
+    } else {
+      temp_size--;
+      $(this).parents('.size_main').find('.size_prd').removeClass("size_checked");
+    }
+  });
+  $(document).on('click', '.color_prd', function () {
+    $(this).parents('.color_main').find('.check_color').click();
+  });
+  $(document).on('click', '.check_color', function () {
+    if ($(this).prop('checked')) {
+      temp_color++;
+      color = $(this).attr('data-color');
+      $(this).parents('.color_main').find('.color_prd').html('<i style="color: white;padding-left: 6px;padding-top: 6px;" class="fa fa-check" aria-hidden="true"></i>');
+    } else {
+      temp_color--;
+      $(this).parents('.color_main').find('.color_prd').html("");
+    }
+  });
+  $(document).on('click', '.addToCart', function (e) {
+    e.preventDefault();
+    var id = $(this).attr('data-id');
+    var quantity = $('#qty').val();
+
+    if (temp_size == 1 && temp_color == 1) {
+      $.ajax({
+        type: 'POST',
+        url: '/cart/add_to_cart',
+        data: {
+          'product_id': id,
+          'quantity': quantity,
+          'size': size,
+          'color': color
+        },
+        success: function success(scs) {
+          var total_price = number_format(scs.total_price);
+          $('#qty-product').text(scs.quantity);
+          $('#sub_total_price').text(total_price);
+          Swal.fire('Success!', 'Add to cart successfully!', 'success');
+        },
+        error: function error() {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!'
+          });
+        }
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!'
+      });
+    }
+  });
+
+  function number_format(nStr) {
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+
+    while (rgx.test(x1)) {
+      x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+
+    return x1 + x2;
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/seemore.js":
+/*!*********************************!*\
+  !*** ./resources/js/seemore.js ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  var temp = 0;
+  $('.see-more').click(function () {
+    temp += 18;
+    $.ajax({
+      type: 'get',
+      url: '/see-more-product',
+      data: {
+        'temp': temp
+      },
+      success: function success(scs) {
+        var products = '';
+        var price = '';
+        var price_sale = '';
+        var image;
+        $.each(scs.products, function (key, value) {
+          price = number_format(value.price);
+          price_sale = number_format(value.price_sale);
+          $.each(scs.image, function (key_image, value_image) {
+            if (value.id == value_image.product_id) {
+              image = value_image.image;
+            }
+          });
+          products += '<li class="item col-lg-4 col-md-4 col-sm-6 col-xs-12"><div class="product-item"><div class="item-inner"><div class="product-thumbnail"><div class="btn-quickview"> <a href="quick_view.html"><span>Quick View</span></a></div><a href="/single_product/' + value.id + '" class="product-item-photo"> <img style="width: 196.500px; height: 294.203px;" class="product-image-photo" src="' + image + '" alt=""></a></div><div class="pro-box-info"><div class="item-info"><div class="info-inner"><div class="item-title"> <a title="' + value.name + '" href="/single_product/' + value.id + '">' + value.name + ' </a> </div><div class="item-content"><div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div><div class="item-price"><div class="price-box"><p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> ' + price_sale + ' VND </span> </p><p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> ' + price + ' </span> </p></div></div></div></div></div><div class="box-hover"><div class="product-item-actions"><div class="pro-actions"><button class="action add-to-cart" type="button" title="Add to Cart"> <span>Add to Cart</span> </button></div><div class="add-to-links" data-role="add-to-links"><a href="wishlist.html" class="action add-to-wishlist" title="Add to Wishlist"> <span>Wishlist</span> </a><a href="compare.html" class="action add-to-compare" title="Add to Compare"> <span>Compare</span> </a></div></div></div></div></div></div></li>';
+        });
+        $('.products-grid').append(products);
+
+        if (scs.del == 1) {
+          $('.pagination-area').remove();
+        }
+      },
+      error: function error() {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!'
+        });
+      }
+    });
+  });
+
+  function number_format(nStr) {
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+
+    while (rgx.test(x1)) {
+      x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+
+    return x1 + x2;
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -531,9 +744,9 @@ $(document).ready(function () {
 /***/ }),
 
 /***/ 0:
-/*!*********************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/jsclient.js ./resources/js/app.js ./resources/js/logout.js ./resources/js/addToCart.js ./resources/js/login.js ./resources/sass/app.scss ***!
-  \*********************************************************************************************************************************************************************/
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/jsclient.js ./resources/js/app.js ./resources/js/logout.js ./resources/js/addToCart.js ./resources/js/login.js ./resources/js/loading.js ./resources/js/quickview.js ./resources/js/seemore.js ./resources/sass/app.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -542,6 +755,9 @@ __webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/app.js */"./resource
 __webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/logout.js */"./resources/js/logout.js");
 __webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/addToCart.js */"./resources/js/addToCart.js");
 __webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/login.js */"./resources/js/login.js");
+__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/loading.js */"./resources/js/loading.js");
+__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/quickview.js */"./resources/js/quickview.js");
+__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/seemore.js */"./resources/js/seemore.js");
 module.exports = __webpack_require__(/*! /home/chitt/Desktop/FW/resources/sass/app.scss */"./resources/sass/app.scss");
 
 

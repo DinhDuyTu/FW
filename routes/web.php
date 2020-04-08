@@ -16,6 +16,7 @@ Route::group(['namespace' => 'Client'], function () {
 
     Route::get('/list_products', "ProductController@index")->name('list_product');
     Route::get('/single_product/{id}', "ProductController@show")->name('single_product');
+    Route::get('/see-more-product', "ProductController@seeMore");
 
     Route::post('cart/add_to_cart', "CartController@addToCart")->name('add_to_cart');
     Route::get('cart/show_mini_cart', "CartController@showMiniCart")->name('show_mini_cart');

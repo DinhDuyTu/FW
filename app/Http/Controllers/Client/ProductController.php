@@ -32,7 +32,10 @@ class ProductController extends Controller
 
     public function index()
     {
-        return view('client.products.list_product');
+        $products = $this->productRepository->getAll()->take(18);
+        $image_default = $this->imageRepository->getAll()->where('image_default', '1');
+
+        return view('client.products.list_product', compact('products', 'image_default'));
     }
 
     public function show($id)
@@ -70,5 +73,26 @@ class ProductController extends Controller
         $size_prd = $product->sizes()->get();
 
         return response()->json(compact('name', 'price', 'price_sale', 'image_product', 'image_default', 'detail', 'color_prd', 'size_prd'), 200);
+    }
+
+    public function seeMore(Request $request)
+    {
+        $del = 0;
+        $temp = $request->temp + 18;
+        $count = $this->productRepository->getAll()->count();
+        if ($temp != null) {
+            $products = $this->productRepository->getAll()->take($temp);
+            $image = $this->imageRepository->getAll()->where('image_default', '1');
+            for ($i=0; $i < $temp-18; $i++) { 
+                unset($products[$i]);
+            }
+            if ($temp >= $count) {
+                $del = 1;
+            }
+        } else {
+            $products = [];
+        }
+
+        return response()->json(compact('products', 'del', 'image'), 200);
     }
 }
