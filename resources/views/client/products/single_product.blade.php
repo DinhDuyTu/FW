@@ -25,7 +25,7 @@
                             <a href="{{ $img->image }}" class="cloud-zoom" id="zoom1" rel="useWrapper: false, adjustY:0, adjustX:20"> <img class="zoom-img" src="{{ $img->image }}" alt="products"> </a>
                             @endforeach
                         </div>
-                        <div class="flexslider flexslider-thumb">
+                        <div class="flexslider flexslider-thumb" style="margin-left: -50;">
                             <ul class="previews-list slides">
                                 @foreach ($image_product as $image)
                                     <li>

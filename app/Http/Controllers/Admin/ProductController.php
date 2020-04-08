@@ -43,7 +43,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = $this->productRepository->getLatest()->get();
+        $products = $this->productRepository->orderBy('id', 'desc');
         $images = $this->imageRepository->getAll()->where('image_default', '1');
 
         return view('admin.products.index', compact('products', 'images'));

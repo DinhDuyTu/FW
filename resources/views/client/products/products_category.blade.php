@@ -8,7 +8,7 @@
                             <div class="item-inner">
                                 <div class="product-thumbnail">
                                     <div class="icon-sale-label sale-left">Sale</div>
-                                    <div class="btn-quickview"> <a href="quick_view.html"><span>Quick View</span></a></div>
+                                <div class="btn-quickview" data-id="{{ $prd->id }}"> <a class="btn" data-toggle="modal" data-target="#quick-view-modal"><span>Quick View</span></a></div>
                                     @foreach ($images_defult as $image)
                                         @if ($image->product_id == $prd->id)
                                             <a href="{{ route('single_product', $prd->id) }}" class="product-item-photo"> <img class="product-image-photo" src="{{ $image->image }}" alt=""></a>

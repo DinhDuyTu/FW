@@ -39,7 +39,7 @@
                                                         <input class="input-quantity" class="form-control input-sm" type="text" value="{{ $cart['product_num'] }}" data-id="{{ $cart['product_id'] }}" data-color="{{ $cart['color'] }}" data-size="{{ $cart['size'] }}">
                                                     </td>
                                                     <td class="summed-price"><span>{{ number_format($cart['num_price']) }} VND</span></td>
-                                                    <td class="action"><a><i class="icon-close deleteCart" data-id="{{ $cart['product_id'] }}"></i></a></td>
+                                                    <td class="action"><a><i class="icon-close deleteCart" data-id="{{ $cart['product_id'] }}" data-color="{{ $cart['color'] }}" data-size="{{ $cart['size'] }}"></i></a></td>
                                                 </tr>
                                             @endforeach
                                         @else

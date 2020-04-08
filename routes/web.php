@@ -35,6 +35,8 @@ Route::group(['namespace' => 'Client'], function () {
     Route::get('user/{id}/profile', "UserController@show")->name('user.profile');
     Route::get('user/{id}/order-of-user', "UserController@order_of_user")->name('user.order');
     Route::post('user/create', "UserController@store")->name('user.create');
+
+    Route::get('product/quick-view', 'ProductController@quickView');
 });
 
 Auth::routes();

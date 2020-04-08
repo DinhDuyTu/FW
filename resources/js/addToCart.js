@@ -136,6 +136,8 @@ $(document).ready(function () {
     $(document).on('click', '.deleteCart', function (e) {
         e.preventDefault();
         let product_id = $(this).attr('data-id');
+        let size = $(this).attr('data-size');
+        let color = $(this).attr('data-color');
         let _this = $(this);
         Swal.fire({
         title: 'Are you sure?',
@@ -151,7 +153,9 @@ $(document).ready(function () {
                     type: 'POST',
                     url: '/cart/delete',
                     data: {
-                        'product_id': product_id
+                        'product_id': product_id,
+                        'size' : size,
+                        'color' : color
                     },
                     success: function (scs) {
                         let total_price = number_format(scs.total_price);

@@ -139,10 +139,12 @@ class CartController extends Controller
 
     public function delete(Request $request)
     {
+        $color = $request->color;
+        $size = $request->size;
         $product_id = $request->product_id;
         $cart = unserialize($request->cookie('cart'));
-        if ($cart[$product_id]) {
-            unset($cart[$product_id]);
+        if ($cart[$product_id.$size.$color]) {
+            unset($cart[$product_id.$size.$color]);
         }
         $cookie = cookie('cart', serialize($cart), 60*30);
         $carts = unserialize($cookie->getValue());

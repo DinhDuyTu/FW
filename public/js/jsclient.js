@@ -224,6 +224,8 @@ $(document).ready(function () {
   $(document).on('click', '.deleteCart', function (e) {
     e.preventDefault();
     var product_id = $(this).attr('data-id');
+    var size = $(this).attr('data-size');
+    var color = $(this).attr('data-color');
 
     var _this = $(this);
 
@@ -241,7 +243,9 @@ $(document).ready(function () {
           type: 'POST',
           url: '/cart/delete',
           data: {
-            'product_id': product_id
+            'product_id': product_id,
+            'size': size,
+            'color': color
           },
           success: function success(scs) {
             var total_price = number_format(scs.total_price);

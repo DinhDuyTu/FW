@@ -55,4 +55,20 @@ class ProductController extends Controller
             //throw $th;
         }
     }
+
+    public function quickView(Request $request)
+    {
+        $product_id = $request->id;
+        $product = $this->productRepository->find($product_id);
+        $name = $product->name;
+        $price = $product->price;
+        $price_sale = $product->price_sale;
+        $image_product = $this->imageRepository->getAll()->where('product_id', $product_id);
+        $image_default = $image_product->where('image_default', '1');
+        $detail = $product->detail;
+        $color_prd = $product->colors()->get();
+        $size_prd = $product->sizes()->get();
+
+        return response()->json(compact('name', 'price', 'price_sale', 'image_product', 'image_default', 'detail', 'color_prd', 'size_prd'), 200);
+    }
 }

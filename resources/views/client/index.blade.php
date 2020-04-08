@@ -11,7 +11,9 @@
                             <ul class="nav home-nav-tabs home-product-tabs">
                                 <li class="active"><a href="#all" data-toggle="tab" aria-expanded="false">All</a></li>
                                 @foreach ($categories as $category)
-                                    <li> <a href="#{{ $category->name }}" data-toggle="tab" aria-expanded="false">{{ $category->name }}</a> </li>
+                                    @if ($category->id <= 3)
+                                        <li> <a href="#{{ $category->name }}" data-toggle="tab" aria-expanded="false">{{ $category->name }}</a> </li>
+                                    @endif
                                 @endforeach
                             </ul>
                             <!-- /.nav-tabs -->
@@ -55,268 +57,14 @@
                         </div>
                     </div>
                     @include('client.products.featured_products')
-
-                    <!-- Latest news start -->
-
-                    <div id="latest-news" class="news">
-                        <div class="page-header">
-                            <h2>Latest news</h2>
-                        </div>
-                        <div class="slider-items-products">
-                            <div id="latest-news-slider" class="product-flexslider hidden-buttons">
-                                <div class="slider-items slider-width-col6">
-
-                                    <!-- Item -->
-                                    <div class="item">
-                                        <div class="jtv-blog">
-                                            <div class="blog-img">
-                                                <a href="single_post.html"> <img class="primary-img" src="{{ asset('bower_components/Asset-FW-Client/images/blog-img1.jpg') }}" alt=""></a> <span class="moretag"></span> </div>
-                                            <div class="blog-content-jtv">
-                                                <h2><a href="single_post.html">Sed do eiusmod sit amet</a></h2>
-                                                <span><i class="fa fa-calendar"></i>Jan, 20, 2016</span><span class="blog-likes"><i class="fa fa-thumbs-up"></i>149</span> <span class="blog-comments"><i class="fa fa-comment"></i>80</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Item -->
-                                    <div class="item">
-                                        <div class="jtv-blog">
-                                            <div class="blog-img">
-                                                <a href="single_post.html"><img class="primary-img" src="{{ asset('bower_components/Asset-FW-Client/images/blog-img2.jpg') }}" alt=""></a>
-                                            </div>
-                                            <div class="blog-content-jtv">
-                                                <h2><a href="single_post.html">Lorem ipsum dolor sit amet</a></h2>
-                                                <span><i class="fa fa-calendar"></i>May, 20, 2016</span><span class="blog-likes"><i class="fa fa-thumbs-up"></i>55</span> <span class="blog-comments"><i class="fa fa-comment"></i>100</span>
-                                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Item -->
-                                    <div class="item">
-                                        <div class="jtv-blog">
-                                            <div class="blog-img">
-                                                <a href="single_post.html"><img class="primary-img" src="{{ asset('bower_components/Asset-FW-Client/images/blog-img3.jpg') }}" alt=""></a>
-                                            </div>
-                                            <div class="blog-content-jtv">
-                                                <h2><a href="single_post.html">Integer scelerisque diam vitae</a></h2>
-                                                <span><i class="fa fa-calendar"></i>Mar, 25, 2016</span><span class="blog-likes"><i class="fa fa-thumbs-up"></i>149</span> <span class="blog-comments"><i class="fa fa-comment"></i>80</span>
-                                                <p>Ut sit amet turpis. In est arcu, sollicitudin eu, vehicula venenatis. Maecenas eu.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Item -->
-
-                                    <!-- Item -->
-                                    <div class="item">
-                                        <div class="jtv-blog">
-                                            <div class="blog-img">
-                                                <a href="single_post.html"> <img class="primary-img" src="{{ asset('bower_components/Asset-FW-Client/images/blog-img1.jpg') }}" alt=""></a> <span class="moretag"></span> </div>
-                                            <div class="blog-content-jtv">
-                                                <h2><a href="single_post.html">Sed do eiusmod sit amet</a></h2>
-                                                <span><i class="fa fa-calendar"></i>Sep, 13, 2016</span><span class="blog-likes"><i class="fa fa-thumbs-up"></i>49</span> <span class="blog-comments"><i class="fa fa-comment"></i>5</span>
-                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Item -->
-
-                                    <!-- Item -->
-                                    <div class="item">
-                                        <div class="jtv-blog">
-                                            <div class="blog-img">
-                                                <a href="single_post.html"> <img class="primary-img" src="{{ asset('bower_components/Asset-FW-Client/images/blog-img3.jpg') }}" alt=""></a> <span class="moretag"></span> </div>
-                                            <div class="blog-content-jtv">
-                                                <h2><a href="single_post.html">Sed do eiusmod sit amet</a></h2>
-                                                <span><i class="fa fa-calendar"></i>Jun, 29, 2016</span><span class="blog-likes"><i class="fa fa-thumbs-up"></i>39</span> <span class="blog-comments"><i class="fa fa-comment"></i>99</span>
-                                                <p>Lorem ipsum dolor sit amet, adipiscing elit, sed diam nonummy nibh euismod.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Item -->
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <aside class="sidebar col-md-3 col-sm-4 col-xs-12 col-sm-pull-8 col-md-pull-9">
-                    <div class="best-sale-product">
-                        <div class="sidebar-bar-title">
-                            <h3>Best sale of week</h3>
-                        </div>
-                        <div class="block-content">
-                            <div class="slider-items-products">
-                                <div id="best-sale-slider" class="product-flexslider hidden-buttons">
-                                    <div class="slider-items slider-width-col4">
-                                        <div class="product-item">
-                                            <div class="best-sale-item">
-                                                <div class="products-block-left">
-                                                    <a href="single_product.html" title="Sample Product" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img15.jpg') }}" alt="Sample Product "></a>
-                                                </div>
-                                                <div class="products-block-right">
-                                                    <p class="product-name"> <a href="single_product.html">Lorem ipsum dolor sit amet elit</a> </p>
-                                                    <span class="price">$19.99</span>
-                                                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
-                                                </div>
-                                            </div>
-                                            <div class="best-sale-item">
-                                                <div class="products-block-left">
-                                                    <a href="single_product.html" title="Sample Product" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img14.jpg') }}" alt="Sample Product "></a>
-                                                </div>
-                                                <div class="products-block-right">
-                                                    <p class="product-name"> <a href="single_product.html">Consectetur utes anet adipisicing elit</a> </p>
-                                                    <span class="price">$89.99</span>
-                                                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                </div>
-                                            </div>
-                                            <div class="best-sale-item">
-                                                <div class="products-block-left">
-                                                    <a href="single_product.html" title="Sample Product" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img13.jpg') }}" alt="Sample Product "></a>
-                                                </div>
-                                                <div class="products-block-right">
-                                                    <p class="product-name"> <a href="single_product.html">Consectetur utes anet adipisicing elit</a> </p>
-                                                    <span class="price">$89.99</span>
-                                                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                </div>
-                                            </div>
-                                            <div class="best-sale-item">
-                                                <div class="products-block-left">
-                                                    <a href="single_product.html" title="Sample Product" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img12.jpg') }}" alt="Sample Product "></a>
-                                                </div>
-                                                <div class="products-block-right">
-                                                    <p class="product-name"> <a href="single_product.html">Consectetur utes anet adipisicing elit</a> </p>
-                                                    <span class="price">$89.99</span>
-                                                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="product-item">
-                                            <div class="best-sale-item">
-                                                <div class="products-block-left">
-                                                    <a href="single_product.html" title="Sample Product" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img10.jpg') }}" alt="Sample Product "></a>
-                                                </div>
-                                                <div class="products-block-right">
-                                                    <p class="product-name"> <a href="single_product.html">Lorem ipsum dolor sit amet elit</a> </p>
-                                                    <span class="price">$19.99</span>
-                                                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
-                                                </div>
-                                            </div>
-                                            <div class="best-sale-item">
-                                                <div class="products-block-left">
-                                                    <a href="single_product.html" title="Sample Product" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img09.jpg') }}" alt="Sample Product "></a>
-                                                </div>
-                                                <div class="products-block-right">
-                                                    <p class="product-name"> <a href="single_product.html">Consectetur utes anet adipisicing elit</a> </p>
-                                                    <span class="price">$89.99</span>
-                                                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                </div>
-                                            </div>
-                                            <div class="best-sale-item">
-                                                <div class="products-block-left">
-                                                    <a href="single_product.html" title="Sample Product" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img08.jpg') }}" alt="Sample Product "></a>
-                                                </div>
-                                                <div class="products-block-right">
-                                                    <p class="product-name"> <a href="single_product.html">Consectetur utes anet adipisicing elit</a> </p>
-                                                    <span class="price">$89.99</span>
-                                                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                </div>
-                                            </div>
-                                            <div class="best-sale-item">
-                                                <div class="products-block-left">
-                                                    <a href="single_product.html" title="Sample Product" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img07.jpg') }}" alt="Sample Product "></a>
-                                                </div>
-                                                <div class="products-block-right">
-                                                    <p class="product-name"> <a href="single_product.html">Consectetur utes anet adipisicing elit</a> </p>
-                                                    <span class="price">$89.99</span>
-                                                    <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Hot deal -->
-                    <div class="hot-products">
-                        <div class="hot-deal"> <span class="title-text">Hot deal</span>
-                            <ul class="products-grid">
-                                <li class="item">
-                                    <div class="product-item">
-                                        <div class="item-inner">
-                                            <div class="product-thumbnail">
-                                                <div class="icon-hot-label hot-right">Hot</div>
-                                                <div class="btn-quickview"> <a href="quick_view.html"><span>Quick View</span></a></div>
-                                                <a href="single_product.html" class="product-item-photo"> <img class="product-image-photo" src="{{ asset('bower_components/Asset-FW-Client/images/products/img01.jpg') }}" alt=""></a>
-                                                <div class="jtv-box-timer">
-                                                    <div class="countbox_1 jtv-timer-grid"></div>
-                                                </div>
-                                            </div>
-                                            <div class="pro-box-info">
-                                                <div class="item-info">
-                                                    <div class="info-inner">
-                                                        <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
-                                                        <div class="item-content">
-                                                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                                            <div class="item-price">
-                                                                <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="box-hover">
-                                                    <div class="product-item-actions">
-                                                        <div class="pro-actions">
-                                                            <button class="action add-to-cart" type="button" title="Add to Cart"> <span>Add to Cart</span> </button>
-                                                        </div>
-                                                        <div class="add-to-links" data-role="add-to-links">
-                                                            <a href="wishlist.html" class="action add-to-wishlist" title="Add to Wishlist"> <span>Wishlist</span> </a>
-                                                            <a href="compare.html" class="action add-to-compare" title="Add to Compare"> <span>Compare</span> </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!--Hot deal -->
+                    @include('client.products.best_sale_product')
+                    @include('client.products.hot_product')
                     <div class="banner4">
                         <a href="#"><img alt="banner" src="{{ asset('bower_components/Asset-FW-Client/images/top-banner1.jpg') }}"></a>
                     </div>
-                    <div class="block special-product">
-                        <div class="sidebar-bar-title">
-                            <h3>Special Products</h3>
-                        </div>
-                        <div class="block-content">
-                            <ul>
-                                <li class="item">
-                                    <div class="products-block-left">
-                                        <a href="single_product.html" title="Sample Product" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img01.jpg') }}" alt="Sample Product "></a>
-                                    </div>
-                                    <div class="products-block-right">
-                                        <p class="product-name"> <a href="single_product.html">Lorem ipsum dolor sit amet elit</a> </p>
-                                        <span class="price">$19.99</span>
-                                        <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> </div>
-                                    </div>
-                                </li>
-                                <li class="item">
-                                    <div class="products-block-left">
-                                        <a href="single_product.html" title="Sample Product" class="product-image"><img src="{{ asset('bower_components/Asset-FW-Client/images/products/img02.jpg') }}" alt="Sample Product "></a>
-                                    </div>
-                                    <div class="products-block-right">
-                                        <p class="product-name"> <a href="single_product.html">Consectetur utes anet adipisicing elit</a> </p>
-                                        <span class="price">$89.99</span>
-                                        <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Testimonials Box -->
+                    @include('client.products.special_product')
                     <div class="testimonials">
                         <div class="slider-items-products">
                             <div id="testimonials-slider" class="product-flexslider hidden-buttons home-testimonials">
@@ -371,6 +119,7 @@
             </div>
         </div>
     </div>
+    @include('client.reviews.review')
     <div class="jtv-category-area">
         <div class="container">
             <div class="row">
@@ -409,7 +158,8 @@
                                         <div class="button-cart">
                                             <button><i class="fa fa-shopping-cart"></i></button>
                                         </div>
-                                        <a href="#" data-toggle="modal" data-target="#productModal"><i class="fa fa-search"></i></a> <a href="#"><i class="fa fa-heart"></i></a> </div>
+                                        <a href="#" data-toggle="modal" data-target="#productModal"><i class="fa fa-search"></i></a> <a href="#"><i class="fa fa-heart"></i></a> 
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -428,7 +178,8 @@
                                         <div class="button-cart">
                                             <button><i class="fa fa-shopping-cart"></i></button>
                                         </div>
-                                        <a href="#" data-toggle="modal" data-target="#productModal"><i class="fa fa-search"></i></a> <a href="#"><i class="fa fa-heart"></i></a> </div>
+                                        <a href="#" data-toggle="modal" data-target="#productModal"><i class="fa fa-search"></i></a> <a href="#"><i class="fa fa-heart"></i></a> 
+                                    </div>
                                 </div>
                             </div>
                         </div>

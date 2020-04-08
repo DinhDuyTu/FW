@@ -26,6 +26,11 @@ abstract class EloquentRepository implements RepositoryInterface
     {
         return $this->_model->all();
     }
+
+    public function orderBy($field, $type)
+    {
+        return $this->_model->orderBy($field, $type)->get();
+    }
     
     public function get()
     {
