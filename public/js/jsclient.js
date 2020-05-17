@@ -165,9 +165,6 @@ $(document).ready(function () {
       });
     }
   });
-  $('.addToCartNoQty').click(function (e) {
-    alert('adwdw');
-  });
   $('.mini-cart').hover(function () {
     $.ajax({
       type: 'GET',
@@ -506,7 +503,7 @@ $(document).ready(function () {
     }
   });
   $(document).on('click', '.btn-submit-register', function () {
-    var name = $(this).val();
+    var name = $('login_name').val();
     name = name.trim();
 
     if (!name) {
@@ -753,15 +750,15 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/duytu/Desktop/FW/resources/js/jsclient.js */"./resources/js/jsclient.js");
-__webpack_require__(/*! /home/duytu/Desktop/FW/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /home/duytu/Desktop/FW/resources/js/logout.js */"./resources/js/logout.js");
-__webpack_require__(/*! /home/duytu/Desktop/FW/resources/js/addToCart.js */"./resources/js/addToCart.js");
-__webpack_require__(/*! /home/duytu/Desktop/FW/resources/js/login.js */"./resources/js/login.js");
-__webpack_require__(/*! /home/duytu/Desktop/FW/resources/js/loading.js */"./resources/js/loading.js");
-__webpack_require__(/*! /home/duytu/Desktop/FW/resources/js/quickview.js */"./resources/js/quickview.js");
-__webpack_require__(/*! /home/duytu/Desktop/FW/resources/js/seemore.js */"./resources/js/seemore.js");
-module.exports = __webpack_require__(/*! /home/duytu/Desktop/FW/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/jsclient.js */"./resources/js/jsclient.js");
+__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/logout.js */"./resources/js/logout.js");
+__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/addToCart.js */"./resources/js/addToCart.js");
+__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/login.js */"./resources/js/login.js");
+__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/loading.js */"./resources/js/loading.js");
+__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/quickview.js */"./resources/js/quickview.js");
+__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/seemore.js */"./resources/js/seemore.js");
+module.exports = __webpack_require__(/*! /home/chitt/Desktop/FW/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

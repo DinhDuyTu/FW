@@ -11,7 +11,10 @@
 |
 */
 
-Route::group(['namespace' => 'Client'], function () {
+Route::group([
+    'namespace' => 'Client',
+    'middleware' =>  'verified'
+], function () {
     Route::get('/', "HomeController@index")->name('home'); 
 
     Route::get('/list_products', "ProductController@index")->name('list_product');
@@ -40,4 +43,4 @@ Route::group(['namespace' => 'Client'], function () {
     Route::get('product/quick-view', 'ProductController@quickView');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);

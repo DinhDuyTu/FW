@@ -37,7 +37,7 @@ $(document).ready(function () {
     })
 
     $(document).on('click', '.btn-submit-register', function () {
-        let name = $(this).val();
+        let name = $('login_name').val();
         name = name.trim();
         if (!name) {
             $('.alert-name').html('<p style="color: red; margin-left: 10px "><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Name is not null!</p>');
