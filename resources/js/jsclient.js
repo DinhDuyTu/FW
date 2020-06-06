@@ -75,6 +75,52 @@ $(document).ready(function () {
         });
         $(this).parents('.tr-main-wishlist').remove();
     });
+
+    $(document).on('click', '.icon-add-to-wishlist', function () {
+        let prd_id = $(this).attr('data-prd-id');
+        if (prd_id == null) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+                footer: '<a href>Why do I have this issue?</a>'
+            })
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: '/single_product/add_to_wishlist',
+                data: {
+                    'product_id' : prd_id
+                },
+                success: function (scs) {
+                    if (scs.status == "added") {
+                        $('a.icon-add-to-wishlist[data-prd-id="' + prd_id + '"]').addClass('add-to-wishlist-active')
+                        Swal.fire(
+                            'Success!',
+                            'Add to Wishlist successfully!',
+                            'success'
+                        )
+                    } else {
+                        $('a.icon-add-to-wishlist[data-prd-id="' + prd_id + '"]').removeClass('add-to-wishlist-active')
+                        Swal.fire(
+                            'Success!',
+                            'Delete to Wishlist successfully!',
+                            'success'
+                        )
+                    }
+                    $('.wishlist-count').text(scs.wishlistOfUser);
+                },
+                error: function () {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                        footer: '<a href>Why do I have this issue?</a>'
+                    })
+                }
+            })
+        }
+    })
 });
 
 $(window).on('load', function () {

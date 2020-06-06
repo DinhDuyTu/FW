@@ -33,12 +33,40 @@ class HomeController extends Controller
     public function index()
     {
         $categories = $this->categoryRepository->getAll()->where('parent_id', 0);
-        $products = $this->productRepository->getAll();
+        $list_products = $this->productRepository->getAll();
         $images_defult = $this->imageRepository->getAll()->where('image_default', 1);
-        $products_sale = $products->where('price_sale', '<>', 0)->take(10);
-        $featured_products = $products->where('is_highlight', '1')->take(10);
-        $wishlists = $this->wishlistRepository->getAll()->where('user_id', Auth::user()->id);
-        // dd($wishlist);
+        $products_sale = $list_products->where('price_sale', '<>', 0)->take(10);
+        $featured_products = $list_products->where('is_highlight', '1')->take(10);
+        if (Auth::check()) {
+            $wishlists = $this->wishlistRepository->getAll()->where('user_id', Auth::user()->id);
+        } else {
+            $wishlists = 0;
+        }
+
+        $products = array();
+        foreach ($list_products as $key => $product) {
+            $products[$key]['id']           = $product->id;
+            $products[$key]['category_id']  = $product->category_id;
+            $products[$key]['name']         = $product->name;
+            $products[$key]['product_code'] = $product->product_code;
+            $products[$key]['price']        = $product->price;
+            $products[$key]['price_sale']   = $product->price_sale;
+            $products[$key]['quantity']     = $product->quantity;
+            $products[$key]['is_highlight'] = $product->is_highlight;
+            $products[$key]['detail']       = $product->detail;
+            $products[$key]['description']  = $product->description;
+            if (Auth::check()) {
+                $products[$key]['wishlist'] =   count($this->wishlistRepository
+                                                     ->getAll()
+                                                     ->where('user_id', Auth::user()->id)
+                                                     ->where('product_id', $product->id));
+            } else {
+                $products[$key]['wishlist'] = 0;
+            }
+            
+        }
+        
+        // dd($products);
 
         return view('client.index', compact('categories', 'products', 'images_defult', 'products_sale', 'featured_products', 'wishlists'));   
     }

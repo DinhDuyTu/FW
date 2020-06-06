@@ -389,6 +389,45 @@ $(document).ready(function () {
     });
     $(this).parents('.tr-main-wishlist').remove();
   });
+  $(document).on('click', '.icon-add-to-wishlist', function () {
+    var prd_id = $(this).attr('data-prd-id');
+
+    if (prd_id == null) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href>Why do I have this issue?</a>'
+      });
+    } else {
+      $.ajax({
+        type: 'POST',
+        url: '/single_product/add_to_wishlist',
+        data: {
+          'product_id': prd_id
+        },
+        success: function success(scs) {
+          if (scs.status == "added") {
+            $('a.icon-add-to-wishlist[data-prd-id="' + prd_id + '"]').addClass('add-to-wishlist-active');
+            Swal.fire('Success!', 'Add to Wishlist successfully!', 'success');
+          } else {
+            $('a.icon-add-to-wishlist[data-prd-id="' + prd_id + '"]').removeClass('add-to-wishlist-active');
+            Swal.fire('Success!', 'Delete to Wishlist successfully!', 'success');
+          }
+
+          $('.wishlist-count').text(scs.wishlistOfUser);
+        },
+        error: function error() {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href>Why do I have this issue?</a>'
+          });
+        }
+      });
+    }
+  });
 });
 $(window).on('load', function () {
   $.ajax({
@@ -750,15 +789,15 @@ $(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/jsclient.js */"./resources/js/jsclient.js");
-__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/logout.js */"./resources/js/logout.js");
-__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/addToCart.js */"./resources/js/addToCart.js");
-__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/login.js */"./resources/js/login.js");
-__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/loading.js */"./resources/js/loading.js");
-__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/quickview.js */"./resources/js/quickview.js");
-__webpack_require__(/*! /home/chitt/Desktop/FW/resources/js/seemore.js */"./resources/js/seemore.js");
-module.exports = __webpack_require__(/*! /home/chitt/Desktop/FW/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Chitt\Desktop\FW\resources\js\jsclient.js */"./resources/js/jsclient.js");
+__webpack_require__(/*! C:\Users\Chitt\Desktop\FW\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\Chitt\Desktop\FW\resources\js\logout.js */"./resources/js/logout.js");
+__webpack_require__(/*! C:\Users\Chitt\Desktop\FW\resources\js\addToCart.js */"./resources/js/addToCart.js");
+__webpack_require__(/*! C:\Users\Chitt\Desktop\FW\resources\js\login.js */"./resources/js/login.js");
+__webpack_require__(/*! C:\Users\Chitt\Desktop\FW\resources\js\loading.js */"./resources/js/loading.js");
+__webpack_require__(/*! C:\Users\Chitt\Desktop\FW\resources\js\quickview.js */"./resources/js/quickview.js");
+__webpack_require__(/*! C:\Users\Chitt\Desktop\FW\resources\js\seemore.js */"./resources/js/seemore.js");
+module.exports = __webpack_require__(/*! C:\Users\Chitt\Desktop\FW\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

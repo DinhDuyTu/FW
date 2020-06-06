@@ -27,53 +27,7 @@
                         </div>
                     </div>
                     <div class="space15"></div>
-                    <table class="table table-striped table-hover table-bordered" id="editable-sample">
-                        <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th style="width: 110px;">Avatar</th>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>Address</th>
-                                <th>Role</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($users as $key => $user)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>
-                                        <a href="{{ route('admin.users.edit', $user->id) }}">
-                                            <img style="height: 100px;" src="{{ $user->avatar }}" alt="">
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <ul>
-                                            <li><a href="{{ route('admin.users.edit', $user->id) }}"><b>Name: {{ $user->name }}</b></a></li>
-                                            <li><a href="{{ route('admin.users.edit', $user->id) }}"><b>Email: {{ $user->email }}</b></a></li>
-                                        </ul>
-                                    </td>
-                                    <td class="center">{{ $user->phone }}</td>
-                                    <td class="center">{{ $user->address }}</td>
-                                    <td class="center">
-                                        @if ($user->role_id == 0)
-                                            Guest
-                                        @elseif ($user->role_id == 1)
-                                            Manager
-                                        @elseif ($user->role_id == 2)
-                                            Admin
-                                        @elseif ($user->role_id == 3)
-                                            Supper Admin
-                                        @endif
-                                    </td>
-                                    <td><a class="edit" href="javascript:;">Edit</a></td>
-                                    <td><a class="delete" href="javascript:;">Delete</a></td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+
                 </div>
             </div>
         </section>

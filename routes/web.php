@@ -13,7 +13,7 @@
 
 Route::group([
     'namespace' => 'Client',
-    'middleware' =>  'verified'
+    // 'middleware' =>  'verified'
 ], function () {
     Route::get('/', "HomeController@index")->name('home'); 
 

@@ -43,7 +43,7 @@ class WithlistController extends Controller
     public function addToWithlist(Request $request)
     {   
         $status = "";
-        $user_id = $request->user_id;
+        $user_id = Auth::user()->id;
         $product_id =$request->product_id;
         $attr = [
             'user_id' => $user_id,

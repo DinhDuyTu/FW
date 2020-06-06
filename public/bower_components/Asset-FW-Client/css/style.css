@@ -7636,6 +7636,7 @@ button.button.btn-proceed-checkout span {
 
 .product-item .item-inner:hover .pro-box-info .box-hover .add-to-links .action.add-to-wishlist-active {
 	margin-left: -97px;
+	cursor: pointer;
 }
 
 .product-item .item-inner .pro-box-info .box-hover .add-to-links .action.add-to-wishlist-active:before {
