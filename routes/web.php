@@ -41,6 +41,7 @@ Route::group([
     Route::post('user/create', "UserController@store")->name('user.create');
 
     Route::get('product/quick-view', 'ProductController@quickView');
+    Route::get('ajax/get_product_by_category', 'ProductController@getProductByCategory');
 });
 
 Auth::routes(['verify' => true]);

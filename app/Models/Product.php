@@ -53,4 +53,9 @@ class Product extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+
+    public function histories()
+    {
+        return $this->hasMany(History::class);
+    }
 }

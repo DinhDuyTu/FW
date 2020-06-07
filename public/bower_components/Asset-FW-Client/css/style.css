@@ -7643,3 +7643,6 @@ button.button.btn-proceed-checkout span {
 	content: "\f004";
 	color: red;
 }
+a.active.see-more {
+	cursor: pointer;
+}

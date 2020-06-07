@@ -9,6 +9,9 @@ use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\Image\ImageRepositoryInterface;
 use App\Repositories\Wishlist\WishlistRepositoryInterface;
 use Auth;
+use App\Models\Category;
+use App\Models\History;
+use DB;
 
 class ProductController extends Controller
 {
@@ -34,8 +37,17 @@ class ProductController extends Controller
     {
         $products = $this->productRepository->getAll()->take(18);
         $image_default = $this->imageRepository->getAll()->where('image_default', '1');
-
-        return view('client.products.list_product', compact('products', 'image_default'));
+        // $categories = $this->categoryRepository->getAll();
+        $categories = Category::latest()->with('products')->get();
+        $list_products_history = array();
+        if (Auth::check()) {
+            $list_products_history = History::latest()
+                                ->where('user_id', Auth::user()->id)
+                                ->with('products')
+                                ->get();
+        }
+        // dd($history);
+        return view('client.products.list_product', compact('products', 'image_default', 'categories', 'list_products_history'));
     }
 
     public function show($id)
@@ -94,5 +106,24 @@ class ProductController extends Controller
         }
 
         return response()->json(compact('products', 'del', 'image'), 200);
+    }
+
+    public function getProductByCategory(Request $request)
+    {
+        $list_products = $this->productRepository->getAll()->where('category_id', $request->category_id);
+        $products = array();
+        foreach ($list_products as $key => $product) {
+            $products[$key]['id'] = $product->id;
+            $products[$key]['category_id'] = $product->category_id;
+            $products[$key]['name'] = $product->name;
+            $products[$key]['price'] = $product->price;
+            $products[$key]['price_sale'] = $product->price_sale;
+            $image_product = $this->imageRepository->getAll()->where('image_default', 1)->where('product_id', $product->id);
+            foreach ($image_product as $value) {
+                $products[$key]['image'] = $value->image;
+            }
+        }
+
+        return response()->json($products, 200);
     }
 }

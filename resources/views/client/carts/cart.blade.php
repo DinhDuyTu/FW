@@ -120,12 +120,12 @@
                                                                 <input name="phone" type="hidden" value="{{ Auth::user()->phone }}">
                                                                 <label>Note</label>
                                                                 <textarea style="width: 100%; height: 100px;" name="note" id="" cols="30" rows="30"></textarea>
-                                                                <button type="button" class="btn-login use_other_information">Use other information</button>
+                                                                <button type="submit" class="btn-login">Checkout</button>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <div>
-                                                                <button type="submit" class="btn-login">Checkout</button>
+                                                                <button style="background: #000000;" type="button" class="btn-login use_other_information">Use other information</button>
                                                             </div>
                                                         </div>
                                                     </form>

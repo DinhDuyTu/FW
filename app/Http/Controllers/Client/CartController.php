@@ -10,6 +10,7 @@ use App\Repositories\Image\ImageRepositoryInterface;
 use App\Repositories\Order\OrderRepositoryInterface;
 use App\Repositories\OrderDetail\OrderDetailRepositoryInterface;
 use Auth;
+use Mail;
 
 class CartController extends Controller
 {
@@ -183,6 +184,25 @@ class CartController extends Controller
                 ];
                 $this->orderdetailRepository->create($attr);
             }
+            
+            // dd($cart);
+            $prd = $this->productRepository->find($attr['product_id']);
+            $data = [
+                //user
+                'user_id' => Auth::user()->id,
+                'name' => $request->get('name'),
+                'phone' => $request->get('phone'),
+                'email' => $request->get('email'),
+                'address' => $request->get('address'),
+                'note' => $request->get('note'),
+                //product
+                'carts' => $cart
+            ];
+            // dd($data);
+            Mail::send('client.mails.mail-order', $data, function ($message) {
+                $message->to('chittchannels@gmail.com', 'Notification Order');
+                $message->subject('Mail Order');
+            });
             $cookie  = cookie('cart', null);
 
             return redirect()->back()->withCookie($cookie);
