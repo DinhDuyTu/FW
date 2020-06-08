@@ -11,6 +11,7 @@ use App\Repositories\Order\OrderRepositoryInterface;
 use App\Repositories\OrderDetail\OrderDetailRepositoryInterface;
 use Auth;
 use Mail;
+use App\Models\Category;
 
 class CartController extends Controller
 {
@@ -37,6 +38,7 @@ class CartController extends Controller
 
     public function index(Request $request)
     {
+        $categoriesBySearch = Category::latest()->with('products')->get();
         $carts = unserialize($request->cookie('cart'));
         $total_price = 0;
         if ($carts != false) {
@@ -44,7 +46,7 @@ class CartController extends Controller
                 $total_price = $total_price + $cart['num_price'];
             }
         }
-        return view('client.carts.cart', compact('carts', 'total_price'));
+        return view('client.carts.cart', compact('carts', 'total_price', 'categoriesBySearch'));
     }
 
     public function addToCart(Request $request)

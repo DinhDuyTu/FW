@@ -9,6 +9,7 @@ use App\Repositories\User\UserRepositoryInterface;
 use App\Repositories\Order\OrderRepositoryInterface;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\Image\ImageRepositoryInterface;
+use App\Models\Category;
 
 class UserController extends Controller
 {
@@ -75,8 +76,9 @@ class UserController extends Controller
     public function show($id)
     {
         $user = $this->userRepository->find($id);
+        $categoriesBySearch = Category::latest()->with('products')->get();
 
-        return view('client.profiles.profile', compact('user'));
+        return view('client.profiles.profile', compact('user', 'categoriesBySearch'));
     }
 
     public function order_of_user($id)

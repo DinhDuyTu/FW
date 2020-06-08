@@ -42,6 +42,8 @@ Route::group([
 
     Route::get('product/quick-view', 'ProductController@quickView');
     Route::get('ajax/get_product_by_category', 'ProductController@getProductByCategory');
+    Route::get('/search-product-by-name', 'ProductController@searchByName')->name('search');
+    Route::get('/get-product-by-category/{cat_id}', 'ProductController@getProductByCategoryID')->name('getProductByCategoryID');
 });
 
 Auth::routes(['verify' => true]);

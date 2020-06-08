@@ -9,6 +9,7 @@ use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\Image\ImageRepositoryInterface;
 use App\Repositories\Wishlist\WishlistRepositoryInterface;
 use Auth;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
@@ -37,6 +38,7 @@ class HomeController extends Controller
         $images_defult = $this->imageRepository->getAll()->where('image_default', 1);
         $products_sale = $list_products->where('price_sale', '<>', 0)->take(10);
         $featured_products = $list_products->where('is_highlight', '1')->take(10);
+        $categoriesBySearch = Category::latest()->with('products')->get();
         if (Auth::check()) {
             $wishlists = $this->wishlistRepository->getAll()->where('user_id', Auth::user()->id);
         } else {
@@ -68,6 +70,6 @@ class HomeController extends Controller
         
         // dd($products);
 
-        return view('client.index', compact('categories', 'products', 'images_defult', 'products_sale', 'featured_products', 'wishlists'));   
+        return view('client.index', compact('categories', 'products', 'images_defult', 'products_sale', 'featured_products', 'wishlists', 'categoriesBySearch'));   
     }
 }

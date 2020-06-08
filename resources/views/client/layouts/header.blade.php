@@ -80,34 +80,23 @@
                     <!-- End Header Logo -->
                 </div>
                 <div class="col-xs-12 col-sm-5 col-md-5 col-lg-6">
-                    <!-- Search -->
-
                     <div class="top-search">
                         <div id="search">
-                            <form>
+                            <form action="{{ route('search') }}" method="GET">
+                                @csrf
                                 <div class="input-group">
                                     <select class="cate-dropdown hidden-xs hidden-sm" name="category_id">
-                                        <option>All Categories</option>
-                                        <option>women</option>
-                                        <option>&nbsp;&nbsp;&nbsp;Accessories </option>
-                                        <option>&nbsp;&nbsp;&nbsp;Dresses</option>
-                                        <option>&nbsp;&nbsp;&nbsp;Top</option>
-                                        <option>&nbsp;&nbsp;&nbsp;Handbags </option>
-                                        <option>&nbsp;&nbsp;&nbsp;Shoes </option>
-                                        <option>&nbsp;&nbsp;&nbsp;Clothing </option>
-                                        <option>Men</option>
-                                        <option>Electronics</option>
-                                        <option>&nbsp;&nbsp;&nbsp;Mobiles </option>
-                                        <option>&nbsp;&nbsp;&nbsp;Music &amp; Audio </option>
+                                        <option value="0">All Categories</option>
+                                        @foreach ($categoriesBySearch as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
                                     </select>
                                     <input type="text" class="form-control" placeholder="Search" name="search">
-                                    <button class="btn-search" type="button"><i class="fa fa-search"></i></button>
+                                    <button style="height: 40px;" class="btn-search" type="submit"><i class="fa fa-search"></i></button>
                                 </div>
                             </form>
                         </div>
                     </div>
-
-                    <!-- End Search -->
                 </div>
                 <div class="col-lg-3 col-sm-4 col-xs-12 top-cart">
                     <div class="link-wishlist">

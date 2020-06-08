@@ -11,6 +11,7 @@ use App\Repositories\Wishlist\WishlistRepositoryInterface;
 use Auth;
 use App\Models\Category;
 use App\Models\History;
+use App\Models\Product;
 use DB;
 
 class ProductController extends Controller
@@ -39,6 +40,7 @@ class ProductController extends Controller
         $image_default = $this->imageRepository->getAll()->where('image_default', '1');
         // $categories = $this->categoryRepository->getAll();
         $categories = Category::latest()->with('products')->get();
+        $categoriesBySearch = Category::latest()->with('products')->get();
         $list_products_history = array();
         if (Auth::check()) {
             $list_products_history = History::latest()
@@ -47,7 +49,7 @@ class ProductController extends Controller
                                 ->get();
         }
         // dd($history);
-        return view('client.products.list_product', compact('products', 'image_default', 'categories', 'list_products_history'));
+        return view('client.products.list_product', compact('products', 'image_default', 'categories', 'list_products_history', 'categoriesBySearch'));
     }
 
     public function show($id)
@@ -58,6 +60,7 @@ class ProductController extends Controller
             $image_default = $image_product->where('image_default', '1');
             $size_prd = $product->sizes()->get();
             $color_prd = $product->colors()->get();
+            $categoriesBySearch = Category::latest()->with('products')->get();
             if (Auth::check()) {
                 $user_id = Auth::user()->id;
                 $wishlist = $this->wishlistRepository->getAll()->where('user_id', $user_id)->where('product_id', $id)->count();
@@ -65,7 +68,7 @@ class ProductController extends Controller
                 $wishlist = 0;
             }
 
-            return view('client.products.single_product', compact('product', 'image_product', 'image_default', 'size_prd', 'color_prd', 'wishlist'));
+            return view('client.products.single_product', compact('product', 'image_product', 'image_default', 'size_prd', 'color_prd', 'wishlist', 'categoriesBySearch'));
         } catch (\Throwable $th) {
             //throw $th;
         }
@@ -125,5 +128,32 @@ class ProductController extends Controller
         }
 
         return response()->json($products, 200);
+    }
+
+    public function searchByName(Request $request)
+    {
+        $search = $request->search;
+        $category_id = $request->category_id;
+        $image_default = $this->imageRepository->getAll()->where('image_default', '1');
+        $categories = Category::latest()->with('products')->get();
+        $categoriesBySearch = Category::latest()->with('products')->get();
+        if ($category_id == 0) {
+            $products = Product::where('name', 'like', "%$search%")->orWhere('price', 'like', "%$search%")->get();
+        } else {
+            $L_products = Product::where('name', 'like', "%$search%")->orWhere('price', 'like', "%$search%")->get();
+            $products = $L_products->where('category_id', $category_id);
+        }
+        
+        return view('client.products.list_product_search', compact('categories', 'products', 'image_default', 'categoriesBySearch'));
+    }
+
+    public function getProductByCategoryID(Request $request, $cat_id)
+    {
+        $category_id = $cat_id;
+        $image_default = $this->imageRepository->getAll()->where('image_default', '1');
+        $categories = Category::latest()->with('products')->get();
+        $products = Product::where('category_id', $category_id)->get();
+
+        return view('client.products.list_product_search', compact('categories', 'products', 'image_default'));
     }
 }

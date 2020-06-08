@@ -8,6 +8,7 @@ use App\Repositories\Wishlist\WishlistRepositoryInterface;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\Image\ImageRepositoryInterface;
 use Auth;
+use App\Models\Category;
 
 class WithlistController extends Controller
 {
@@ -30,11 +31,12 @@ class WithlistController extends Controller
     {
         if (Auth::check()) {
             $user_id = Auth::user()->id;
+            $categoriesBySearch = Category::latest()->with('products')->get();
             $wishlists = $this->wishlistRepository->getAll()->where('user_id', $user_id);
             $products = $this->productRepository->getAll();
             $images = $this->imageRepository->getAll()->where('image_default', 1);
             
-            return view('client.wishlists.wishlist', compact('wishlists', 'products', 'images'));
+            return view('client.wishlists.wishlist', compact('wishlists', 'products', 'images', 'categoriesBySearch'));
         } else {
             return redirect()->route('home');
         }
