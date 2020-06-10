@@ -201,10 +201,10 @@ class CartController extends Controller
                 'carts' => $cart
             ];
             // dd($data);
-            Mail::send('client.mails.mail-order', $data, function ($message) {
-                $message->to('chittchannels@gmail.com', 'Notification Order');
-                $message->subject('Mail Order');
-            });
+            // Mail::send('client.mails.mail-order', $data, function ($message) {
+            //     $message->to('chittchannels@gmail.com', 'Notification Order');
+            //     $message->subject('Mail Order');
+            // });
             $cookie  = cookie('cart', null);
 
             return redirect()->back()->withCookie($cookie);
